@@ -1,0 +1,15 @@
+<header>
+<h1>Camera {{ room.number }}</h1>
+</header>
+
+{% if error_message %}
+	<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+Hotel: <a href="{% url 'hotels:hotel_detail' hotel.id %}">{{ room.hotel }}</a><br>
+Number: {{ room.number }}<br>
+Beds: {{ room.beds }}<br>
+Description: {{ room.description }}<br>
+Cost per night: EUR {{ room.cost }}<br>
+
+Available Services:<br>

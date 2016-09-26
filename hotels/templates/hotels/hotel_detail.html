@@ -1,0 +1,21 @@
+<header>
+<h1>{{ hotel.name }}</h1>
+</header>
+
+{% if error_message %}
+	<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+Name: {{ hotel.name }}<br>
+Address: {{ hotel.address }}<br>
+Description: {{ hotel.description }}<br>
+Email: {{ hotel.email }}<br>
+Tel: {{ hotel.tel }}<br>
+
+Camere:<br>
+<ul>
+{% for room in hotel.room_set.all %}
+	<li><a href="{% url 'hotels:room_detail' hotel.id room.id %}">
+		Camera {{ room.number }}</a>
+{% endfor %}
+</ul>
