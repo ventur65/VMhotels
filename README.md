@@ -1,2 +1,0 @@
-# VMhotels
-Progetto Linguaggi Dinamici
