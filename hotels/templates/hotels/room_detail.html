@@ -6,6 +6,9 @@
 	<p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
+<img src="{{ room.image.url }}" alt="Hotel View" style="width:300px;height:230px;">
+<br>
+
 Hotel: <a href="{% url 'hotels:hotel_detail' hotel.id %}">{{ room.hotel }}</a><br>
 Number: {{ room.number }}<br>
 Beds: {{ room.beds }}<br>

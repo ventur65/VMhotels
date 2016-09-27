@@ -5,8 +5,10 @@
 {% if error_message %}
 	<p><strong>{{ error_message }}</strong></p>
 {% endif %}
-
+<img src="{{ hotel.image.url }}" alt="Hotel View" style="width:300px;height:230px;">
+<br>
 Name: {{ hotel.name }}<br>
+City: {{ hotel.city }}<br>
 Address: {{ hotel.address }}<br>
 Description: {{ hotel.description }}<br>
 Email: {{ hotel.email }}<br>
