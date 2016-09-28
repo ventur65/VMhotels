@@ -20,8 +20,8 @@ from . import views
 
 urlpatterns = [
 	url(r'^$', views.main_page),
-	url(r'^hotels/$', include('hotels.urls', namespace = "hotels")),
-	url(r'^portal/$', include('portal.urls', namespace = "portal")),
+	url(r'^hotels/', include('hotels.urls', namespace = "hotels")),
+	url(r'^portal/', include('portal.urls', namespace = "portal")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^logout/$', views.logout_view, name='logout_view'),
     url(r'^', include('django.contrib.auth.urls')),
