@@ -1,0 +1,10 @@
+{% extends "portal/portal.html" %}
+{% comment %} Welcome page of the portal. {% endcomment %}
+{% block title %} Portal{% endblock %}
+
+{% block content %}
+	<section>
+		<h2>Welcome, {{ request.user.username | capfirst }}</h2>
+		<p>This is the entry page of the Web Portal.
+	</section>
+{% endblock %}

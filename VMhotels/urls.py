@@ -16,8 +16,13 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from . import views
 
 urlpatterns = [
-	url(r'^hotels/', include('hotels.urls', namespace = "hotels")),
+	url(r'^$', views.main_page),
+	url(r'^hotels/$', include('hotels.urls', namespace = "hotels")),
+	url(r'^portal/$', include('portal.urls', namespace = "portal")),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^logout/$', views.logout_view, name='logout_view'),
+    url(r'^', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
