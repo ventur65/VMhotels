@@ -11,7 +11,7 @@ def path_to_room_image(instance, filename):
 class Hotel(models.Model):
 	name = models.CharField(max_length = 50, unique = True)
 	city = models.CharField(max_length = 50, default = '')
-	address = models.CharField(max_length = 200, unique = True)
+	address = models.CharField(max_length = 200)
 	description = models.CharField(max_length = 1000)
 	email = models.EmailField(unique = True)
 	tel = models.PositiveIntegerField(unique = True)
@@ -21,7 +21,9 @@ class Hotel(models.Model):
 								height_field = '_height', 
 								width_field = '_width',
 								null = True)
-	
+	class Meta:
+		unique_together = ('city', 'address')
+		
 	def __unicode__(self):
 		return self.name
 	
