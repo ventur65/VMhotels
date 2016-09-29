@@ -23,7 +23,7 @@ class Hotel(models.Model):
 	image = models.ImageField(upload_to = path_to_hotel_image, 
 								height_field = '_height', 
 								width_field = '_width',
-								null = True)
+								null = True, blank = True)
 	class Meta:
 		unique_together = ('city', 'address')
 		
@@ -41,7 +41,7 @@ class Room(models.Model):
 	image = models.ImageField(upload_to = path_to_room_image,
 								height_field = '_height',
 								width_field = '_width',
-								null = True)
+								null = True, blank = True)
 	class Meta:
 		unique_together = ('hotel', 'number')
 	

@@ -26,11 +26,9 @@ def create_hotel(request):
 			h.user = request.user
 			h.save()
 			return HttpResponseRedirect("/hotels/"+str(h.id))
-		else:
-			return HttpResponse("Errore") #Da sostituire con redirezione a questa view con mex di errore
-	elif request.method == 'GET':
+	else:
 		form = HotelForm()
-		return render(request, 'hotels/inserthotel.html', {'form': form,})
+	return render(request, 'hotels/inserthotel.html', {'form': form,})
 
 @login_required()
 def create_room(request, hotel_id):
@@ -43,13 +41,11 @@ def create_room(request, hotel_id):
 				r.hotel = h
 				r.save()
 				return HttpResponseRedirect('/'.join(['/hotels', str(h.pk), str(r.pk)]))
-			else:
-				return HttpResponse("Errore")
 		else: #Caso di user non uguale
 			HttpResponse("Non sei il proprietario dell'hotel.")
 	else: #caso GET
 		form = RoomForm()
-		return render(request, 'hotels/insertroom.html', {'form': form,})
+	return render(request, 'hotels/insertroom.html', {'form': form,})
 			
 			
 			
