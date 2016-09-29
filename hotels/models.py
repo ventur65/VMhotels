@@ -9,7 +9,9 @@ def path_to_hotel_image(instance, filename):
 def path_to_room_image(instance, filename):
 	return '/'.join([instance.hotel.name, str(instance.number), filename])
 
+
 class Hotel(models.Model):
+	user = models.ForeignKey(User)
 	name = models.CharField(max_length = 50, unique = True)
 	city = models.CharField(max_length = 50, default = '')
 	address = models.CharField(max_length = 200)
@@ -44,6 +46,5 @@ class Room(models.Model):
 		unique_together = ('hotel', 'number')
 	
 	def __unicode__(self):
-		return self.hotel.name + " Room n. " + str(self.number)
-	
+		return self.hotel.name + " Room n. " + str(self.number)	
 	

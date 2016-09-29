@@ -8,6 +8,7 @@ class RoomInline(admin.StackedInline):
 
 class HotelAdmin(admin.ModelAdmin):
 	fieldsets = [
+		('User', {'fields': ['user']}),
 		('Name', {'fields': ['name']}),
 		('City', {'fields': ['city']}),
 		('Address', {'fields': ['address']}),
@@ -16,8 +17,9 @@ class HotelAdmin(admin.ModelAdmin):
 		('Description', {'fields': ['description'], 'classes': ['collapse']}),
 		('Image', {'fields': ['image']}),
 	]
-	list_display = ['name', 'city', 'address', 'tel', 'email', 'image']
+	list_display = ['user', 'name', 'city', 'address', 'tel', 'email', 'image']
 	inlines = [RoomInline]
 	search_fields = ['name', 'city', 'address', 'tel', 'email']
 	
 admin.site.register(Hotel, HotelAdmin)
+admin.site.register(Room)
