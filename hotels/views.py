@@ -24,7 +24,7 @@ def create_hotel(request):
 		if form.is_valid():
 			h = form.save(commit=False)
 			h.user = request.user
-			h.save()
+			h.save() ##FARE CON TRY-CATCH
 			return HttpResponseRedirect("/hotels/"+str(h.id))
 	else:
 		form = HotelForm()
@@ -39,7 +39,7 @@ def create_room(request, hotel_id):
 			if form.is_valid():
 				r = form.save(commit = False)
 				r.hotel = h
-				r.save()
+				r.save() ##FARE CON TRY-CATCH
 				return HttpResponseRedirect('/'.join(['/hotels', str(h.pk), str(r.pk)]))
 		else: #Caso di user non uguale
 			HttpResponse("Non sei il proprietario dell'hotel.")
