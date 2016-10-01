@@ -33,4 +33,5 @@ def upload(request):
     		'email':request.user.email,
     	}
     	form = UserForm(data=form_data)
-    	return render(request, 'portal/upload.html', {'form' : form})	
+    	return render(request, 'portal/upload.html', {'form' : form}) 
+    		
