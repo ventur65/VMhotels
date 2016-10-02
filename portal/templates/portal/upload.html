@@ -1,5 +1,16 @@
-<form enctype="multipart/form-data" method="post">
-{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit" />
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+{% block content %}
+
+<form role="form" class="form-horizontal" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout="horizontal" %}
+        {% buttons submit='OK' reset='Cancel' layout='horizontal' %}{% endbuttons %}
 </form>
+
+{% endblock %}
