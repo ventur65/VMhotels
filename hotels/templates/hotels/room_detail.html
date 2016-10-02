@@ -16,3 +16,6 @@ Description: {{ room.description }}<br>
 Cost per night: {{ room.cost }} EUR<br>
 
 Available Services:<br>
+
+Are you the owner of this room? Click <a href="{% url 'hotels:edit_room' hotel.id room.id %}">here</a> to change Room data.
+

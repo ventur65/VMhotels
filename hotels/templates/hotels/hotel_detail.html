@@ -22,4 +22,5 @@ Camere:<br>
 		Camera {{ room.number }}</a>
 {% endfor %}
 </ul><br>
-Are you the owner of this hotel? Click <a href="{% url 'hotels:create_room' hotel.id %}">here</a> to add a Room.
+Are you the owner of this hotel? Click <a href="{% url 'hotels:create_room' hotel.id %}">here</a> to add a Room. <br>
+Are you the owner of this hotel? Click <a href="{% url 'hotels:edit_hotel' hotel.id %}">here</a> to change Hotel data.
