@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.contrib.auth.models import User
-from portal.forms import *
+from .forms import *
 from django.http import HttpResponseRedirect, HttpResponse
 
 # Create your views here.
@@ -17,14 +17,11 @@ def portal_welcome(request):
 @login_required       
 def upload(request):
     if request.method == 'POST':
-    	b = User.objects.get(pk=request.user.id)
+    	b = request.user
     	form = UserForm(request.POST, instance=b)
     	if form.is_valid():
-    		if request.user.is_authenticated():
-			form.save()
-			return HttpResponse('Dati aggiornati')
-	else:
-		return HttpResponse('User non autenticato')
+    		form.save()
+		return HttpResponse('Dati aggiornati')
     else:
     	form_data = {
     		'username':request.user.username,
@@ -33,4 +30,4 @@ def upload(request):
     		'email':request.user.email,
     	}
     	form = UserForm(data=form_data)
-    	return render(request, 'portal/upload.html', {'form' : form})	
+    return render(request, 'portal/upload.html', {'form' : form})	
