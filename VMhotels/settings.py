@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'hotels',
     'portal',
+    'bootstrap3',
 )
 
 MIDDLEWARE_CLASSES = (

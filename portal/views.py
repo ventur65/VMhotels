@@ -14,20 +14,15 @@ def portal_welcome(request):
 	"""
 	return render(request, 'portal/index.html', {'request': request})
 	
-@login_required       
+@login_required
 def upload(request):
     if request.method == 'POST':
-    	b = request.user
-    	form = UserForm(request.POST, instance=b)
+    	u = request.user
+    	form = UserForm(request.POST, instance=u)
     	if form.is_valid():
     		form.save()
 		return HttpResponse('Dati aggiornati')
     else:
-    	form_data = {
-    		'username':request.user.username,
-    		'first_name':request.user.first_name,
-    		'last_name':request.user.last_name,
-    		'email':request.user.email,
-    	}
-    	form = UserForm(data=form_data)
-    return render(request, 'portal/upload.html', {'form' : form})	
+    	u = request.user
+    	form = UserForm(instance = u)
+    return render(request, 'portal/upload.html', {'form' : form})

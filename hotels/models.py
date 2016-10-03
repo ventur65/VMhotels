@@ -15,7 +15,7 @@ class Hotel(models.Model):
 	name = models.CharField(max_length = 50, unique = True)
 	city = models.CharField(max_length = 50, default = '')
 	address = models.CharField(max_length = 200)
-	description = models.CharField(max_length = 1000)
+	description = models.CharField(max_length = 1000, blank = True, null = True)
 	email = models.EmailField(unique = True)
 	tel = models.PositiveIntegerField(unique = True)
 	_height = 50
@@ -34,7 +34,7 @@ class Room(models.Model):
 	hotel = models.ForeignKey(Hotel)
 	beds = models.PositiveSmallIntegerField(default=1)
 	number = models.PositiveSmallIntegerField()
-	description = models.CharField(max_length = 300)
+	description = models.CharField(max_length = 300, blank = True, null = True)
 	cost = models.FloatField()
 	_height = 50
 	_width = 50

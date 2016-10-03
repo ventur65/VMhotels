@@ -8,8 +8,7 @@ class HotelForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(HotelForm, self).__init__(*args, **kwargs)
 		self.fields['description'].required = False
-		#Mettere come non obbligatorio anche campo image
-		
+		self.fields['image'].required = False
 
 class RoomForm(forms.ModelForm):
 	class Meta:
@@ -19,5 +18,4 @@ class RoomForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(RoomForm, self).__init__(*args, **kwargs)
 		self.fields['description'].required = False
-		#Mettere come non obbligatorio anche campo image
-	
+		self.fields['image'].required = False
