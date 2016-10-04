@@ -1,0 +1,13 @@
+{% if found_entries %}
+    <p>You searched for "{{ query_string }}".</p>
+    <ul>
+    {% for i in found_entries %}
+        <li><a href="{{ q.get_absolute_url }}">{{ found_entries }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% if query_string and not found_entries %}
+    <p>No results found.</p>
+{% else %}
+    <p>Type a search query into the box above, and press "Submit" to search.</p>
+{% endif %}

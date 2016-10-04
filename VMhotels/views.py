@@ -5,10 +5,24 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .forms import RegisterForm
 from registration import signals
 from registration.views import RegistrationView as BaseRegistrationView
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from hotels.models import Hotel
 
 User = get_user_model()
 
 def main_page(request):
+    query_string = ''
+    found_entries = None
+    search_fields=('uid')
+    
+    if ('q' in request.GET) and request.GET['q'].strip() and ('search' in request.GET):
+
+        query_string = request.GET['q']
+
+        found_entries = Hotel.objects.filter(city=query_string)
+	return render_to_response('search.html',{ 'query_string': query_string, 'found_entries': found_entries },  context_instance=RequestContext(request))
+    else:
 	return render(request, 'index.html')
 
 def logout_view(request):
@@ -51,4 +65,5 @@ def register_view(request):
 			return HttpResponseRedirect('/login')
 	else:
 		form = RegisterForm()
-	return render(request, 'registration.html', {'form': form})	
+	return render(request, 'registration.html', {'form': form})
+

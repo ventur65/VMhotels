@@ -9,4 +9,10 @@
 		<p>Welcome to VMhotels.<br>
 		   Click <a href="{% url 'portal:portal_welcome' %}">here</a> to login.<br>
 	</section>
+	
+	<form method="get" class="navbar-form pull-right">
+		<input type="text" id="searchBox" class="input-medium search-query" name="q" placeholder="Search hotels by city">
+		<input type="submit" class="btn" value="Search" name="search" >
+	</form>
+	
 {% endblock %}
