@@ -8,22 +8,20 @@ from registration.views import RegistrationView as BaseRegistrationView
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from hotels.models import Hotel
+from django.core.urlresolvers import reverse
 
 User = get_user_model()
 
 def main_page(request):
-    query_string = ''
-    found_entries = None
-    search_fields=('uid')
-    
-    if ('q' in request.GET) and request.GET['q'].strip() and ('search' in request.GET):
-
-        query_string = request.GET['q']
-
-        found_entries = Hotel.objects.filter(city=query_string)
-	return render_to_response('search.html',{ 'query_string': query_string, 'found_entries': found_entries },  context_instance=RequestContext(request))
-    else:
 	return render(request, 'index.html')
+	
+def search_results(request):
+	query_string = request.POST['q']
+	#try:
+	found_entries = Hotel.objects.filter(city=query_string)
+	#except (KeyError, Hotel.DoesNotExist):
+		#return HttpResponseRedirect(reverse('main_page'))
+	return render(request, 'search.html', {'query_string': query_string, 'found_entries': found_entries})
 
 def logout_view(request):
 	"Log users out and re-direct them to the main page."
