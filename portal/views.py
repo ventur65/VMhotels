@@ -16,13 +16,15 @@ def portal_welcome(request):
 	
 @login_required
 def upload(request):
-    if request.method == 'POST':
+    if 'Ok' in request.POST:
     	u = request.user
     	form = UserForm(request.POST, instance=u)
     	if form.is_valid():
     		form.save()
 		return HttpResponse('Dati aggiornati')
-    else:
+    elif 'Cancel' in request.POST:
+    	return HttpResponseRedirect("/portal/")
+    elif request.method == 'GET': ##caso GET
     	u = request.user
     	form = UserForm(instance = u)
     return render(request, 'portal/upload.html', {'form' : form})
