@@ -77,12 +77,14 @@ def edit_room(request, hotel_id, room_id):
 	if h.user != request.user: ##Se l'utente della sessione non e' il proprietario dell'hotel
 		return HttpResponseForbidden("You can't edit a room of an hotel not yours")
 	if h.pk == r.hotel.pk: ##Se la stanza e' di questo hotel
-		if request.method == 'POST':
+		if 'Ok' in request.POST:
 			form = RoomForm(request.POST, request.FILES, instance = r)
 			if form.is_valid():
 				form.save()
 				return HttpResponseRedirect('/'.join(["/hotels",str(h.id),str(r.id)]))
-		else: ##caso GET
+		elif 'Cancel' in request.POST:
+			return HttpResponseRedirect("/hotels/"+str(h.pk)+"/"+str(r.pk))
+		elif request.method == 'GET': ##caso GET
 			form = RoomForm(instance = r)
 		return render(request, 'hotels/editroom.html', {'form': form, 'hotel': h, 'room': r})
 	return HttpResponse("This room doesn't exist in this Hotel")
