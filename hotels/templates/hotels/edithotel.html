@@ -9,8 +9,12 @@
 <h1>Editing Hotel {{ hotel.name }}</h1>
 <form role="form" class="form-horizontal" enctype="multipart/form-data" method="post">
         {% csrf_token %}
-        {% bootstrap_form form layout="horizontal" %}
-        {% buttons submit='OK' reset='Cancel' layout='horizontal' %}{% endbuttons %}
+        {% bootstrap_form form layout="horizontal" size="medium" %}
+        
+        <div class="col-md-4 text-center">
+        {% bootstrap_button "Ok" button_type="submit" name="Ok" button_class="btn-primary" icon="ok" %}
+        {% bootstrap_button "Cancel" button_type="submit" name="Cancel" button_class="btn-default" icon="remove" %}
+        </div>
 </form>
 
 {% endblock %}

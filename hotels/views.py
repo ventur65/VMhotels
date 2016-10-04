@@ -58,12 +58,14 @@ def edit_hotel(request, hotel_id):
 		#logout(request)
 		#return HttpResponseRedirect("/login")
 		return HttpResponseForbidden("You can't edit an hotel not yours.")
-	if request.method == 'POST':
+	if 'Ok' in request.POST:
 		form = HotelForm(request.POST, request.FILES, instance = h)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect("/hotels/"+str(h.pk))
-	else: ##caso GET
+	elif 'Cancel' in request.POST:
+		return HttpResponseRedirect("/hotels/"+str(h.pk))
+	elif request.method == 'GET': ##caso GET
 		form = HotelForm(instance = h)
 	return render(request, 'hotels/edithotel.html', {'form': form, 'hotel': h}) 
     	
