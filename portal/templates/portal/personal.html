@@ -1,0 +1,21 @@
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+<h1 align="center">Personal Page of {{ request.user }}</h1>
+<br>
+<div align="center">
+<h2>Hotels:</h2>
+<ul>
+{% for h in hotel_list %}
+	<li><a href="{% url 'hotels:hotel_detail' h.pk %}">{{ h.name }}</a>
+{% endfor %}
+</ul>
+<br><br>
+<a href="/logout">{% bootstrap_button "Logout" button_type="link" name="Logout" button_class="btn-default" %}</a>
+<a href="{% url 'hotels:create_hotel' %}">{% bootstrap_button "Add Hotel" button_type="link" name="AddHotel" button_class="btn-default" %}</a>
+<a href="{% url 'portal:update_data' %}">{% bootstrap_button "Edit Personal Data" button_type="link" name="EditUser" button_class="btn-default" %}</a>
+</div>
