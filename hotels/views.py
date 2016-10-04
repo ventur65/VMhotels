@@ -86,7 +86,7 @@ def edit_room(request, hotel_id, room_id):
 			return HttpResponseRedirect("/hotels/"+str(h.pk)+"/"+str(r.pk))
 		elif request.method == 'GET': ##caso GET
 			form = RoomForm(instance = r)
-		return render(request, 'hotels/editroom.html', {'form': form, 'hotel': h, 'room': r})
+			return render(request, 'hotels/editroom.html', {'form': form, 'hotel': h, 'room': r})
 	return HttpResponse("This room doesn't exist in this Hotel")
 			
 			
