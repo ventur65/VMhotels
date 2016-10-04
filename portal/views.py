@@ -21,9 +21,7 @@ def upload(request):
     	form = UserForm(request.POST, instance=u)
     	if form.is_valid():
     		form.save()
-		return HttpResponse('Dati aggiornati')
-    elif 'Cancel' in request.POST:
-    	return HttpResponseRedirect("/portal/")
+		return HttpResponse('Dati aggiornati') ##DA SOSTITUIRE CON REDIREZIONE A PAGINA PERSONALE UTENTE
     elif request.method == 'GET': ##caso GET
     	u = request.user
     	form = UserForm(instance = u)

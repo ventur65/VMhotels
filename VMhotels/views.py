@@ -17,10 +17,7 @@ def main_page(request):
 	
 def search_results(request):
 	query_string = request.POST['q']
-	#try:
 	found_entries = Hotel.objects.filter(city=query_string)
-	#except (KeyError, Hotel.DoesNotExist):
-		#return HttpResponseRedirect(reverse('main_page'))
 	return render(request, 'search.html', {'query_string': query_string, 'found_entries': found_entries})
 
 def logout_view(request):

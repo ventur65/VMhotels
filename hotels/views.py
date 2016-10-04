@@ -63,8 +63,6 @@ def edit_hotel(request, hotel_id):
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect("/hotels/"+str(h.pk))
-	elif 'Cancel' in request.POST:
-		return HttpResponseRedirect("/hotels/"+str(h.pk))
 	elif request.method == 'GET': ##caso GET
 		form = HotelForm(instance = h)
 	return render(request, 'hotels/edithotel.html', {'form': form, 'hotel': h}) 
@@ -82,8 +80,6 @@ def edit_room(request, hotel_id, room_id):
 			if form.is_valid():
 				form.save()
 				return HttpResponseRedirect('/'.join(["/hotels",str(h.pk),str(r.pk)]))
-		elif 'Cancel' in request.POST:
-			return HttpResponseRedirect('/'.join(["/hotels",str(h.pk),str(r.pk)]))
 		elif request.method == 'GET': ##caso GET
 			form = RoomForm(instance = r)
 		return render(request, 'hotels/editroom.html', {'form': form, 'hotel': h, 'room': r})

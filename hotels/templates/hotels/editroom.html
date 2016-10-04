@@ -6,14 +6,20 @@
 {% bootstrap_messages %}
 
 {% block content %}
-<h1>Hotel {{ hotel.name }} | Editing Room {{ room.number }}</h1>
+<h1 align="center">Hotel {{ hotel.name }} | Editing Room {{ room.number }}</h1>
+<br><br><br><br>
+<div class="col-xs-10" align="center">
 <form role="form" class="form-horizontal" enctype="multipart/form-data" method="post">
         {% csrf_token %}
-        {% bootstrap_form form layout="horizontal" %}
-        <div class="col-md-4 text-center">
-        {% bootstrap_button "Ok" button_type="submit" name="Ok" button_class="btn-primary" icon="ok" %}
-        {% bootstrap_button "Cancel" button_type="submit" name="Cancel" button_class="btn-default" icon="remove" %}
-        </div>
+        
+        	{% bootstrap_form form layout="horizontal" size='md' %}
+        	<div class="col-md-6 text-center">
+        	{% bootstrap_button "Ok" button_type="submit" name="Ok" button_class="btn-primary" icon="ok" %}
+        	</div>
 </form>
+<a href="{% url 'hotels:room_detail' hotel.pk room.pk %}">{% bootstrap_button "Cancel" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>
+</div>
+<br>
+
 
 {% endblock %}
