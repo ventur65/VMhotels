@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views
 
 urlpatterns = [
@@ -16,5 +16,6 @@ urlpatterns = [
 	url(r'^(?P<hotel_id>[0-9]+)/edithotel/$', views.edit_hotel, name='edit_hotel'),
 	#ex: /hotels/1/2/editroom
 	url(r'^(?P<hotel_id>[0-9]+)/(?P<room_id>[0-9]+)/editroom/$', views.edit_room, name='edit_room'),
-	url(r'^(?P<hotel_id>[0-9]+)/(?P<room_id>[0-9]+)/addreservation/$', views.add_reservation, name='add_reservation'),
+	url(r'^(?P<hotel_id>[0-9]+)/(?P<room_id>[0-9]+)/', include('reservation.urls', namespace='reservation')),
+	#url(r'^(?P<hotel_id>[0-9]+)/(?P<room_id>[0-9]+)/addreservation/$', views.add_reservation, name='add_reservation'),
 ]
