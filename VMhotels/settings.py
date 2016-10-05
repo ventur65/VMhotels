@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'hotels',
     'portal',
     'bootstrap3',
+    'bootstrap3_datetime',
 )
 
 MIDDLEWARE_CLASSES = (

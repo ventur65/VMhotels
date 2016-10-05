@@ -1,6 +1,7 @@
 from django import forms
 from .models import Hotel, Room, Reservation
 from django.contrib.admin import widgets
+from bootstrap3_datetime.widgets import DateTimePicker
 
 class HotelForm(forms.ModelForm):
 	class Meta:
@@ -24,9 +25,11 @@ class RoomForm(forms.ModelForm):
 class ReservationForm(forms.ModelForm):
 	class Meta:
 		model = Reservation
-		fields = ['firstname', 'lastname', 'city', 'address', 'email', 'tel', 'idate', 'fdate']
-	#def __init__(self, *args, **kwargs):
-		#super(ReservationForm, self).__init__(*args, **kwargs)
-		#self.fields['idate'].widget = widgets.AdminDateWidget
-		#self.fields['fdate'].widget = widgets.AdminDateWidget
+		fields = ['firstname', 'lastname', 'idate', 'fdate', 'city', 'address', 'email', 'tel']
+	def __init__(self, *args, **kwargs):
+		super(ReservationForm, self).__init__(*args, **kwargs)
+		self.fields['idate'].widget = DateTimePicker(options={"format": "YYYY-MM-DD",
+								     "pickTime": False})
+		self.fields['fdate'].widget = DateTimePicker(options={"format": "YYYY-MM-DD",
+								     "pickTime": False})
 	

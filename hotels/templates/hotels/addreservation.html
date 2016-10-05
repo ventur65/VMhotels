@@ -1,11 +1,20 @@
 {% load bootstrap3 %}
 
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-
-{% bootstrap_messages %}
 
 {% block content %}
+
+<head>
+<link rel="stylesheet"
+              href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.css">
+        <link rel="stylesheet"
+              href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js">
+        </script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.js">
+        </script>
+        {{ form.media }}
+</head>
+
 <h1 align="center">Adding Reservation for Room n.{{ room.number }} | Hotel {{ hotel.name }}</h1>
 <br><br><br><br>
 <div class="col-xs-10" align="center">
