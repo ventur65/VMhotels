@@ -14,8 +14,8 @@ This is the main template for all portal pages.
 	<section>
 		<ul>
 			<li><a href="/">Main Page</a></li>
-			<li><a href="{% url 'logout_view' %}">Logout</a></li>
-			<li><a href="/portal/change">Modifica dati utente</a></li>
+			<li><a href="{% url 'portal:logout_view' %}">Logout</a></li>
+			<li><a href="{% url 'portal:update_data' %}">Modifica dati utente</a></li>
 		</ul>
 	</section>
 	

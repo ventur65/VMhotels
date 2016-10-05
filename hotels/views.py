@@ -6,6 +6,7 @@ from .forms import HotelForm, RoomForm
 from django import forms
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required, permission_required
+from django.core.urlresolvers import reverse
 
 # Create your views here.
 class HotelDetailView(generic.DetailView):
@@ -27,7 +28,8 @@ def create_hotel(request):
 			h = form.save(commit=False)
 			h.user = request.user
 			h.save() ##FARE CON TRY-CATCH
-			return HttpResponseRedirect("/hotels/"+str(h.id))
+			#return HttpResponseRedirect("/hotels/"+str(h.id))
+			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
 	else:
 		form = HotelForm()
 	return render(request, 'hotels/inserthotel.html', {'form': form,})
@@ -43,7 +45,8 @@ def create_room(request, hotel_id):
 				r = form.save(commit = False)
 				r.hotel = h
 				r.save() ##FARE CON TRY-CATCH
-				return HttpResponseRedirect('/'.join(['/hotels', str(h.pk), str(r.pk)]))
+				#return HttpResponseRedirect('/'.join(['/hotels', str(h.pk), str(r.pk)]))
+				return HttpResponseRedirect(reverse('hotels:room_detail', args=(h.pk, r.pk,)))
 		else: #Caso di user non uguale
 			HttpResponseForbidden("You can't add a room to an hotel not yours.")
 	else: #caso GET
@@ -62,7 +65,8 @@ def edit_hotel(request, hotel_id):
 		form = HotelForm(request.POST, request.FILES, instance = h)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect("/hotels/"+str(h.pk))
+			#return HttpResponseRedirect("/hotels/"+str(h.pk))
+			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
 	elif request.method == 'GET': ##caso GET
 		form = HotelForm(instance = h)
 	return render(request, 'hotels/edithotel.html', {'form': form, 'hotel': h}) 
@@ -79,7 +83,8 @@ def edit_room(request, hotel_id, room_id):
 			form = RoomForm(request.POST, request.FILES, instance = r)
 			if form.is_valid():
 				form.save()
-				return HttpResponseRedirect('/'.join(["/hotels",str(h.pk),str(r.pk)]))
+				#return HttpResponseRedirect('/'.join(["/hotels",str(h.pk),str(r.pk)]))
+				return HttpResponseRedirect(reverse('hotels:room_detail', args=(h.pk, r.pk,)))
 		elif request.method == 'GET': ##caso GET
 			form = RoomForm(instance = r)
 		return render(request, 'hotels/editroom.html', {'form': form, 'hotel': h, 'room': r})

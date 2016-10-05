@@ -12,7 +12,7 @@
 	<div class="container">
     	<div class="row" align="center">
 			<form action="{% url 'search_results' %}" method="post">
-			{% csrf_token %}
+				{% csrf_token %}
 				<input type="text" id="searchBox" class="input-medium search-query" name="q" placeholder="Search hotels by city">
 				<input type="submit" class="btn-primary" value="Search" name="search">
 			</form>

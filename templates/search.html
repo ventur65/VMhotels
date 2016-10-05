@@ -1,10 +1,11 @@
 {% if found_entries %}
-    <p>You've searched for "{{ query_string }}".</p>
+    <h2>Hotels Found:</h2>
     <ul>
     {% for i in found_entries %}
         <li><a href="{% url 'hotels:hotel_detail' i.pk %}">{{ i }}</a></li>
     {% endfor %}
     </ul>
+	<p>You've searched for "{{ query_string }}".</p>
 {% endif %}
 {% if query_string and not found_entries %}
     <p>No results found.</p>

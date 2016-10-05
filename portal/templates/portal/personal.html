@@ -15,7 +15,7 @@
 {% endfor %}
 </ul>
 <br><br>
-<a href="/logout">{% bootstrap_button "Logout" button_type="link" name="Logout" button_class="btn-default" %}</a>
+<a href="{% url 'portal:logout_view' %}">{% bootstrap_button "Logout" button_type="link" name="Logout" button_class="btn-default" %}</a>
 <a href="{% url 'hotels:create_hotel' %}">{% bootstrap_button "Add Hotel" button_type="link" name="AddHotel" button_class="btn-default" %}</a>
 <a href="{% url 'portal:update_data' %}">{% bootstrap_button "Edit Personal Data" button_type="link" name="EditUser" button_class="btn-default" %}</a>
 </div>
