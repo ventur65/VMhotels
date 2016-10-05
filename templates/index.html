@@ -3,8 +3,7 @@
 {% block head %}
 	<title>VMhotels</title>
 {% endblock %}
-{% block body %}
-	<header><h1 align="center">VMhotels</h1></header>
+{% block body %}    
 	<section>
 		<p align="center">Welcome to VMhotels.<br>
 		Click <a href="{% url 'portal:portal_welcome' %}">here</a> to login.<br>
@@ -15,6 +14,7 @@
 			{% csrf_token %}
 				<input type="text" id="searchBox" class="input-medium search-query" name="q" placeholder="Search hotels by city">
 				<input type="submit" class="btn-primary" value="Search" name="search">
+				
 			</form>
 		</div>
 	</div>
