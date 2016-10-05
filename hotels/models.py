@@ -46,5 +46,19 @@ class Room(models.Model):
 		unique_together = ('hotel', 'number')
 	
 	def __unicode__(self):
-		return self.hotel.name + " Room n. " + str(self.number)	
+		return self.hotel.name + " Room n. " + str(self.number)
+		
+class Reservation(models.Model):
+	user = models.ForeignKey(User)
+	room = models.ForeignKey(Room)
+	firstname = models.CharField(max_length=50)
+	lastname = models.CharField(max_length=50)
+	city = models.CharField(max_length=50)
+	address = models.CharField(max_length=100)
+	email = models.EmailField()
+	tel = models.PositiveIntegerField()
+	idate = models.DateField()
+	fdate = models.DateField()
+	created = models.DateTimeField(auto_now_add=True)
+	updated = models.DateTimeField(auto_now=True)
 	

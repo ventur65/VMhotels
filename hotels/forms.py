@@ -1,5 +1,6 @@
 from django import forms
-from .models import Hotel, Room
+from .models import Hotel, Room, Reservation
+from django.contrib.admin import widgets
 
 class HotelForm(forms.ModelForm):
 	class Meta:
@@ -19,3 +20,13 @@ class RoomForm(forms.ModelForm):
 		super(RoomForm, self).__init__(*args, **kwargs)
 		self.fields['description'].required = False
 		self.fields['image'].required = False
+		
+class ReservationForm(forms.ModelForm):
+	class Meta:
+		model = Reservation
+		fields = ['firstname', 'lastname', 'city', 'address', 'email', 'tel', 'idate', 'fdate']
+	#def __init__(self, *args, **kwargs):
+		#super(ReservationForm, self).__init__(*args, **kwargs)
+		#self.fields['idate'].widget = widgets.AdminDateWidget
+		#self.fields['fdate'].widget = widgets.AdminDateWidget
+	
