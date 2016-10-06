@@ -21,10 +21,8 @@ from . import views
 urlpatterns = [
 	url(r'^$', views.main_page, name='main_page'),
 	url(r'^results/$', views.search_results, name='search_results'),
-	url(r'^hotels/', include('hotels.urls', namespace = "hotels")),
 	url(r'^portal/', include('portal.urls', namespace = "portal")),
     url(r'^admin/', include(admin.site.urls)),
-    #url(r'^logout/$', views.logout_view, name='logout_view'),
-    #url(r'^register/$', views.RegistrationView.as_view(), name='registration_register'),
-    #url(r'^', include('registration.backends.simple.urls')),
+    url(r'^reservation/', include('reservation.urls', namespace='reservation')),
+	url(r'^hotels/', include('hotels.urls', namespace = "hotels")),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

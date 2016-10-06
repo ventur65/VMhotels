@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from registration.views import RegistrationView as BaseRegistrationView
 from registration import signals
 from hotels.models import Hotel
+from reservation.models import Reservation
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
@@ -21,9 +22,17 @@ def portal_welcome(request):
 
 @login_required
 def personal(request):
-	user = request.user
-	hotel_list = Hotel.objects.filter(user=user)
-	return render(request, 'portal/personal.html', {'request': request, 'hotel_list': hotel_list})
+	context = {}
+	if Group.objects.get(name='owners') in request.user.groups.all():
+		user = request.user
+		hotel_list = Hotel.objects.filter(user=user)
+		print hotel_list
+		context = {'request': request, 'hotel_list': hotel_list, 'owner': True}
+	elif Group.objects.get(name='customers') in request.user.groups.all():
+		user = request.user
+		reservation_list = Reservation.objects.filter(user=user)
+		context = {'request': request, 'reservation_list': reservation_list, 'customer': True}
+	return render(request, 'portal/personal.html', context)
 	
 @login_required
 def upload(request):
@@ -44,7 +53,6 @@ def logout_view(request):
 	#return HttpResponseRedirect('/')
 	return HttpResponseRedirect(reverse('main_page'))
 
-
 class RegistrationView(BaseRegistrationView):
 	def register(self, form):
 		User = get_user_model()
@@ -53,7 +61,10 @@ class RegistrationView(BaseRegistrationView):
 			username=getattr(new_user, User.USERNAME_FIELD),
 			password=form.cleaned_data['password1']
 		)
-		g = Group.objects.get(name='owners')
+		if 'owner' in str(self.request.path):
+			g = Group.objects.get(name='owners')
+		elif 'customer' in str(self.request.path):
+			g = Group.objects.get(name='customers')
 		new_user.groups.add(g)
 		new_user.user_permissions = [p for p in g.permissions.all()]
 		login(self.request, new_user)

@@ -1,0 +1,19 @@
+<header>
+<h1>Reservation for Room {{ reservation.room.number }} Hotel {{ reservation.room.hotel.name }}</h1>
+</header>
+
+{% if error_message %}
+	<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<br>
+First Name: {{ reservation.firstname }}<br>
+Last Name: {{ reservation.lastname }}<br>
+City: {{ reservation.city }}<br>
+Address: {{ reservation.address }}<br>
+Email: {{ reservation.email }}<br>
+Tel: {{ reservation.tel }}<br>
+IDate: {{ reservation.idate }}<br>
+FDate: {{ reservation.fdate }}<br>
+Created On: {{ reservation.created }}<br>
+Last Update: {{ reservation.updated }}<br>

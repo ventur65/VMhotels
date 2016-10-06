@@ -5,6 +5,7 @@ from .models import Reservation
 from .forms import ReservationForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
+from django.views import generic
 # Create your views here.
 
 ##NON E' UNA VIEW.
@@ -21,6 +22,7 @@ def check_res(newres, room):
 	return True	
 
 @login_required
+@permission_required('reservation.add_reservation')
 def add_reservation(request, hotel_id, room_id):
 	h = get_object_or_404(Hotel, pk=hotel_id)
 	r = get_object_or_404(Room, pk=room_id)
@@ -41,3 +43,14 @@ def add_reservation(request, hotel_id, room_id):
 	else:
 		form = ReservationForm()
 	return render(request, 'reservation/addreservation.html', {'form': form, 'hotel': h, 'room': r})
+
+@login_required
+def reservation_detail(request, reservation_id):
+	res = get_object_or_404(Reservation, pk=reservation_id)
+	if request.user == res.user:
+		return render(request, 'reservation/reservation_detail.html', {'reservation': res})
+	return HttpResponse("NON SEI L'UTENTE CHE HA EFFETTUATO QUESTA PRENOTAZIONE")
+	
+	
+	
+	

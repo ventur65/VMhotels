@@ -6,6 +6,7 @@ urlpatterns = [
 	url(r'^change/$', views.upload, name='update_data'),
 	url(r'^personal/$', views.personal, name='personal'),
 	url(r'^logout/$', views.logout_view, name='logout_view'),
-    url(r'^register/$', views.RegistrationView.as_view(), name='registration_register'),
+    url(r'^register/customer/$', views.RegistrationView.as_view(), name='registration_register_customer'),
+    url(r'^register/owner/$', views.RegistrationView.as_view(), name='registration_register_owner'),
     url(r'^', include('registration.backends.simple.urls')),
 ]
