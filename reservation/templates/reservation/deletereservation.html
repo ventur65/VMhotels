@@ -1,0 +1,23 @@
+{% load bootstrap3 %}
+
+{% block content %}
+
+<head>
+</head>
+
+<h1 align="center">Delete Reservation for Room n.{{ room.number }} | Hotel {{ hotel.name }} ?</h1>
+<h2 align="center" color="red">Are you sure baby ?</h1>
+<br><br><br><br>
+<div class="col-xs-10" align="center">
+<form role="form" class="form-horizontal" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        
+        	<div class="col-md-6 text-center">
+        	{% bootstrap_button "Yes" button_type="submit" name="Ok" button_class="btn-primary" icon="ok" %}
+        	</div>
+</form>
+<a href="{% url 'reservation:reservation_detail' reservation.id%}">{% bootstrap_button "No" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>
+</div>
+<br>
+
+{% endblock %}
