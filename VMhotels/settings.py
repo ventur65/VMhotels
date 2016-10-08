@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'hotels',
     'portal',
+    'review',
     'reservation',
     'bootstrap3',
     'bootstrap3_datetime',
