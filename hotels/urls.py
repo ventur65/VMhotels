@@ -16,4 +16,6 @@ urlpatterns = [
 	url(r'^(?P<hotel_id>[0-9]+)/edithotel/$', views.edit_hotel, name='edit_hotel'),
 	#ex: /hotels/1/2/editroom
 	url(r'^(?P<hotel_id>[0-9]+)/(?P<room_id>[0-9]+)/editroom/$', views.edit_room, name='edit_room'),
+	#ex: /hotels/1/review
+	url(r'^(?P<hotel_id>[0-9]+)/review/$', include('review.urls', namespace = "reviews")),
 ]
