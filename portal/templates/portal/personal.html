@@ -10,27 +10,27 @@
 <div align="center">
 {% if owner %}
 <h2>Hotels:</h2>
-{% if hotel_list %}
 <ul>
 {% for h in hotel_list %}
 	<li><a href="{% url 'hotels:hotel_detail' h.pk %}">{{ h.name }}</a>
+{% empty %}
+	<li>No Hotels yet.</li>
 {% endfor %}
 </ul>
-{% endif %}
 {% endif %}
 {% if customer %}
 <h2>Reservations:</h2>
-{% if reservation_list %}
 <ul>
 {% for r in reservation_list %}
 	<li><a href="{% url 'reservation:reservation_detail' r.pk %}">Reservation</a>
-		Room {{ r.room.number }} Hotel {{ r.room.hotel }}
+		Room {{ r.room.number }} Hotel {{ r.room.hotel }}: {{ r.idate|date }} to {{ r.fdate|date }}
 		{% if not r.is_active %}
 		-- in queue --
 		{% endif %}</li>
+{% empty %}
+	<li>No reservation yet.</li>
 {% endfor %}
 </ul>
-{% endif %}
 {% endif %}
 <br><br>
 {% if owner %}

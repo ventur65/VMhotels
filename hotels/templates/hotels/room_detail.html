@@ -6,7 +6,7 @@
 	<p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
-<img src="{{ room.image.url }}" alt="Hotel View" style="width:300px;height:230px;">
+<img src="{{ room.image.url }}" alt="Room View" style="width:300px;height:230px;">
 <br>
 
 Hotel: <a href="{% url 'hotels:hotel_detail' hotel.id %}">{{ room.hotel }}</a><br>
@@ -17,5 +17,6 @@ Cost per night: {{ room.cost }} EUR<br>
 
 Available Services:<br>
 
+Add a Reservation for this Room <a href="{% url 'reservation:add_reservation' hotel.id room.id %}">here</a><br>
 Are you the owner of this room? Click <a href="{% url 'hotels:edit_room' hotel.id room.id %}">here</a> to change Room data.
 
