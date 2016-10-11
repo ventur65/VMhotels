@@ -17,3 +17,8 @@ IDate: {{ reservation.idate }}<br>
 FDate: {{ reservation.fdate }}<br>
 Created On: {{ reservation.created }}<br>
 Last Update: {{ reservation.updated }}<br>
+In Queue: {% if reservation.is_active %} No {% else %} Yes {% endif %}
+<br>
+Edit <a href="{% url 'reservation:edit_reservation' reservation.pk %}">here</a>
+<br>
+Delete <a href="{% url 'reservation:delete_reservation' reservation.pk %}">here</a>

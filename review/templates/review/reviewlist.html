@@ -1,0 +1,14 @@
+<h1>Reviews</h1>
+
+Hotel: <a href="{% url 'hotels:hotel_detail' hotel.id %}">{{ hotel.name }}</a><br>
+Average Rate: {{ average }}<br>
+<ul>
+{% for review in review_list %}
+    <li>{{ review.user.username }} - {{ review.created|date }}<br>
+    	{{ review.rate }}<br>
+    	{{ review.comment }}<br>
+    </li>
+{% empty %}
+    <li>No reviews yet.</li>
+{% endfor %}
+</ul>

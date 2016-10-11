@@ -14,7 +14,8 @@ Address: {{ hotel.address }}<br>
 Description: {{ hotel.description }}<br>
 Email: {{ hotel.email }}<br>
 Tel: {{ hotel.tel }}<br>
-
+View the last reviews for this hotel <a href="{% url 'review:list_review' hotel.id %}">here</a>
+<br>
 Camere:<br>
 <ul>
 {% for room in hotel.room_set.all %}

@@ -10,7 +10,7 @@ from django.views import generic
 
 ##NON E' UNA VIEW.
 def check_res(newres, room):
-	for res in Reservation.objects.filter(room = room):
+	for res in Reservation.objects.filter(room = room, is_active=True):
 		if (res == newres):
 			continue
 		if (newres.idate >= res.idate) and (newres.idate <= res.fdate):
@@ -34,14 +34,16 @@ def add_reservation(request, hotel_id, room_id):
 		form = ReservationForm(request.POST)
 		if form.is_valid():
 			newres = form.save(commit=False)
+			newres.user = request.user
+			newres.room = r
 			if check_res(newres, r):
-				newres.user = request.user
-				newres.room = r
+				newres.is_active = True
 				newres.save()
-				r.save()
-				return HttpResponse("Stanza Riservata con Successo")
+				return HttpResponseRedirect(reverse('portal:personal'))
 			else:
-				return HttpResponse("Stanza gia prenotata in quel periodo")
+				newres.is_active = False
+				newres.save()
+				return render(request, 'reservation/inqueue.html')
 	else:
 		form = ReservationForm()
 	return render(request, 'reservation/addreservation.html', {'form': form, 'hotel': h, 'room': r})
@@ -65,17 +67,16 @@ def edit_reservation(request, reservation_id):
 		if form.is_valid():
 			form.save(commit=False)
 			if check_res(res, r):
-				res.user = request.user
-				res.room = r
+				res.is_active = True
 				res.save()
-				r.save()
 				return HttpResponseRedirect(reverse('reservation:reservation_detail', args=(res.id,)))
 			else:
-				return HttpResponse("Stanza gia prenotata in quel periodo")
+				res.is_active = False
+				res.save()
+				return HttpResponseRedirect(reverse('portal:personal'))
 	elif request.method == 'GET': ##caso GET
 		form = ReservationForm(instance = res)
-		return render(request, 'reservation/editreservation.html', {'form': form, 'hotel': h, 'room': r, 'reservation':res,})
-	return HttpResponse("This reservation does not exists for this user")
+	return render(request, 'reservation/editreservation.html', {'form': form, 'hotel': h, 'room': r, 'reservation':res,})
 	
 @login_required
 def delete_reservation(request, reservation_id):
@@ -86,7 +87,13 @@ def delete_reservation(request, reservation_id):
 		return HttpResponseForbidden("You can't edit a reservation of a reservation not yours")
 	if 'Ok' in request.POST:
 		Reservation.objects.filter(id=res.id).delete()
-		return HttpResponse("Prenotazione cancellata con successo")
+		rlist = Reservation.objects.filter(room = r, is_active = False).order_by('-updated')
+		for non_active_res in rlist:
+			if check_res(non_active_res, r):
+				non_active_res.is_active = True
+				non_active_res.save()
+				#NOTIFICA
+		return HttpResponseRedirect(reverse('portal:personal'))
 	else:
 		return render(request, 'reservation/deletereservation.html', {'hotel': h, 'room': r, 'reservation':res,})
 	return HttpResponse("This reservation does not exists for this user")

@@ -5,5 +5,6 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-	url(r'^$', views.add_review, name='reviews'),
+	url(r'^(?P<hotel_id>[0-9]+)/add/$', views.add_review, name='add_review'),
+	url(r'^(?P<hotel_id>[0-9]+)/$', views.ReviewListView.as_view(), name='list_review'),
 ]

@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^reservation/', include('reservation.urls', namespace='reservation')),
 	url(r'^hotels/', include('hotels.urls', namespace = "hotels")),
+	url(r'^review/', include('review.urls', namespace = "review")),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

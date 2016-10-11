@@ -24,7 +24,10 @@
 <ul>
 {% for r in reservation_list %}
 	<li><a href="{% url 'reservation:reservation_detail' r.pk %}">Reservation</a>
-		Room {{ r.room.number }} Hotel {{ r.room.hotel }}</li>
+		Room {{ r.room.number }} Hotel {{ r.room.hotel }}
+		{% if not r.is_active %}
+		-- in queue --
+		{% endif %}</li>
 {% endfor %}
 </ul>
 {% endif %}

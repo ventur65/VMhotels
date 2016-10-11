@@ -11,4 +11,5 @@ class Review(models.Model):
 	rate = models.PositiveIntegerField()
 	comment = models.CharField(max_length=1000)
 	email = models.EmailField()
+	created = models.DateTimeField(auto_now_add = True)
 	
