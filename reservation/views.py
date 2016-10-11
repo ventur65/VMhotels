@@ -56,6 +56,7 @@ def reservation_detail(request, reservation_id):
 	return HttpResponse("NON SEI L'UTENTE CHE HA EFFETTUATO QUESTA PRENOTAZIONE")
 	
 @login_required
+@permission_required('reservation.change_reservation')
 def edit_reservation(request, reservation_id):
 	res = get_object_or_404(Reservation, pk=reservation_id)
 	r = get_object_or_404(Room, pk=res.room.pk)
@@ -73,12 +74,13 @@ def edit_reservation(request, reservation_id):
 			else:
 				res.is_active = False
 				res.save()
-				return HttpResponseRedirect(reverse('portal:personal'))
+				return render(request, 'reservation/inqueue.html')
 	elif request.method == 'GET': ##caso GET
 		form = ReservationForm(instance = res)
 	return render(request, 'reservation/editreservation.html', {'form': form, 'hotel': h, 'room': r, 'reservation':res,})
 	
 @login_required
+@permission_required('reservation.delete_reservation')
 def delete_reservation(request, reservation_id):
 	res = get_object_or_404(Reservation, pk=reservation_id)
 	r = get_object_or_404(Room, pk=res.room.pk)
@@ -87,7 +89,7 @@ def delete_reservation(request, reservation_id):
 		return HttpResponseForbidden("You can't edit a reservation of a reservation not yours")
 	if 'Ok' in request.POST:
 		Reservation.objects.filter(id=res.id).delete()
-		rlist = Reservation.objects.filter(room = r, is_active = False).order_by('-updated')
+		rlist = Reservation.objects.filter(room = r, is_active = False).order_by('updated')
 		for non_active_res in rlist:
 			if check_res(non_active_res, r):
 				non_active_res.is_active = True

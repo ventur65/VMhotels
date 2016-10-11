@@ -30,7 +30,7 @@ def personal(request):
 		context = {'request': request, 'hotel_list': hotel_list, 'owner': True}
 	elif Group.objects.get(name='customers') in request.user.groups.all():
 		user = request.user
-		reservation_list = Reservation.objects.filter(user=user)
+		reservation_list = Reservation.objects.filter(user=user).order_by('idate')
 		context = {'request': request, 'reservation_list': reservation_list, 'customer': True}
 	return render(request, 'portal/personal.html', context)
 	

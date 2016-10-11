@@ -1,5 +1,7 @@
 <header>
-<h1>Reservation for Room {{ reservation.room.number }} Hotel {{ reservation.room.hotel.name }}</h1>
+<h1>Reservation for 
+<a href="{% url 'hotels:room_detail' reservation.room.hotel.id reservation.room.id %}">Room {{ reservation.room.number }}</a>
+ Hotel <a href="{% url 'hotels:hotel_detail' reservation.room.hotel.id %}">{{ reservation.room.hotel.name }}</a></h1>
 </header>
 
 {% if error_message %}

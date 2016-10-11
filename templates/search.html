@@ -1,13 +1,11 @@
-{% if found_entries %}
-    <h2>Hotels Found:</h2>
-    <ul>
-    {% for i in found_entries %}
-        <li><a href="{% url 'hotels:hotel_detail' i.pk %}">{{ i }}</a></li>
+<h2>Rooms Found:</h2>
+    {% for r in found_entries %}
+        <img src="{{ r.image.url }}" alt="Room View" style="width:100px;height:100px;">
+        <a href="{% url 'hotels:room_detail' r.hotel.pk r.pk %}">{{ r }}</a>
+        Hotel: <a href="{% url 'hotels:hotel_detail' r.hotel.pk %}">{{ r.hotel.name }}</a>
+        {% widthratio r.cost 1 days as total_cost %}
+        Cost: {{ total_cost }}<br>
+    {% empty %}
+    	No Results Found.
     {% endfor %}
-    </ul>
-	<p>You've searched for "{{ query_string }}".</p>
-{% endif %}
-{% if query_string and not found_entries %}
-    <p>No results found.</p>
-    <p><a href="{% url 'main_page' %}">Back</a></p>
-{% endif %}
+<p><a href="{% url 'main_page' %}">Back</a></p>
