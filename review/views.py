@@ -6,6 +6,7 @@ from .forms import ReviewForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
 from django.views import generic
+from django.db.models import Avg
 # Create your views here.
 
 @login_required
@@ -39,14 +40,7 @@ class ReviewListView(generic.list.ListView):
 		h_id = self.kwargs['hotel_id']
 		h = get_object_or_404(Hotel, pk = h_id)
 		context['hotel'] = h
-		i = 0
-		tot = 0
-		for r in Review.objects.filter(hotel = h):
-			tot += r.rate
-			i += 1
-		if i > 0:
-			context['average'] = tot/i
-		else:
-			context['average'] = 0
+		av = Review.objects.filter(hotel=h).aggregate(Avg('rate'))
+		context['average'] = av['rate__avg']
 		return context
 

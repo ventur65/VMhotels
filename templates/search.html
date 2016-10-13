@@ -1,10 +1,18 @@
-<h2>Rooms Found:</h2>
-    {% for r in found_entries %}
-        <img src="{{ r.image.url }}" alt="Room View" style="width:100px;height:100px;">
-        <a href="{% url 'hotels:room_detail' r.hotel.pk r.pk %}">{{ r }}</a>
-        Hotel: <a href="{% url 'hotels:hotel_detail' r.hotel.pk %}">{{ r.hotel.name }}</a>
-        {% widthratio r.cost 1 days as total_cost %}
-        Cost: {{ total_cost }}<br>
+<h2>Hotels Found:</h2>
+    {% for h in found_entries %}
+        <img src="{{ h.image.url }}" alt="Hotel View" style="width:100px;height:100px;">
+        Hotel: <a href="{% url 'hotels:hotel_detail' h.pk %}">{{ h.name }}</a>
+        {% if 'rate' in request.POST %}
+        	Average Vote: {{ h.average }}<br>
+        {% else %}
+        	{% widthratio h.room.cost 1 days as total_cost %}
+        	Average Cost: {{ total_cost }}<br>
+        {% endif %}
+        {% for r in rl %}
+        	{% if r.hotel = h %}
+        		Camera: {{ r.number }}, Cost: {{ r.cost }}<br>
+        	{% endif %}
+        {% endfor %}
     {% empty %}
     	No Results Found.
     {% endfor %}
