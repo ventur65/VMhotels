@@ -4,7 +4,7 @@
 
 {% block content %}
 	<section>
-		<h2>Welcome, {{ request.user.username | capfirst }}</h2>
-		<p>This is the entry page of the Web Portal.
+		<h2>{{ request.user.username | capfirst }}</h2>
+		<p>Select the operations you want
 	</section>
 {% endblock %}

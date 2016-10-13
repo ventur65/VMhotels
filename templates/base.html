@@ -7,7 +7,8 @@
 {% bootstrap_messages %}
 {% block bar %}
 <html>
- <head>  
+
+ <head>   
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
   <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -18,22 +19,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="#" class="navbar-brand"><img class="center-block img-circle" height="33" alt="VMhotels"></a>
+          <a href="#" class="navbar-brand"><img src="/media/vm.png" class="center-block img-circle" height="33" alt="VMhotels"></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="#">Chi Siamo</a>
+              <a href="/">Main page</a>
             </li>
             <li>
-              <a href="#">Dove Siamo</a>
-            </li>
-            <li>
-              <a href="#">News</a>
+              <a href="{% url 'portal:update_data' %}">Modifica dati utente</a>
             </li>
             
             <li>
-              <a href="mailto:">Contattaci</a>
+              <a href="mailto:vmhotels@gmail.com">Contattaci</a>
             </li>
             <li>
               {% if user.is_authenticated %} 
@@ -62,5 +60,46 @@
  <body>
   {% block body %}{% endblock %}
   {% block form %}{% endblock %}
+  {% block footer %}
+  <div class="container well">
+	<h2><center>Frase figa da effetto XD tipo SIAMO SEMPRE PRESENTI</center></h2>
+  </div>
+	<div id="footer" style="background-image: url(/media/foot.jpeg);  height: 280px;">
+    	<div class="container">
+       	 <div class="row">
+            	<h3 class="footertext">About Us:</h3>
+            	<br>
+             	 <div class="col-md-4">
+               	 	<center>
+                  	<img src="http://oi60.tinypic.com/w8lycl.jpg" class="img-circle" alt="the-brains">
+                  	<br>
+                  	<h4 class="footertext">Programmer</h4>
+                  	<p class="footertext">You can thank all the crazy programming here to this guy.<br>
+               		 </center>
+              	</div>
+                <div class="col-md-4">
+                	<center>
+                  	<img src="http://oi60.tinypic.com/2z7enpc.jpg" class="img-circle" alt="...">
+                  	<br>
+                  	<h4 class="footertext">Artist</h4>
+                  	<p class="footertext">All the images here are hand drawn by this man.<br>
+                	</center>
+                </div>
+              	<div class="col-md-4">
+                	<center>
+                  	<img src="http://oi61.tinypic.com/307n6ux.jpg" class="img-circle" alt="...">
+                  	<br>
+                  	<h4 class="footertext">Designer</h4>
+                  	<p class="footertext">This pretty site and the copy it holds are all thanks to this guy.<br>
+                	</center>
+              	</div>
+            	</div>
+            	<div class="row">
+            		<p><center><a href="#">Contact Stuff Here</a> <p class="footertext">Copyright 2016</p></center></p>
+        	</div>
+    	</div>
+  </div>
+  {% endblock %}
+  
  </body>
 </html>
