@@ -50,15 +50,18 @@
   {% block image %}
   {% endblock %}
   
-  <div class="cover" style="background-image: url(/media/trav.jpg);  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
-  
   {% block cover %}
+  <div class="cover" style="background-image: url(/media/trav.jpg);  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
   {% endblock %}
   </div>
     
  </head>
  <body>
-  {% block body %}{% endblock %}
+  {% block body %}
+  <div class="container well">
+	<h2><center>Frase figa da effetto XD tipo SIAMO SEMPRE PRESENTI</center></h2>
+  </div>
+  {% endblock %}
   {% block form %}{% endblock %}
   {% block footer %}
   <div class="container well">
