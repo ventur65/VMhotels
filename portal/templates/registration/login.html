@@ -3,32 +3,46 @@
 {% block head %}
   <title>VMHotels | Login</title>
 {% endblock %}
-{% block body %}
-  <header>
-    <h1>VMhotels</h1>
-    <h2>Login Page</h2>
-  </header>
-  <section>
-    {% if form.errors %}
-      <p>Your username and password didn't match, please try again.</p>
-    {% endif %}
+{% block bar %}
+{% endblock %}
 
-  <form method="post">
-      {% csrf_token %}
-      <p>
-        {{ form.username.label_tag }}
-        {{ form.username }}
-      </p>  <p>
-        {{ form.password.label_tag }}
-        {{ form.password }}
-      </p>
-      {% if next %}
-        <input type="hidden" name="next" value="{{ next }}" />
-      {% else %}
-        <input type="hidden" name="next" value="{% url 'portal:personal' %}" />
-      {% endif %}
-      <input type="submit" value="login" />
-    </form>
-  </section>
+{% block cover %}
+	 <table align="center">
+ 	 <tr>
+    		<th>	<br><br><br><br>
+    			<h1 align="center">VMhotels</h1>
+    			<h2 align="center">Login Page</h2>
+		</th>
+ 	 </tr>
+ 	 <br>
+ 	 <br>
+ 	 <tr>
+ 	 	<th> <div align="center"><br><br><br>
+ 	 		{% if form.errors %}
+      				<p>Your username and password didn't match, please try again.</p>
+    			{% endif %}
+	
+  			<form method="post">
+      				{% csrf_token %}
+      				<p>
+        				{{ form.username.label_tag }}
+        				{{ form.username }} 
+      				</p>  
+      				<p>
+        				{{ form.password.label_tag }}
+        				{{ form.password }}
+      				</p>
+      				{% if next %}
+        				<input type="hidden" name="next" value="{{ next }}" />
+      				{% else %}
+        				<input type="hidden" name="next" value="{% url 'portal:personal' %}" />
+      				{% endif %}
+      					<input type="submit" value="login" align="center"/>
+    			</form>
+    		      </div>
+ 	 	</th>
+ 	 </tr>
+
+    </table>	
 {% endblock %}
 
