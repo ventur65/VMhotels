@@ -1,5 +1,20 @@
-<form enctype="multipart/form-data" method="post">
+{% extends "portal/portal.html" %}
+{% load bootstrap3 %}
+
+{% block covercontent %}
+<br><br><br><br><br><br>
+<h1 align="center"> Register page </h1>
+<br><br><br>
+<div class="col-xs-10" align="center">
+<form role="form" class="form-horizontal" enctype="multipart/form-data" method="post">
 {% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Create"/>
+{% bootstrap_form form layout="horizontal" size='md' %}
+{% bootstrap_button "Ok" button_type="submit" value="Ok" button_class="btn-primary" icon="ok" %}
+<a href="{% url 'portal:portal_welcome' %}">{% bootstrap_button "Cancel" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>
 </form>
+</div>
+{% endblock %}
+{% block body %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
