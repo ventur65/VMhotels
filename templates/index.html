@@ -3,26 +3,50 @@
 {% block head %}
 	<title>VMhotels</title>
 {% endblock %}
-{% block body %}    
-	<section>
-		<p align="center">Welcome to VMhotels.<br>
-		Click <a href="{% url 'portal:django.contrib.auth.views.login' %}">here</a> to login.<br>
-		Click <a href="{% url 'portal:registration_register_customer' %}">here</a> to register as a costumer.<br>
-		Click <a href="{% url 'portal:registration_register_owner' %}">here</a> to register as an owner.<br>
-	</section>
-	<div class="container">
-    	<div class="row" align="center">
-			<form action="{% url 'search_results' %}" method="post">
-				{% csrf_token %}
-				<input type="text" id="searchCity" class="input-medium search-query" name="dest" placeholder="Destination">
-				<input type="number" id="searchBed" class="input-medium search-query" name="beds" placeholder="Beds">
-				<input type="date" id="checkin" class="input-medium search-query" name="checkin" placeholder="CheckIn">
-				<input type="date" id="checkout" class="input-medium search-query" name="checkout" placeholder="CheckOut">
-				Order by Rate: <input type="checkbox" id="rate" class="input-medium search-query" name="rate">
-				<input type="submit" class="btn-primary" value="Search" name="search">
-				
-			</form>
+{% block bar %}
+{% endblock %}
+{% block cover %}
+    <table align="center">
+ 	 <tr>
+    		<th>
+    		<div class="container" style="margin-top: 5cm;">
+    			<div class="row" align="center">
+				<form action="{% url 'search_results' %}" method="post">
+					{% csrf_token %}
+					<input type="text" id="searchCity" class="input-medium search-query" name="dest" placeholder="Destination">
+					<input type="number" id="searchBed" class="input-medium search-query" name="beds" placeholder="Beds">
+					<input type="date" id="checkin" class="input-medium search-query" name="checkin" placeholder="CheckIn">
+					<input type="date" id="checkout" class="input-medium search-query" name="checkout" placeholder="CheckOut">
+					<input type="submit" class="btn-primary" value="Search" name="search">
+				</form>
+			</div>
 		</div>
-	</div>
-	
+		</th>
+ 	 </tr>
+ 	 <br>
+ 	 <br>
+ 	 <tr>
+ 	 	<th>
+ 	 	<div>
+ 	 		<h1 align="center">Welcome to VMhotels</h1>		
+ 	 	</div>
+ 	 	</th>
+ 	 </tr>
+ 	 <tr>
+ 	 	<th>
+ 	 	<div align="center">
+ 	 		
+ 	 		{% if user.is_authenticated %} 
+              			<h1> {{ user.username }} </h1> 
+              			<a href="{% url 'portal:logout_view' %}"><button type="button" class="btn btn-danger">Logout</button></a>
+              		{% else %}
+              			<a href="{% url 'portal:django.contrib.auth.views.login' %}"><button type="button" class="btn btn-success">Login</button></a>
+ 	 			<a href="{% url 'portal:registration_register_customer' %}"><button type="button" class="btn btn-success">Sign in as customer</button></a>
+ 	 			<a href="{% url 'portal:registration_register_owner' %}"><button type="button" class="btn btn-success">Sign in as owner</button></a>
+	      		{% endif %}  
+ 	 		<br>
+		</div>
+		</th>
+	</tr>
+    </table>	
 {% endblock %}

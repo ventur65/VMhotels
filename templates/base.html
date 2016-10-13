@@ -2,12 +2,12 @@
 {% load bootstrap3 %}
 
 {% bootstrap_css %}
-{% bootstrap_javascript_url %}
+
 
 {% bootstrap_messages %}
-
+{% block bar %}
 <html>
- <head>
+ <head>  
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
   <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -22,7 +22,7 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="active">
+            <li>
               <a href="#">Chi Siamo</a>
             </li>
             <li>
@@ -31,33 +31,36 @@
             <li>
               <a href="#">News</a>
             </li>
-            <li>
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="badge">2</span>Catalogo</a>
-              <ul class="dropdown-menu" role="menu">
-                <li>
-                  <a href="#">•Tutti i Prodotti</a>
-                </li>
-              </ul>
-            </li>
+            
             <li>
               <a href="mailto:">Contattaci</a>
             </li>
             <li>
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Lingua</a>
-              <ul class="dropdown-menu" role="menu">
-                <li>
-                  <a href="../Eng/chisiamo.html"> <img>Inglese</a>
-                </li>
-              </ul>
+              {% if user.is_authenticated %} 
+              	<li> <a href="{% url 'portal:logout_view' %}"> Logout </a></li>
+              {% else %}
+              	<li> <a href="{% url 'portal:django.contrib.auth.views.login' %}"> Login </a></li>
+	      {% endif %}              	
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="cover"><img src="/media/trav.jpg" style="width:100%; height:600px;"></div>
-  {% block head %}{% endblock %}
+    
+  {% endblock %}
+  
+  {% block image %}
+  {% endblock %}
+  
+  <div class="cover" style="background-image: url(/media/trav.jpg);  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
+  
+  {% block cover %}
+  {% endblock %}
+  </div>
+    
  </head>
  <body>
   {% block body %}{% endblock %}
+  {% block form %}{% endblock %}
  </body>
 </html>
