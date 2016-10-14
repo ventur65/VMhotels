@@ -23,5 +23,7 @@ def search_results(request):
 		#found_entries = found_entries.annotate(average=Avg('room__cost')).order_by('average')
 		found_entries = found_entries.order_by('room__cost')
 	for h in found_entries:
-		rl[h] = h.room_set.filter(beds=beds).aggregate(costmin=Min('cost'), costmax=Max('cost'))
+		rl[h] = h.room_set.filter(beds=beds).aggregate(costmin=Min('cost')*days.days, costmax=Max('cost')*days.days)
+#		rl[h]['costmin'] *= days.days
+#		rl[h]['costmax'] *= days.days
 	return render(request, 'search.html', {'found_entries': found_entries, 'days': days.days, 'rl': rl})
