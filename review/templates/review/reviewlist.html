@@ -1,5 +1,11 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block body %}
 <h1>Reviews</h1>
 
+<div align="justify">
+<p>
 Hotel: <a href="{% url 'hotels:hotel_detail' hotel.id %}">{{ hotel.name }}</a><br>
 Average Rate: {{ average }}<br>
 <ul>
@@ -12,3 +18,6 @@ Average Rate: {{ average }}<br>
     <li>No reviews yet.</li>
 {% endfor %}
 </ul>
+</p>
+</div>
+{% endblock %}
