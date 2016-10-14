@@ -23,34 +23,31 @@ def portal_welcome(request):
 @login_required
 def personal(request):
 	context = {}
+	user = request.user
 	if Group.objects.get(name='owners') in request.user.groups.all():
-		user = request.user
-		hotel_list = Hotel.objects.filter(user=user)
+		hotel_list = user.hotel_set.all()
 		print hotel_list
 		context = {'request': request, 'hotel_list': hotel_list, 'owner': True}
 	elif Group.objects.get(name='customers') in request.user.groups.all():
-		user = request.user
-		reservation_list = Reservation.objects.filter(user=user).order_by('idate')
+		reservation_list = user.reservation_set.all().order_by('idate')
 		context = {'request': request, 'reservation_list': reservation_list, 'customer': True}
 	return render(request, 'portal/personal.html', context)
 	
 @login_required
 def upload(request):
-    if 'Ok' in request.POST:
-    	u = request.user
-    	form = UserForm(request.POST, instance=u)
-    	if form.is_valid():
-    		form.save()
-		return HttpResponseRedirect(reverse('portal:personal'))
-    elif request.method == 'GET': ##caso GET
-    	u = request.user
-    	form = UserForm(instance = u)
-    return render(request, 'portal/upload.html', {'form' : form})
+	u = request.user
+	if 'Ok' in request.POST:
+ 		form = UserForm(request.POST, instance=u)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(reverse('portal:personal'))
+	elif request.method == 'GET': ##caso GET
+		form = UserForm(instance = u)
+	return render(request, 'portal/upload.html', {'form' : form})
     
 def logout_view(request):
 	"Log users out and re-direct them to the main page."
 	logout(request)
-	#return HttpResponseRedirect('/')
 	return HttpResponseRedirect(reverse('main_page'))
 
 class RegistrationView(BaseRegistrationView):
@@ -74,4 +71,4 @@ class RegistrationView(BaseRegistrationView):
 		return new_user
 
 	def get_success_url(self, user):
-		return '/'
+		return reverse('main_page')

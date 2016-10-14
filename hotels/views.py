@@ -27,7 +27,6 @@ def create_hotel(request):
 			h = form.save(commit=False)
 			h.user = request.user
 			h.save() ##FARE CON TRY-CATCH
-			#return HttpResponseRedirect("/hotels/"+str(h.id))
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
 	else:
 		form = HotelForm()
@@ -36,35 +35,31 @@ def create_hotel(request):
 @login_required
 @permission_required('hotels.add_room')
 def create_room(request, hotel_id):
-	if request.method == 'POST':
-		h = get_object_or_404(Hotel, pk=hotel_id)
-		if request.user == h.user:
+	h = get_object_or_404(Hotel, pk=hotel_id)
+	if request.user == h.user:
+		if request.method == 'POST':
 			form = RoomForm(request.POST, request.FILES)
 			if form.is_valid():
 				r = form.save(commit = False)
 				r.hotel = h
 				r.save() ##FARE CON TRY-CATCH
-				#return HttpResponseRedirect('/'.join(['/hotels', str(h.pk), str(r.pk)]))
 				return HttpResponseRedirect(reverse('hotels:room_detail', args=(h.pk, r.pk,)))
-		else: #Caso di user non uguale
-			HttpResponseForbidden("You can't add a room to an hotel not yours.")
-	else: #caso GET
-		form = RoomForm()
-	return render(request, 'hotels/insertroom.html', {'form': form,})
-
+		else: #caso GET
+			form = RoomForm()
+		return render(request, 'hotels/insertroom.html', {'form': form,})
+	#Caso di user non uguale
+	return HttpResponseForbidden("You're not the owner of this Hotel.")
+			
 @login_required
 @permission_required('hotels.change_hotel')
 def edit_hotel(request, hotel_id):
 	h = get_object_or_404(Hotel, pk=hotel_id)
 	if request.user != h.user: ##Se l'utente della sessione non e' il proprietario dell'hotel
-		#logout(request)
-		#return HttpResponseRedirect("/login")
-		return HttpResponseForbidden("You can't edit an hotel not yours.")
+		return HttpResponseForbidden("You're not the owner of this Hotel.")
 	if 'Ok' in request.POST:
 		form = HotelForm(request.POST, request.FILES, instance = h)
 		if form.is_valid():
 			form.save()
-			#return HttpResponseRedirect("/hotels/"+str(h.pk))
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
 	elif request.method == 'GET': ##caso GET
 		form = HotelForm(instance = h)
@@ -76,15 +71,14 @@ def edit_room(request, hotel_id, room_id):
 	h = get_object_or_404(Hotel, pk=hotel_id)
 	r = get_object_or_404(Room, pk=room_id)
 	if h.user != request.user: ##Se l'utente della sessione non e' il proprietario dell'hotel
-		return HttpResponseForbidden("You can't edit a room of an hotel not yours")
+		return HttpResponseForbidden("You're not the owner of this Hotel.")
 	if h.pk == r.hotel.pk: ##Se la stanza e' di questo hotel
 		if 'Ok' in request.POST:
 			form = RoomForm(request.POST, request.FILES, instance = r)
 			if form.is_valid():
 				form.save()
-				#return HttpResponseRedirect('/'.join(["/hotels",str(h.pk),str(r.pk)]))
 				return HttpResponseRedirect(reverse('hotels:room_detail', args=(h.pk, r.pk,)))
 		elif request.method == 'GET': ##caso GET
 			form = RoomForm(instance = r)
 		return render(request, 'hotels/editroom.html', {'form': form, 'hotel': h, 'room': r})
-	return HttpResponse("This room doesn't exist in this Hotel")
+	return HttpResponseForbidden("This Room doesn't exist in this Hotel.")
