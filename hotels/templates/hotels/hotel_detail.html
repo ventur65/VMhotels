@@ -1,3 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block cover %}
+  <div class="cover" style="background-image: url({{ hotel.image.url }});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
+  {% block covercontent %}
+  {% endblock %}
+  </div>
+  {% endblock %}
+  
+
+{% block body %}
+
 <header>
 <h1>{{ hotel.name }}</h1>
 </header>
@@ -6,22 +19,41 @@
 	<p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
-<img src="{{ hotel.image.url }}" alt="Hotel View" style="width:300px;height:230px;">
+<div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <br>
+            <br>
+            <img src="{{ hotel.image.url }}" alt="Hotel View" style="width:300px;height:230px;" class="img-responsive">
+          </div>
+          <div class="col-md-8 text-center">
+            <p> <br><br><br>
+            	Name: {{ hotel.name }}<br>
+		City: {{ hotel.city }}<br>
+		Address: {{ hotel.address }}<br>
+		Description: {{ hotel.description }}<br>
+		Email: {{ hotel.email }}<br>
+		Tel: {{ hotel.tel }}<br>
+		View the last reviews for this hotel <a href="{% url 'review:list_review' hotel.id %}">here</a>
+		<br>
+		Camere:<br>
+		<ul>
+		{% for room in hotel.room_set.all %}
+			<li><a href="{% url 'hotels:room_detail' hotel.id room.id %}">
+			Camera {{ room.number }}</a>
+		{% endfor %}
+		</ul><br>
+	   </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 <br>
-Name: {{ hotel.name }}<br>
-City: {{ hotel.city }}<br>
-Address: {{ hotel.address }}<br>
-Description: {{ hotel.description }}<br>
-Email: {{ hotel.email }}<br>
-Tel: {{ hotel.tel }}<br>
-View the last reviews for this hotel <a href="{% url 'review:list_review' hotel.id %}">here</a>
-<br>
-Camere:<br>
-<ul>
-{% for room in hotel.room_set.all %}
-	<li><a href="{% url 'hotels:room_detail' hotel.id room.id %}">
-		Camera {{ room.number }}</a>
-{% endfor %}
-</ul><br>
+<p align="center">
 Are you the owner of this hotel? Click <a href="{% url 'hotels:create_room' hotel.id %}">here</a> to add a Room. <br>
 Are you the owner of this hotel? Click <a href="{% url 'hotels:edit_hotel' hotel.id %}">here</a> to change Hotel data.
+</p>
+{% endblock %}
