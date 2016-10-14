@@ -1,6 +1,7 @@
+{% extends "base.html" %}
 {% load bootstrap3 %}
 
-{% block content %}
+{% block covercontent %}
 
 <head>
 <link rel="stylesheet"
@@ -13,7 +14,7 @@
         </script>
         {{ form.media }}
 </head>
-
+<br><br><br>
 <h1 align="center">Adding Reservation for Room n.{{ room.number }} | Hotel {{ hotel.name }}</h1>
 <br><br><br><br>
 <div class="col-xs-10" align="center">
@@ -29,4 +30,6 @@
 </div>
 <br>
 
+{% endblock %}
+{% block footer %}
 {% endblock %}
