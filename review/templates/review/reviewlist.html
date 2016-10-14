@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 
-{% block body %}
-<h1>Reviews</h1>
-
-<div align="justify">
+{% block covercontent %}
+	<br><br><br><br><br><br><br><br><br><br><div style="background: white; width: 50%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
+	<div align="justify">
 <p>
 Hotel: <a href="{% url 'hotels:hotel_detail' hotel.id %}">{{ hotel.name }}</a><br>
 Average Rate: {{ average }}<br>
@@ -20,4 +19,10 @@ Average Rate: {{ average }}<br>
 </ul>
 </p>
 </div>
+	</div>
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+{% block footer %}
 {% endblock %}
