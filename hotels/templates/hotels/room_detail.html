@@ -1,3 +1,9 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block cover %}
+{% endblock %}
+{% block body %}
+<br><br><br><br>
 <header>
 <h1>Camera {{ room.number }}</h1>
 </header>
@@ -6,17 +12,35 @@
 	<p><strong>{{ error_message }}</strong></p>
 {% endif %}
 
-<img src="{{ room.image.url }}" alt="Room View" style="width:300px;height:230px;">
+<div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <br>
+            <br>
+            <img src="{{ room.image.url }}" alt="Room View" style="width:300px;height:230px;">
+          </div>
+          <div class="col-md-8 text-center">
+            <p> <br><br><br><br>
+            Hotel: <a href="{% url 'hotels:hotel_detail' hotel.id %}">{{ room.hotel }}</a><br>
+	    Number: {{ room.number }}<br>
+	    Beds: {{ room.beds }}<br>
+	    Description: {{ room.description }}<br>
+	    Cost per night: {{ room.cost }} EUR<br>
+
+            Available Services:<br>
+	   </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 <br>
 
-Hotel: <a href="{% url 'hotels:hotel_detail' hotel.id %}">{{ room.hotel }}</a><br>
-Number: {{ room.number }}<br>
-Beds: {{ room.beds }}<br>
-Description: {{ room.description }}<br>
-Cost per night: {{ room.cost }} EUR<br>
 
-Available Services:<br>
-
-Add a Reservation for this Room <a href="{% url 'reservation:add_reservation' hotel.id room.id %}">here</a><br>
-Are you the owner of this room? Click <a href="{% url 'hotels:edit_room' hotel.id room.id %}">here</a> to change Room data.
-
+<p align="center">
+	Add a <b>Reservation</b> for this Room <a href="{% url 'reservation:add_reservation' hotel.id room.id %}">here</a><br>
+	Are you the owner of this room? Click <a href="{% url 'hotels:edit_room' hotel.id room.id %}">here</a> to change Room data.
+</p>
+{% endblock %}
