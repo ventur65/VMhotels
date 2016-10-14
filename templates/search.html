@@ -6,10 +6,12 @@
         {% if 'rate' in request.POST %}
         	Average Vote: {{ h.average }}<br>
         {% endif %}
-        {% widthratio rl|get_value_from_dict:h|get_value_from_dict:'costmin' 1 days as min_cost %}
-        {% widthratio rl|get_value_from_dict:h|get_value_from_dict:'costmax' 1 days as max_cost %}
+        {% with rl|get_value_from_dict:h|get_value_from_dict:'costmin' as min_cost %}
+        {% with rl|get_value_from_dict:h|get_value_from_dict:'costmax' as max_cost %}
         Min Price for {{ days }} nights: {{ min_cost }} <br>
         Max Price for {{ days }} nights: {{ max_cost }}<br>
+        {% endwith %}
+        {% endwith %}
     {% empty %}
     	No Results Found.
     {% endfor %}
