@@ -4,12 +4,8 @@
 {% block cover %}
   <div class="cover" style="background-image: url({{ hotel.image.url }});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
   {% block covercontent %}
-  {% endblock %}
-  </div>
-  {% endblock %}
-  
-
-{% block body %}
+  	<br><br><br><br><br><br><br>
+  	<div style="background: white; width: 80%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 
 <header>
 <h1>{{ hotel.name }}</h1>
@@ -38,12 +34,14 @@
 		View the last reviews for this hotel <a href="{% url 'review:list_review' hotel.id %}">here</a>
 		<br>
 		Camere:<br>
-		<ul>
+		<div class="pre-scrollable" style="height:50px;">
+		<ul>		
 		{% for room in hotel.room_set.all %}
 			<li><a href="{% url 'hotels:room_detail' hotel.id room.id %}">
 			Camera {{ room.number }}</a>
 		{% endfor %}
-		</ul><br>
+		</ul>
+		</div>		
 	   </p>
           </div>
         </div>
@@ -52,8 +50,19 @@
 
 
 <br>
-<p align="center">
+
+<p align="center"><br>
 Are you the owner of this hotel? Click <a href="{% url 'hotels:create_room' hotel.id %}">here</a> to add a Room. <br>
 Are you the owner of this hotel? Click <a href="{% url 'hotels:edit_hotel' hotel.id %}">here</a> to change Hotel data.
 </p>
+
+ </div>
+  {% endblock %}
+</div>
+{% endblock %}
+  
+
+{% block body %}
+{% endblock %}
+{% block footer %}
 {% endblock %}
