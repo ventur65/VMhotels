@@ -7,6 +7,7 @@
 <p>
 Hotel: <a href="{% url 'hotels:hotel_detail' hotel.id %}">{{ hotel.name }}</a><br>
 Average Rate: {{ average }}<br>
+<div class="pre-scrollable" style="height:700px;">
 <ul>
 {% for review in review_list %}
     <li>{{ review.user.username }} - {{ review.created|date }}<br>
@@ -17,6 +18,7 @@ Average Rate: {{ average }}<br>
     <li>No reviews yet.</li>
 {% endfor %}
 </ul>
+</div>
 </p>
 </div>
 	</div>
