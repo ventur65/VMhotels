@@ -6,8 +6,10 @@
 
 {% bootstrap_messages %}
 
+{% load staticfiles %}
+
 {% block cover %}
-<div class="cover" style="background-image: url(/media/quaderno.jpeg);  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
+<div class="cover" style="background-image: url({% static 'images/quaderno.jpeg' %});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
 <br><br><br><br>
 <h1 align="center">Edit Personal Data</h1>
 <br><br><br><br>
