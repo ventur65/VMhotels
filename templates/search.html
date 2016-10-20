@@ -1,18 +1,49 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
 {% load mytags %}
+
+{% block covercontent %}
+<br><br><br><br><br><br><br>
+<div style="background: white; width: 80%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 <h2>Hotels Found:</h2>
+    <br><br>
     {% for h in found_entries %}
-        <img src="{{ h.image.url }}" alt="Hotel View" style="width:100px;height:100px;">
-        Hotel: <a href="{% url 'hotels:hotel_detail' h.pk %}">{{ h.name }}</a><br>
-        {% if 'rate' in request.POST %}
-        	Average Vote: {{ h.average }}<br>
-        {% endif %}
-        {% with rl|get_value_from_dict:h|get_value_from_dict:'costmin' as min_cost %}
-        {% with rl|get_value_from_dict:h|get_value_from_dict:'costmax' as max_cost %}
-        Min Price for {{ days }} nights: {{ min_cost }} <br>
-        Max Price for {{ days }} nights: {{ max_cost }}<br>
-        {% endwith %}
-        {% endwith %}
-    {% empty %}
-    	No Results Found.
-    {% endfor %}
-<p><a href="{% url 'main_page' %}">Back</a></p>
+    <div class="pre-scrollable" style="height:600px;">
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            {% if h.image %}
+            	<img src="{{ h.image.url }}" alt="Hotel View" style="width:50%;">
+            {% else %}
+            	<img src="{% static 'hotels/image_not_found.jpeg' %}" alt="Hotel View" style="width:30%;" class="img-responsive">
+            {% endif %}
+          </div>
+          <div class="col-md-8 text-center"><br>
+            <p> Hotel: <a href="{% url 'hotels:hotel_detail' h.pk %}">{{ h.name }}</a><br>
+        	{% if 'rate' in request.POST %}
+        		Average Vote: {{ h.average }}<br>
+       	        {% endif %}
+        	{% with rl|get_value_from_dict:h|get_value_from_dict:'costmin' as min_cost %}
+        	{% with rl|get_value_from_dict:h|get_value_from_dict:'costmax' as max_cost %}
+        		Min Price for {{ days }} nights: {{ min_cost }} <br>
+        		Max Price for {{ days }} nights: {{ max_cost }}<br>
+        	{% endwith %}
+        	{% endwith %}
+    		{% empty %}
+    			No Results Found.
+    		{% endfor %}	
+	   </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  <a href="{% url 'main_page' %}">
+  <button type="button" class="btn btn-default">      
+	<span class="glyphicon glyphicon-chevron-left">Back</span>
+  </button>
+  </a>
+</div>
+{% endblock %}
