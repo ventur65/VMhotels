@@ -31,6 +31,12 @@
         		Max Price for {{ days }} nights: {{ max_cost }}<br>
         	{% endwith %}
         	{% endwith %}
+        	Available Services: 
+        	<ul>
+        	{% for service in s[h] %}
+        		<li>{{ service.name }}</li>
+        	{% endfor %}
+        	</ul>
     		{% empty %}
     			No Results Found.
     		{% endfor %}	

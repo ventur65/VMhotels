@@ -17,6 +17,7 @@ def search_results(request):
 		check_out = datetime.strptime(request.POST['checkout'], "%Y/%m/%d")
 		days = check_out - check_in
 		rl = dict()
+		s = dict()
 		found_entries = Hotel.objects.filter(city=dest, room__beds=beds).distinct()
 		if 'rate' in request.POST:
 			found_entries = found_entries.annotate(average=Avg('review__rate')).order_by('-average')
@@ -25,5 +26,6 @@ def search_results(request):
 			found_entries = found_entries.order_by('room__cost')
 		for h in found_entries:
 			rl[h] = h.room_set.filter(beds=beds).aggregate(costmin=Min('cost')*days.days, costmax=Max('cost')*days.days)
-		return render(request, 'search.html', {'found_entries': found_entries, 'days': days.days, 'rl': rl})
+			s[h] = h.services.all()
+		return render(request, 'search.html', {'found_entries': found_entries, 'days': days.days, 'rl': rl, 's': s})
 	return HttpResponseRedirect(reverse('main_page'))
