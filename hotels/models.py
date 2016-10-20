@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
@@ -20,7 +21,7 @@ class Hotel(models.Model):
 	name = models.CharField(max_length = 50, unique = True)
 	city = models.CharField(max_length = 50, default = '')
 	address = models.CharField(max_length = 200)
-	description = models.CharField(max_length = 1000, blank = True, null = True)
+	description = models.TextField(blank = True, null = True)
 	email = models.EmailField(unique = True)
 	tel = models.PositiveIntegerField(unique = True)
 	_height = 50
@@ -42,9 +43,16 @@ class Hotel(models.Model):
 	
 class Room(models.Model):
 	hotel = models.ForeignKey(Hotel)
-	beds = models.PositiveSmallIntegerField(default=1)
-	number = models.PositiveSmallIntegerField()
-	description = models.CharField(max_length = 300, blank = True, null = True)
+	beds = models.PositiveSmallIntegerField(default=1, 
+											validators = [
+												MinValueValidator(1)
+												]
+											)
+	number = models.PositiveSmallIntegerField(validators = [
+												MinValueValidator(1)
+												]
+											)
+	description = models.TextField(blank = True, null = True)
 	cost = models.FloatField()
 	_height = 50
 	_width = 50
