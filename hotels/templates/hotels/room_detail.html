@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 {% load staticfiles %}
+
 {% block cover %}
-{% endblock %}
-{% block body %}
-<br><br><br><br>
+{% if room.image %}
+  <div class="cover" style="background-image: url({{ room.image.url }});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
+{% endif %}
+{% block covercontent %}
+<br><br><br><br><br><br><br>
+  	<div style="background: white; width: 80%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 <header>
 <h1>Camera {{ room.number }}</h1>
 </header>
@@ -49,9 +53,23 @@
 
 
 <p align="center">
-	Add a <b>Reservation</b> for this Room <a href="{% url 'reservation:add_reservation' hotel.id room.id %}">here</a><br>
+	
+	<a href="{% url 'reservation:add_reservation' hotel.id room.id %}">
+		<button type="button" class="btn btn-default">
+    		<span class="glyphicon glyphicon-plus"></span> Add Reservation
+		</button>
+	</a>
 	{% if request.user == hotel.user %}
-	Are you the owner of this room? Click <a href="{% url 'hotels:edit_room' hotel.id room.id %}">here</a> to change Room data.
+	<a href="{% url 'hotels:edit_room' hotel.id room.id %}">
+		<button type="button" class="btn btn-default">
+    		<span class="glyphicon glyphicon-pencil"></span> Edit Room
+		</button>
+	</a>
 	{% endif %}
+	
 </p>
+</div>
+{% endblock %}
+{% endblock %}
+{% block body %}
 {% endblock %}
