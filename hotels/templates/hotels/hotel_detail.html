@@ -58,11 +58,30 @@
 <br>
 
 <p align="center"><br>
-View the last reviews for this hotel <a href="{% url 'review:list_review' hotel.id %}">here</a><br>
+
+<a href="{% url 'review:list_review' hotel.id %}">
+<button type="button" class="btn btn-default">
+    <span class="glyphicon glyphicon-search"></span> All Reviews
+</button>
+</a>
 {% if request.user == hotel.user %}
-Click <a href="{% url 'hotels:create_room' hotel.id %}">here</a> to add a Room. <br>
-Click <a href="{% url 'hotels:edit_hotel' hotel.id %}">here</a> to change Hotel data.<br>
-Click <a href="{% url 'hotels:delete_hotel' hotel.id %}">here</a> to delete Hotel.
+<a href="{% url 'hotels:create_room' hotel.id %}">
+<button type="button" class="btn btn-default">
+    <span class="glyphicon glyphicon-plus"></span> Add Room
+</button>
+</a>
+
+<a href="{% url 'hotels:edit_hotel' hotel.id %}">
+<button type="button" class="btn btn-default">
+    <span class="glyphicon glyphicon-pencil"></span> Edit Hotel
+</button>
+</a>
+
+<a href="{% url 'hotels:delete_hotel' hotel.id %}">
+<button type="button" class="btn btn-default">
+    <span class="glyphicon glyphicon-remove"></span> Delete Hotel
+</button>
+</a>
 {% endif %}
 </p>
 
