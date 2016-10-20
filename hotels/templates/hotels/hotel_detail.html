@@ -61,7 +61,8 @@
 View the last reviews for this hotel <a href="{% url 'review:list_review' hotel.id %}">here</a><br>
 {% if request.user == hotel.user %}
 Click <a href="{% url 'hotels:create_room' hotel.id %}">here</a> to add a Room. <br>
-Click <a href="{% url 'hotels:edit_hotel' hotel.id %}">here</a> to change Hotel data.
+Click <a href="{% url 'hotels:edit_hotel' hotel.id %}">here</a> to change Hotel data.<br>
+Click <a href="{% url 'hotels:delete_hotel' hotel.id %}">here</a> to delete Hotel.
 {% endif %}
 </p>
 

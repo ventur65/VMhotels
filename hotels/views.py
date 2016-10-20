@@ -86,3 +86,18 @@ def edit_room(request, hotel_id, room_id):
 			form = RoomForm(instance = r)
 		return render(request, 'hotels/editroom.html', {'form': form, 'hotel': h, 'room': r})
 	return HttpResponseForbidden("This Room doesn't exist in this Hotel.")
+
+def del_room (h_id):
+	for room in Room.objects.filter(hotel = h_id):
+		room.delete()	
+
+@login_required
+def delete_hotel(request, hotel_id):
+	h = get_object_or_404(Hotel, pk=hotel_id)
+	if h.user != request.user: ##Se l'utente della sessione non e' il titolare della prenotazione
+		return HttpResponseForbidden("This hotel is not yours.")
+	if 'Ok' in request.POST:
+		del_room(h)
+		Hotel.objects.filter(id=h.id).delete()
+		return HttpResponseRedirect(reverse('portal:personal'))
+	return render(request, 'hotels/delhotel.html', {'hotel': h,})
