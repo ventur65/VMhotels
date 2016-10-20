@@ -1,26 +1,29 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load bootstrap3 %}
 
 {% comment %} Main page of VMhotels. {% endcomment %}
-{% block head %}
-	<title>VMhotels</title>
-{% endblock %}
+
+
 
 {% block cover %}
  <div class="cover" style="background-image: url({% static 'images/login.jpg' %});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
 {% block covercontent %}
+<head>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.js"></script>
+{{ form.media }}
+</head>
     <table align="center">
  	 <tr>
     		<th>
     		<div class="container" style="margin-top: 5cm;">
     			<div class="row" align="center">
-				<form action="{% url 'search_results' %}" method="post">
+				<form action="{% url 'main_page' %}" method="post">
 					{% csrf_token %}
-					<input type="text" id="searchCity" class="input-medium search-query" name="dest" placeholder="Destination">
-					<input type="number" id="searchBed" class="input-medium search-query" name="beds" placeholder="Beds">
-					<input type="date" id="checkin" class="input-medium search-query" name="checkin" placeholder="CheckIn">
-					<input type="date" id="checkout" class="input-medium search-query" name="checkout" placeholder="CheckOut">
-					Order by Rate: <input type="checkbox" id="rate" class="input-medium search_query" name="rate">
+					{% bootstrap_form form layout="horizontal" size='sm' %}
 					<input type="submit" class="btn-primary" value="Search" name="search">
 				</form>
 			</div>

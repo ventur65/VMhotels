@@ -87,22 +87,19 @@ def edit_room(request, hotel_id, room_id):
 		return render(request, 'hotels/editroom.html', {'form': form, 'hotel': h, 'room': r})
 	return HttpResponseForbidden("This Room doesn't exist in this Hotel.")
 
-def del_room (h_id):
-	for room in Room.objects.filter(hotel = h_id):
-		room.delete()	
-
 @login_required
+@permission_required('hotels.delete_hotel')
 def delete_hotel(request, hotel_id):
 	h = get_object_or_404(Hotel, pk=hotel_id)
 	if h.user != request.user: ##Se l'utente della sessione non e' il titolare della prenotazione
 		return HttpResponseForbidden("This hotel is not yours.")
 	if 'Ok' in request.POST:
-		del_room(h)
-		Hotel.objects.filter(id=h.id).delete()
+		Hotel.objects.get(pk=h.id).delete()
 		return HttpResponseRedirect(reverse('portal:personal'))
 	return render(request, 'hotels/delhotel.html', {'hotel': h,})
 	
 @login_required
+@permission_required('hotels.delete_room')
 def delete_room(request, hotel_id, room_id):
 	r = get_object_or_404(Room, pk=room_id)
 	h = get_object_or_404(Hotel, pk=hotel_id)
@@ -110,7 +107,7 @@ def delete_room(request, hotel_id, room_id):
 		return HttpResponseForbidden("This hotel is not yours.")
 	if h.pk == r.hotel.pk:
 		if 'Ok' in request.POST:
-			Room.objects.filter(id=r.id).delete()
+			Room.objects.get(pk=r.id).delete()
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
 		return render(request, 'hotels/delroom.html', {'room': r, 'hotel': h,})
 	return HttpResponseForbidden("This Room doesn't exist in this Hotel.")

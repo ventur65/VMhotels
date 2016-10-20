@@ -20,7 +20,6 @@ from . import views
 
 urlpatterns = [
 	url(r'^$', views.main_page, name='main_page'),
-	url(r'^results/$', views.search_results, name='search_results'),
 	url(r'^portal/', include('portal.urls', namespace = "portal")),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^reservation/', include('reservation.urls', namespace='reservation')),

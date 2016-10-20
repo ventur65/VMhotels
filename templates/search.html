@@ -5,22 +5,23 @@
 
 {% block covercontent %}
 <br><br><br><br><br><br><br>
-<div style="background: white; width: 80%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
+<div style="background: white; width: 90%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 <h2>Hotels Found:</h2>
     <br><br>
-    {% for h in found_entries %}
     <div class="pre-scrollable" style="height:600px;">
     <div class="section">
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
+          
+    {% for h in found_entries %}
+    		<div class="col-md-6">
             {% if h.image %}
-            	<img src="{{ h.image.url }}" alt="Hotel View" style="width:50%;">
+            	<img src="{{ h.image.url }}" alt="Hotel View" style="width:100px;height:100px;">
             {% else %}
             	<img src="{% static 'hotels/image_not_found.jpeg' %}" alt="Hotel View" style="width:30%;" class="img-responsive">
             {% endif %}
           </div>
-          <div class="col-md-8 text-center"><br>
+          <div class="col-md-4 text-center"><br>
             <p> Hotel: <a href="{% url 'hotels:hotel_detail' h.pk %}">{{ h.name }}</a><br>
         	{% if 'rate' in request.POST %}
         		Average Vote: {{ h.average }}<br>
@@ -32,16 +33,16 @@
         	{% endwith %}
         	{% endwith %}
         	Available Services: 
+        	<div class="pre-scrollable" style="height:50px;">
         	<ul>
-        	{% for service in s[h] %}
+        	{% for service in s|get_value_from_dict:h %}
         		<li>{{ service.name }}</li>
         	{% endfor %}
-        	</ul>
+        	</ul><br></div></p></div>
     		{% empty %}
     			No Results Found.
     		{% endfor %}	
-	   </p>
-          </div>
+         
         </div>
       </div>
     </div>
