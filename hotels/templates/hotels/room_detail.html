@@ -65,6 +65,11 @@
     		<span class="glyphicon glyphicon-pencil"></span> Edit Room
 		</button>
 	</a>
+	<a href="{% url 'hotels:delete_room' hotel.id room.id %}">
+		<button type="button" class="btn btn-default">
+    		<span class="glyphicon glyphicon-remove"></span> Delete Room
+		</button>
+	</a>
 	{% endif %}
 	
 </p>
