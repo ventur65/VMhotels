@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 
-{% block body %}
+{% block covercontent %}
+
+<br><br><br><br><br><br><br>
+  	<div style="background: white; width: 80%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
+
 <header>
 <h1>Reservation for 
 <a href="{% url 'hotels:room_detail' reservation.room.hotel.id reservation.room.id %}">Room {{ reservation.room.number }}</a>
@@ -29,4 +33,7 @@ In Queue: {% if reservation.is_active %} No {% else %} Yes {% endif %}
 <a href="{% url 'reservation:edit_reservation' reservation.pk %}"><button type="button" class="btn btn-success">Edit</button></a>
 <a href="{% url 'reservation:delete_reservation' reservation.pk %}"><button type="button" class="btn btn-danger">Delete</button></a>
 </p>
+</div>
+{% endblock %}
+{% block body %}
 {% endblock %}
