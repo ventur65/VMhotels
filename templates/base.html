@@ -27,11 +27,11 @@
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a href="/">Main page</a>
+              <a href="/"> <span class="glyphicon glyphicon-home"> Mainpage</span></a>
             </li>
               {% if user.is_authenticated %}
-              	<li> <a href="{% url 'portal:personal' %}">{{ user.username }}</a></li>
-              	<li><a href="{% url 'portal:update_data' %}">Modifica dati utente</a></li> 
+              	<li> <a href="{% url 'portal:personal' %}"><span class="glyphicon glyphicon-user"> {{ user.username }}</span></a></li>
+              	<li><a href="{% url 'portal:update_data' %}"><span class="glyphicon glyphicon-pencil"> Modifica utente</span></a></li> 
               	<li> <a href="{% url 'portal:logout_view' %}"> Logout </a></li>
               {% else %}
               	<li> <a href="{% url 'portal:django.contrib.auth.views.login' %}"> Login </a></li>
