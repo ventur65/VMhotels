@@ -1,14 +1,20 @@
 from django import forms
-from .models import Hotel, Room
+from .models import Hotel, Room, Service
+from django import forms
 
 class HotelForm(forms.ModelForm):
+	
 	class Meta:
 		model = Hotel
-		fields = ['name', 'city', 'address', 'description', 'email', 'tel', 'image']
+		fields = ['name', 'city', 'address', 'description', 'email', 'tel', 'image', 'services']
+	
 	def __init__(self, *args, **kwargs):
-		super(HotelForm, self).__init__(*args, **kwargs)
+		r = super(HotelForm, self).__init__(*args, **kwargs)
 		self.fields['description'].required = False
 		self.fields['image'].required = False
+		choices = self.fields['services'].choices
+		self.fields['services'].widget = forms.CheckboxSelectMultiple(choices = choices)
+		return r								
 
 class RoomForm(forms.ModelForm):
 	class Meta:

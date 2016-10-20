@@ -15,7 +15,8 @@ class HotelDetailView(generic.DetailView):
 def room_detail(request, hotel_id, room_id):
 	hotel = get_object_or_404(Hotel, pk=hotel_id)
 	room = get_object_or_404(Room, pk=room_id)
-	context = {'hotel': hotel, 'room': room}
+	services = hotel.services.all()
+	context = {'hotel': hotel, 'room': room, 'services': services}
 	return render(request, 'hotels/room_detail.html', context)
 
 @login_required
@@ -27,6 +28,9 @@ def create_hotel(request):
 			h = form.save(commit=False)
 			h.user = request.user
 			h.save() ##FARE CON TRY-CATCH
+			services = form.cleaned_data['services']
+			for service in services:
+				h.services.add(service)
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
 	else:
 		form = HotelForm()

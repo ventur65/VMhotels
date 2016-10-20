@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
+{% load staticfiles %}
 
 {% block cover %}
+{% if hotel.image %}
   <div class="cover" style="background-image: url({{ hotel.image.url }});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
+{% endif %}
   {% block covercontent %}
   	<br><br><br><br><br><br><br>
   	<div style="background: white; width: 80%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
@@ -21,7 +24,11 @@
           <div class="col-md-4">
             <br>
             <br>
-            <img src="{{ hotel.image.url }}" alt="Hotel View" style="width:100%;" class="img-responsive">
+            {% if hotel.image %}
+            	<img src="{{ hotel.image.url }}" alt="Hotel View" style="width:100%;" class="img-responsive">
+            {% else %}
+            	<img src="{% static 'hotels/image_not_found.jpeg' %}" alt="Hotel View" style="width:100%;" class="img-responsive">
+            {% endif %}
           </div>
           <div class="col-md-8 text-center">
             <p> <br><br><br>
@@ -31,7 +38,6 @@
 		Description: {{ hotel.description }}<br>
 		Email: {{ hotel.email }}<br>
 		Tel: {{ hotel.tel }}<br>
-		View the last reviews for this hotel <a href="{% url 'review:list_review' hotel.id %}">here</a>
 		<br>
 		Camere:<br>
 		<div class="pre-scrollable" style="height:50px;">
@@ -52,8 +58,11 @@
 <br>
 
 <p align="center"><br>
-Are you the owner of this hotel? Click <a href="{% url 'hotels:create_room' hotel.id %}">here</a> to add a Room. <br>
-Are you the owner of this hotel? Click <a href="{% url 'hotels:edit_hotel' hotel.id %}">here</a> to change Hotel data.
+View the last reviews for this hotel <a href="{% url 'review:list_review' hotel.id %}">here</a><br>
+{% if request.user == hotel.user %}
+Click <a href="{% url 'hotels:create_room' hotel.id %}">here</a> to add a Room. <br>
+Click <a href="{% url 'hotels:edit_hotel' hotel.id %}">here</a> to change Hotel data.
+{% endif %}
 </p>
 
  </div>

@@ -29,20 +29,13 @@
             <li>
               <a href="/">Main page</a>
             </li>
-            <li>
-              <a href="{% url 'portal:update_data' %}">Modifica dati utente</a>
-            </li>
-            
-            <li>
-              <a href="mailto:vmhotels@gmail.com">Contattaci</a>
-            </li>
-            <li>
-              {% if user.is_authenticated %} 
+              {% if user.is_authenticated %}
+              	<li> <a href="{% url 'portal:personal' %}">{{ user.username }}</a></li>
+              	<li><a href="{% url 'portal:update_data' %}">Modifica dati utente</a></li> 
               	<li> <a href="{% url 'portal:logout_view' %}"> Logout </a></li>
               {% else %}
               	<li> <a href="{% url 'portal:django.contrib.auth.views.login' %}"> Login </a></li>
 	      {% endif %}              	
-            </li>
           </ul>
         </div>
       </div>

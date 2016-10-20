@@ -19,8 +19,8 @@
 <h2>Reservations:</h2>
 <ul>
 {% for r in reservation_list %}
-	<li><a href="{% url 'reservation:reservation_detail' r.pk %}">Reservation</a>
-		Room {{ r.room.number }} Hotel {{ r.room.hotel }}: {{ r.idate|date }} to {{ r.fdate|date }}
+	<li><a href="{% url 'reservation:reservation_detail' r.pk %}">Reservation</a> First Name: {{ r.firstname }}  Last Name: {{ r.lastname }} -
+		Room {{ r.room.number }} Hotel {{ r.room.hotel }}: {{ r.idate|date }} to {{ r.fdate|date }} Last Update: {{ r.updated }}
 		{% if not r.is_active %}
 		-- in queue --
 		{% endif %}</li>

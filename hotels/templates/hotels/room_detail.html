@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
+{% load staticfiles %}
 {% block cover %}
 {% endblock %}
 {% block body %}
@@ -18,7 +19,11 @@
           <div class="col-md-4">
             <br>
             <br>
-            <img src="{{ room.image.url }}" alt="Room View" style="width:300px;height:230px;">
+            {% if room.image %}
+            	<img src="{{ room.image.url }}" alt="Room View" style="width:300px;height:230px;">
+            {% else %}
+            	<img src="{% static 'hotels/image_not_found.jpeg' %}" alt="Room View" style="width:300px;height:230px;">
+            {% endif %}
           </div>
           <div class="col-md-8 text-center">
             <p> <br><br><br><br>
@@ -27,8 +32,12 @@
 	    Beds: {{ room.beds }}<br>
 	    Description: {{ room.description }}<br>
 	    Cost per night: {{ room.cost }} EUR<br>
-
-            Available Services:<br>
+        Available Services: 
+        <ul>
+        {% for service in services %}
+        	<li>{{ service.name }}</li>
+        {% endfor %}
+        </ul>
 	   </p>
           </div>
         </div>
@@ -41,6 +50,8 @@
 
 <p align="center">
 	Add a <b>Reservation</b> for this Room <a href="{% url 'reservation:add_reservation' hotel.id room.id %}">here</a><br>
+	{% if request.user == hotel.user %}
 	Are you the owner of this room? Click <a href="{% url 'hotels:edit_room' hotel.id room.id %}">here</a> to change Room data.
+	{% endif %}
 </p>
 {% endblock %}

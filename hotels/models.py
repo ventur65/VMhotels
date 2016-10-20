@@ -9,6 +9,11 @@ def path_to_hotel_image(instance, filename):
 def path_to_room_image(instance, filename):
 	return '/'.join([instance.hotel.name, str(instance.number), filename])
 
+class Service(models.Model):
+	name = models.CharField(max_length = 30)
+
+	def __unicode__(self):
+		return self.name
 
 class Hotel(models.Model):
 	user = models.ForeignKey(User)
@@ -24,11 +29,16 @@ class Hotel(models.Model):
 								height_field = '_height', 
 								width_field = '_width',
 								null = True, blank = True)
+	services = models.ManyToManyField(Service)
+	
 	class Meta:
 		unique_together = ('city', 'address')
 		
 	def __unicode__(self):
 		return self.name
+	
+	def get_services(self):
+		return ', '.join([s.name for s in self.services.all()])
 	
 class Room(models.Model):
 	hotel = models.ForeignKey(Hotel)

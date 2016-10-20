@@ -10,7 +10,7 @@ class ReservationAdmin(admin.ModelAdmin):
 		('IDate', {'fields': ['idate']}),
 		('FDate', {'fields': ['fdate']}),
 	]
-	list_display = ['user', 'room', 'idate', 'fdate']
+	list_display = ['user', 'room', 'idate', 'fdate', 'updated']
 	search_fields = ['user', 'room', 'idate', 'fdate']
 	
 admin.site.register(Reservation, ReservationAdmin)
