@@ -9,8 +9,10 @@
 {% load staticfiles %}
 
 {% block cover %}
-<div class="cover" style="background-image: url({% static 'images/quaderno.jpeg' %});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
+<div class="cover" style="background-image: url({% static 'images/editda.jpg' %});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
+{% block covercontent %}
 <br><br><br><br>
+<div style="background: rgba(255,255,255, 0.8); width: 80%; height: 470px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 <h1 align="center">Edit Personal Data</h1>
 <br><br><br><br>
 <div class="col-xs-10" align="center">
@@ -23,7 +25,9 @@
 </form>
 <a href="{% url 'portal:personal' %}">{% bootstrap_button "Cancel" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>
 </div>
+</div>
 
+{% endblock %}
 {% endblock %}
 {% block body %}
 {% endblock %}
