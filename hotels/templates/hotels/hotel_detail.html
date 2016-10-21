@@ -32,19 +32,20 @@
           </div>
           <div class="col-md-8 text-center">
             <p> <br><br><br>
-            	Name: {{ hotel.name }}<br>
+        Name: {{ hotel.name }}<br>
 		City: {{ hotel.city }}<br>
 		Address: {{ hotel.address }}<br>
 		Description: {{ hotel.description }}<br>
 		Email: {{ hotel.email }}<br>
 		Tel: {{ hotel.tel }}<br>
+		Services: {% for s in hotel.services.all %} {{ s.name }} {% endfor %}<br>
 		<br>
 		Camere:<br>
-		<div class="pre-scrollable" style="height:50px;">
+		<div class="pre-scrollable" style="height:70px;">
 		<ul>		
 		{% for room in hotel.room_set.all %}
 			<li><a href="{% url 'hotels:room_detail' hotel.id room.id %}">
-			Camera {{ room.number }}</a>
+			Room {{ room.number }}</a> Beds: {{ room.beds }} Cost: {{ room.cost }}
 		{% endfor %}
 		</ul>
 		</div>		

@@ -11,14 +11,14 @@ from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 
-# Create your views here.
-@login_required
-def portal_welcome(request):
-	"""
-	If users are authenticated, direct them to the portal welcome page
-	(template index.html). Otherwise, take them to the login page.
-	"""
-	return render(request, 'portal/index.html', {'request': request})
+## Create your views here.
+#@login_required
+#def portal_welcome(request):
+#	"""
+#	If users are authenticated, direct them to the portal welcome page
+#	(template index.html). Otherwise, take them to the login page.
+#	"""
+#	return render(request, 'portal/index.html', {'request': request})
 
 @login_required
 def personal(request):
@@ -34,7 +34,7 @@ def personal(request):
 	return render(request, 'portal/personal.html', context)
 	
 @login_required
-def upload(request):
+def editpersdata(request):
 	u = request.user
 	if 'Ok' in request.POST:
  		form = UserForm(request.POST, instance=u)

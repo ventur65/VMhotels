@@ -40,7 +40,12 @@
          						 {%  bootstrap_field form.rate %}
         					</div>
       					</div>
-					<input type="submit" class="btn-primary" value="Search" name="search">
+					<input type="submit" class="btn-primary" value="Search" name="search"><br><br>
+				</form>
+				<form action="{% url 'main_page' %}" method="post">
+					{% csrf_token %}
+					Search by Name: <input type="search" name="namesearch"><br><br>
+					<input type="submit" class="btn-primary" value="Search by Name" name="namesearchbtn">
 				</form>
 			</div>
 		</div>

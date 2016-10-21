@@ -18,14 +18,15 @@
             {% if h.image %}
             	<img src="{{ h.image.url }}" alt="Hotel View" style="width:100px;height:100px;">
             {% else %}
-            	<img src="{% static 'hotels/image_not_found.jpeg' %}" alt="Hotel View" style="width:30%;" class="img-responsive">
+            	<img src="{% static 'hotels/image_not_found.jpeg' %}" alt="Hotel View" style="width:100px;height:100px;">
             {% endif %}
-          </div>
+          </div> 
           <div class="col-md-4 text-center"><br>
             <p> Hotel: <a href="{% url 'hotels:hotel_detail' h.pk %}">{{ h.name }}</a><br>
+            {% if not namesearch %}
         	{% if 'rate' in request.POST %}
         		Average Vote: {{ h.average }}<br>
-       	        {% endif %}
+       	    {% endif %}
         	{% with rl|get_value_from_dict:h|get_value_from_dict:'costmin' as min_cost %}
         	{% with rl|get_value_from_dict:h|get_value_from_dict:'costmax' as max_cost %}
         		Min Price for {{ days }} nights: {{ min_cost }} <br>
@@ -39,9 +40,10 @@
         		<li>{{ service.name }}</li>
         	{% endfor %}
         	</ul><br></div></p></div>
-    		{% empty %}
-    			No Results Found.
-    		{% endfor %}	
+        	{% endif %}
+    {% empty %}
+    		No Results Found.
+    {% endfor %}	
          
         </div>
       </div>
