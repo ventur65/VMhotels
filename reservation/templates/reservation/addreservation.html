@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
+{% load staticfiles %}
 
+{% bootstrap_messages %}
+{% block cover %}
+<div class="cover" style="background-image: url({% static 'images/res.jpg' %});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
 {% block covercontent %}
 
 <head>
@@ -15,6 +19,7 @@
         {{ form.media }}
 </head>
 <br><br><br>
+<div style="background: rgba(255,255,255, 0.8); width: 80%; height: 600px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 <h1 align="center">Adding Reservation for Room n.{{ room.number }} | Hotel {{ hotel.name }}</h1>
 <br><br><br><br>
 <div class="col-xs-10" align="center">
@@ -28,8 +33,9 @@
 </form>
 <a href="{% url 'hotels:hotel_detail' hotel.pk%}">{% bootstrap_button "Cancel" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>
 </div>
-<br>
+</div>
 
+{% endblock %}
 {% endblock %}
 {% block footer %}
 {% endblock %}
