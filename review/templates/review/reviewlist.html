@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 
 {% block covercontent %}
-	<br><br><br><br><br><br><br><br><br><br><div style="background: white; width: 50%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
+	<br><br><br><br><br><br><br><br><br><br><div style="background: rgba(255,255,255, 0.9); width: 50%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 	<div align="justify">
 <p>
 Hotel: <a href="{% url 'hotels:hotel_detail' hotel.id %}">{{ hotel.name }}</a><br>
@@ -46,6 +46,7 @@ Average Rate: {{ average }}<br>
 </div>
 </p>
 </div>
+	<a href="{% url 'hotels:hotel_detail' hotel.pk%}">{% bootstrap_button "Back" button_type="link" name="Cancel" button_class="btn-default" icon="menu-left" %}</a>
 	</div>
 {% endblock %}
 
