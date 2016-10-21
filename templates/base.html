@@ -25,6 +25,9 @@
           <a href="/" class="navbar-brand"><img src="{% static 'images/vm.png' %}" class="center-block img-circle" height="33" alt="VMhotels"></a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li><br><div id="txt"></div><li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             <li>
               <a href="/"> <span class="glyphicon glyphicon-home"> Mainpage</span></a>
@@ -35,10 +38,7 @@
               	<li> <a href="{% url 'portal:logout_view' %}"> Logout </a></li>
               {% else %}
               	<li> <a href="{% url 'portal:django.contrib.auth.views.login' %}"> Login </a></li>
-	      {% endif %} 
-	      <li><br>
-              <div id="txt"></div>
-            </li>             	
+	      {% endif %}            	
           </ul>
         </div>
       </div>
