@@ -15,6 +15,7 @@
         {{ form.media }}
 </head>
 <br><br><br><br>
+<div style="background: rgba(255,255,255, 0.8); width: 80%; height: 600px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 <h1 align="center">Editing Reservation for Room n.{{ room.number }} | Hotel {{ hotel.name }}</h1>
 <br><br><br><br>
 <div class="col-xs-10" align="center">
@@ -28,7 +29,7 @@
 </form>
 <a href="{% url 'reservation:reservation_detail' reservation.id%}">{% bootstrap_button "Cancel" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>
 </div>
-<br>
+</div>
 
 {% endblock %}
 {% block footer %}
