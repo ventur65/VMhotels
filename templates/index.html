@@ -23,7 +23,23 @@
     			<div class="row" align="center">
 				<form action="{% url 'main_page' %}" method="post">
 					{% csrf_token %}
-					{% bootstrap_form form layout="horizontal" size='sm' %}
+					 <div class="row">
+        					<div class="col-md-3">
+          						{%  bootstrap_field form.dest %}
+        					</div>
+        					<div class="col-md-2">
+         						 {%  bootstrap_field form.beds %}
+        					</div>
+        					<div class="col-md-3">
+         						 {%  bootstrap_field form.checkin %}
+        					</div>
+        					<div class="col-md-3">
+         						 {%  bootstrap_field form.checkout %}
+        					</div><br>
+        					<div class="col-md-1">
+         						 {%  bootstrap_field form.rate %}
+        					</div>
+      					</div>
 					<input type="submit" class="btn-primary" value="Search" name="search">
 				</form>
 			</div>
