@@ -4,25 +4,29 @@
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 
-{% bootstrap_messages %}
+{% load staticfiles %}
 
+{% bootstrap_messages %}
+{% block cover %}
+<div class="cover" style="background-image: url({% static 'images/edith.jpg' %});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
 {% block covercontent %}
-<br><br><br><br>
+<br><br><br>
+<div style="background: rgba(255,255,255, 0.8); width: 80%; height: 700px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 <h1 align="center">Editing Hotel {{ hotel.name }}</h1>
-<br><br><br><br>
 <div class="col-xs-10" align="center">
 <form role="form" class="form-horizontal" enctype="multipart/form-data" method="post">
         {% csrf_token %}
         
-        	{% bootstrap_form form layout="horizontal" size='md' %}
+        	{% bootstrap_form form layout="horizontal" size='sm' %}
         	<div class="col-md-6 text-center">
         	{% bootstrap_button "Ok" button_type="submit" name="Ok" button_class="btn-primary" icon="ok" %}
         	</div>
 </form>
 <a href="{% url 'hotels:hotel_detail' hotel.pk%}">{% bootstrap_button "Cancel" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>
 </div>
-<br>
+</div>
 
+{% endblock %}
 {% endblock %}
 {% block footer %}
 {% endblock %}
