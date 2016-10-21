@@ -77,30 +77,6 @@
 		</th>
 	</tr>
     </table>
-    <body onload="startTime()">
-    <br><br><br><br><br><br><br><br><br><br><br>
-    <div id="txt" style="background: rgba(255,255,255, 0.7); width: 60px; height: 20px; -moz-border-radius: 6px; border-radius: 6px;" align="left"></div>	
-    <script>
-	function startTime() {
-	var today=new Date();
-	var h=today.getHours();
-	var m=today.getMinutes();
-	var s=today.getSeconds();
-	m = checkTime(m);
-	s = checkTime(s);
-	document.getElementById('txt').innerHTML = h+":"+m+":"+s;
-	var t = 
-	setTimeout(function(){startTime()},500); 
-	}
-	
-	function checkTime(i)
- 	{
-	if (i<10) {i = "0" + i};  
-	// add a zero in front of numbers < 10
-	return i;
-	}
-</script>
- </body>
 {% endblock %}
 {% endblock %}
 {% block footer %}
