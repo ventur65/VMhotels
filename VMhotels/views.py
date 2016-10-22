@@ -6,11 +6,22 @@ from .forms import SearchForm
 from datetime import datetime
 from django.db.models import Avg, Min, Max
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 
 def main_page(request):
 	if request.method == 'POST':
 		if 'namesearch' in request.POST:
-			found_entries = Hotel.objects.filter(name = request.POST['namesearch'])
+			your_search_query = request.POST['namesearch']
+			
+			qset = Q()
+			
+			if len(your_search_query)>2:
+				for term in your_search_query.split():
+    					qset |= Q(name__contains=term)
+    				found_entries = Hotel.objects.filter(qset)
+    			else:
+    				found_entries = None
+			#found_entries = Hotel.objects.filter(name = request.POST['namesearch'])
 			return render(request, 'search.html', {'found_entries': found_entries, 'namesearch': True})
 		else:
 			form = SearchForm(request.POST)
