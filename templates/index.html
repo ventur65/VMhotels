@@ -48,8 +48,11 @@
 	</tr>
  	 <tr>
     		<th>
-    		
+    		{% if user.is_authenticated %}
     		<div class="container" style="margin-top: 2cm;">
+    		{% else %}
+    		<div class="container" style="margin-top: 6cm;">
+    		{% endif %}
     			<div class="row" align="center">
 				<form action="{% url 'main_page' %}" method="post">
 					{% csrf_token %}
