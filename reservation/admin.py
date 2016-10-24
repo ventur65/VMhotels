@@ -7,8 +7,15 @@ class ReservationAdmin(admin.ModelAdmin):
 	fieldsets = [
 		('User', {'fields': ['user']}),
 		('Room', {'fields': ['room']}),
-		('IDate', {'fields': ['idate']}),
-		('FDate', {'fields': ['fdate']}),
+		('First Name', {'fields': ['firstname']}),
+		('Last Name', {'fields': ['lastname']}),
+		('City', {'fields': ['city']}),
+		('Address', {'fields': ['address']}),
+		('Email', {'fields': ['email']}),
+		('Tel', {'fields': ['tel']}),
+		('Initial Date', {'fields': ['idate']}),
+		('Final Date', {'fields': ['fdate']}),
+		('Is Active', {'fields': ['is_active']}),
 	]
 	list_display = ['user', 'room', 'idate', 'fdate', 'updated']
 	search_fields = ['user', 'room', 'idate', 'fdate']
