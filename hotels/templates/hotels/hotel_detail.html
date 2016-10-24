@@ -32,13 +32,13 @@
           </div>
           <div class="col-md-8 text-center">
             <p> <br><br><br>
-        Name: {{ hotel.name }}<br>
-		City: {{ hotel.city }}<br>
-		Address: {{ hotel.address }}<br>
-		Description: {{ hotel.description }}<br>
-		Email: {{ hotel.email }}<br>
-		Tel: {{ hotel.tel }}<br>
-		Services: {% for s in hotel.services.all %} {{ s.name }} {% endfor %}<br>
+        	<span class="glyphicon glyphicon-tag" aria-hidden="true"></span> Name: {{ hotel.name }}<br>
+		<span class="glyphicon glyphicon-home" aria-hidden="true"></span> City: {{ hotel.city }}<br>
+		<span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Address: {{ hotel.address }}<br>
+		<span class="glyphicon glyphicon glyphicon-comment" aria-hidden="true"></span> Description: {{ hotel.description }}<br>
+		<span class="glyphicon glyphicon glyphicon-envelope" aria-hidden="true"></span> Email: {{ hotel.email }}<br>
+		<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Tel: {{ hotel.tel }}<br>
+		<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span> Services: {% for s in hotel.services.all %} {{ s.name }} {% endfor %}<br>
 		<br>
 		Camere:<br>
 		<div class="pre-scrollable" style="height:70px;">
