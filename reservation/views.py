@@ -6,6 +6,7 @@ from .forms import ReservationForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
 from django.views import generic
+from django.core.mail import send_mail
 # Create your views here.
 
 ##NON E' UNA VIEW.
@@ -29,7 +30,11 @@ def update_state_res(room):
 		if check_res(non_active_res, room):
 			non_active_res.is_active = True
 			non_active_res.save()
-			#NOTIFICA
+			subject = 'Reservation VMHotels'
+			mex = "Your reservation for Room " + str(non_active_res.room.number) + " Hotel "+ non_active_res.room.hotel.name + " from " + str(non_active_res.idate) + " to " + str(non_active_res.fdate) + " is now valid."
+			frommail = 'progettovmhotels@gmail.com'
+			to = [non_active_res.email]
+			send_mail(subject, mex, frommail, to, fail_silently = False)
 
 @login_required
 @permission_required('reservation.add_reservation')
