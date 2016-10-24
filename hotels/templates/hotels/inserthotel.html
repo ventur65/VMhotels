@@ -7,15 +7,33 @@
 <div class="cover" style="background-image: url({% static 'images/addh.jpg' %});  width: 100%; height:900px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
 {% block covercontent %}
 <br><br><br>
-<div style="background: rgba(255,255,255, 0.8); width: 80%; height: 800px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
+<div style="background: rgba(255,255,255, 0.8); width: 80%; height: 680px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 <h1 align="center">Insert Hotel data</h1>
 <br>
 <div class="col-xs-10" align="center">
 <form role="form" class="form-horizontal" enctype="multipart/form-data" method="post">
 {% csrf_token %}
-{% bootstrap_form form layout="horizontal" size='sm' %}
-{% bootstrap_button "Ok" button_type="submit" name="Create" button_class="btn-primary" icon="ok" %}
+{%  bootstrap_field form.name layout="horizontal" size='sm' %}
+        	{%  bootstrap_field form.city layout="horizontal" size='sm' %}
+        	{%  bootstrap_field form.address layout="horizontal" size='sm' %}
+        	{%  bootstrap_field form.description layout="horizontal" size='sm' %}
+        	{%  bootstrap_field form.email layout="horizontal" size='sm' %}
+        	{%  bootstrap_field form.tel layout="horizontal" size='sm' %}
+        	{%  bootstrap_field form.image layout="horizontal" size='sm' %}
+        	<p align="justify" style="margin-left:12em;"><font size="2"> <b>Services</b></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	{% regroup form.services by attrs.cat_name as list %}
+        	{% for el in list %}
+        	
+        		{% for e in el.list %}        		
+                			{{e}}
+                	{% endfor %}
+        	{% endfor %}
+		<br><br>
+		<div class="col-md-6 text-center">
+			{% bootstrap_button "Ok" button_type="submit" name="Create" button_class="btn-primary" icon="ok" %}
+		</div>
 </form>
+<a href="{% url 'portal:personal' %}">{% bootstrap_button "Cancel" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>
 </div>
 </div>
 {% endblock %}
