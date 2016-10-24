@@ -10,7 +10,7 @@ Average Rate: {{ average }}<br>
 <div class="pre-scrollable" style="height:700px;">
 <ul>
 {% for review in review_list %}
-    <li>{{ review.user.username }} - {{ review.created|date }}<br>
+    <li>{{ review.user.username }} - {{ review.created|date }} <br>
     	{% ifequal review.rate 1 %}
     	<span class="glyphicon glyphicon-star"></span>
     	{% endifequal %}
@@ -37,7 +37,7 @@ Average Rate: {{ average }}<br>
     	<span class="glyphicon glyphicon-star"></span>
     	{% endifequal %}
     	<br>
-    	{{ review.comment }}<br>
+    	<span class="glyphicon glyphicon-comment" aria-hidden="true"></span> {{ review.comment }}<br>
     </li>
 {% empty %}
     <li>No reviews yet.</li>
