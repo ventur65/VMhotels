@@ -10,6 +10,7 @@ from django.db.models import Avg
 # Create your views here.
 
 @login_required
+@permission_required('review.add_review')
 def add_review(request, hotel_id):
 	h = get_object_or_404(Hotel, pk=hotel_id)
 	if 'Ok' in request.POST:
@@ -20,8 +21,6 @@ def add_review(request, hotel_id):
 			newrev.hotel = h
 			newrev.save()
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
-		else:
-			return HttpResponse("Commento non valido")
 	else:
 		form = ReviewForm()
 	return render(request, 'review/addreview.html', {'form': form, 'hotel': h})
