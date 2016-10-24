@@ -67,6 +67,11 @@
  	 		{% if user.is_authenticated %} 
               			<h1> {{ user.username }} </h1> 
               			<a href="{% url 'portal:logout_view' %}"><button type="button" class="btn btn-danger">Logout</button></a>
+              			<p align="center">
+ 				<SCRIPT LANGUAGE="JavaScript">
+					document.write("You've been here <b>" + amt() + "</b> times.")
+				</SCRIPT>
+  </p>
               		{% else %}
               			<a href="{% url 'portal:django.contrib.auth.views.login' %}"><button type="button" class="btn btn-success">Login</button></a>
  	 			<a href="{% url 'portal:registration_register_customer' %}"><button type="button" class="btn btn-success">Sign in as customer</button></a>
