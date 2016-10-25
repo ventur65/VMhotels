@@ -24,15 +24,18 @@
           <div class="col-md-4 text-center"><br>
             <p> Hotel: <a href="{% url 'hotels:hotel_detail' h.pk %}">{{ h.name }}</a><br>
             {% if not namesearch %}
+            
         	{% if 'rate' in request.POST %}
         		Average Vote: {{ h.average }}<br>
-       	    {% endif %}
+       		{% endif %}
+       		
         	{% with rl|get_value_from_dict:h|get_value_from_dict:'costmin' as min_cost %}
         	{% with rl|get_value_from_dict:h|get_value_from_dict:'costmax' as max_cost %}
         		Min Price for {{ days }} nights: {{ min_cost }} <br>
         		Max Price for {{ days }} nights: {{ max_cost }}<br>
         	{% endwith %}
         	{% endwith %}
+        	
         	Available Services: 
         	<div class="pre-scrollable" style="height:50px;">
         	<ul>
@@ -40,7 +43,9 @@
         		<li>{{ service.name }}</li>
         	{% endfor %}
         	</ul><br></div></p></div>
-        	{% endif %}
+             {% else %}<br><br><br>
+             	<div style="height:50px;"></div></div>
+             {% endif %}
     {% empty %}
     		No Results Found.
     {% endfor %}	
