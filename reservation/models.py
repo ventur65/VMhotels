@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from hotels.models import Room
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 class Reservation(models.Model):
@@ -11,7 +12,7 @@ class Reservation(models.Model):
 	city = models.CharField(max_length=50)
 	address = models.CharField(max_length=100)
 	email = models.EmailField()
-	tel = models.PositiveIntegerField()
+	tel = PhoneNumberField()
 	idate = models.DateField()
 	fdate = models.DateField()
 	is_active = models.BooleanField()

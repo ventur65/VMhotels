@@ -15,7 +15,7 @@ class HotelForm(forms.ModelForm):
 		self.fields['image'].required = False
 		choices = self.fields['services'].choices
 		self.fields['services'].widget = forms.CheckboxSelectMultiple(choices = choices)
-		self.fields['tel'].widget = PhoneNumberPrefixWidget
+		self.fields['tel'].widget = PhoneNumberPrefixWidget()
 		return r								
 
 class RoomForm(forms.ModelForm):
