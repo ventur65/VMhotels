@@ -13,6 +13,7 @@ class HotelForm(forms.ModelForm):
 		r = super(HotelForm, self).__init__(*args, **kwargs)
 		self.fields['description'].required = False
 		self.fields['image'].required = False
+		self.fields['services'].required = False
 		choices = self.fields['services'].choices
 		self.fields['services'].widget = forms.CheckboxSelectMultiple(choices = choices)
 		self.fields['tel'].widget = PhoneNumberPrefixWidget()

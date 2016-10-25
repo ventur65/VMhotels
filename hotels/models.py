@@ -27,14 +27,14 @@ class Hotel(models.Model):
 	#tel = models.PositiveIntegerField(unique = True)
 	#phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
     	#tel = models.CharField(validators=[phone_regex], blank=True, max_length = 15, unique = True) # validators should be a list
-    	tel = PhoneNumberField(unique = True)
+	tel = PhoneNumberField(unique = True)
 	_height = 50
 	_width = 50
 	image = models.ImageField(upload_to = path_to_hotel_image, 
 								height_field = '_height', 
 								width_field = '_width',
 								null = True, blank = True)
-	services = models.ManyToManyField(Service)
+	services = models.ManyToManyField(Service, blank = True)
 	
 	class Meta:
 		unique_together = ('city', 'address')
