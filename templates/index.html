@@ -78,12 +78,16 @@
          						 {%  bootstrap_field form.rate %}
         					</div>
       					</div>
-					<input type="submit" class="btn-primary" value="Search" name="search"><br><br>
+					<button type="submit" class="btn btn-primary" value="Search" name="search"> Search 
+  						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button><br><br>
 				</form>
 				<form action="{% url 'main_page' %}" method="post">
-					{% csrf_token %}
+					{% csrf_token %}<span class="" aria-hidden="true"></span> 
 					Search by Name: <input type="search" name="namesearch"><br><br>
-					<input type="submit" class="btn-primary" value="Search by Name" name="namesearchbtn">
+					<button type="submit" class="btn btn-primary" value="Search by Name" name="namesearchbtn"> Search by Name
+  						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button>
 				</form>
 			</div>
 		</div>
