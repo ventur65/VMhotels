@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
@@ -23,7 +24,10 @@ class Hotel(models.Model):
 	address = models.CharField(max_length = 200)
 	description = models.TextField(blank = True, null = True)
 	email = models.EmailField(unique = True)
-	tel = models.PositiveIntegerField(unique = True)
+	#tel = models.PositiveIntegerField(unique = True)
+	#phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    	#tel = models.CharField(validators=[phone_regex], blank=True, max_length = 15, unique = True) # validators should be a list
+    	tel = PhoneNumberField(unique = True)
 	_height = 50
 	_width = 50
 	image = models.ImageField(upload_to = path_to_hotel_image, 
