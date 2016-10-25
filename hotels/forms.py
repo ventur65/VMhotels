@@ -1,6 +1,7 @@
 from django import forms
 from .models import Hotel, Room, Service
 from django import forms
+from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
 class HotelForm(forms.ModelForm):
 	
@@ -14,6 +15,7 @@ class HotelForm(forms.ModelForm):
 		self.fields['image'].required = False
 		choices = self.fields['services'].choices
 		self.fields['services'].widget = forms.CheckboxSelectMultiple(choices = choices)
+		self.fields['tel'].widget = PhoneNumberPrefixWidget
 		return r								
 
 class RoomForm(forms.ModelForm):
