@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     'bootstrap3_datetime',
     'phonenumber_field',
+    'django.contrib.humanize',
 )
 
 MIDDLEWARE_CLASSES = (
