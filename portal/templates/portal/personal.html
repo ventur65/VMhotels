@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
+{% load humanize %} 
 
 {% block covercontent %}
 <br><br><br><br><br><br>
@@ -50,7 +51,7 @@
 <ul>
 {% for r in reservation_list %}
 	<li><a href="{% url 'reservation:reservation_detail' r.pk %}">Reservation</a> First Name: {{ r.firstname }}  Last Name: {{ r.lastname }} -
-		Room {{ r.room.number }} Hotel {{ r.room.hotel }}: {{ r.idate|date }} to {{ r.fdate|date }} Last Update: {{ r.updated }}
+		Room {{ r.room.number }} Hotel {{ r.room.hotel }}: {{ r.idate|date }} to {{ r.fdate|date }} Last Update: {{ r.updated | naturaltime}}
 		{% if not r.is_active %}
 		-- in queue --
 		{% endif %}</li>
