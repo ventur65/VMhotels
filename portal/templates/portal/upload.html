@@ -20,9 +20,11 @@
         {% csrf_token %}
         {% bootstrap_form form layout="horizontal" size='md' %}
         	<div class="col-md-6 text-center">
+        	<br><br><br>
         	{% bootstrap_button "Ok" button_type="submit" name="Ok" button_class="btn-primary" icon="ok" %}
         	</div>
 </form>
+<br><br><br>
 <a href="{% url 'portal:personal' %}">{% bootstrap_button "Cancel" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>
 </div>
 </div>
