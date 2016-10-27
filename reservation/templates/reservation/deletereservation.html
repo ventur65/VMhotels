@@ -5,7 +5,6 @@
 {% block content %}
 
 <head>
-<script type="text/javascript" src="{% static 'js/window_confirm.js' %}"></script>
 </head>
 
 <h1 align="center">Delete Reservation for Room n.{{ room.number }} | Hotel {{ hotel.name }} ?</h1>
@@ -16,7 +15,7 @@
         {% csrf_token %}
         
         	<div class="col-md-6 text-center">
-        	<button type="submit" class="btn btn-primary" value="Yes" name="Ok" onclick="clicked_check('The reservation is removed properly.');"> Yes
+        	<button type="submit" class="btn btn-primary" value="Yes" name="Ok"> Yes
    			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 		</button>
         	</div>

@@ -43,7 +43,9 @@ def add_reservation(request, hotel_id, room_id):
 	h = get_object_or_404(Hotel, pk=hotel_id)
 	r = get_object_or_404(Room, pk=room_id)
 	if h.pk != r.hotel.pk:
-		return HttpResponseForbidden("Non esiste questa stanza in questo Hotel")
+		messages.add_message(request, messages.WARNING, 'This room is not in this Hotel.')
+		return HttpResponseRedirect(reverse('portal:personal'))
+		#return HttpResponseForbidden("Non esiste questa stanza in questo Hotel")
 	if 'Ok' in request.POST:
 		form = ReservationForm(request.POST)
 		if form.is_valid():
@@ -70,7 +72,9 @@ def reservation_detail(request, reservation_id):
 	res = get_object_or_404(Reservation, pk=reservation_id)
 	if request.user == res.user:
 		return render(request, 'reservation/reservation_detail.html', {'reservation': res})
-	return HttpResponseForbidden("This reservation is not yours")
+	messages.add_message(request, messages.WARNING, 'The reservation is not yours.')
+	return HttpResponseRedirect(reverse('portal:personal'))
+	#return HttpResponseForbidden("This reservation is not yours")
 	
 @login_required
 @permission_required('reservation.change_reservation')
@@ -79,7 +83,9 @@ def edit_reservation(request, reservation_id):
 	r = get_object_or_404(Room, pk=res.room.pk)
 	h = get_object_or_404(Hotel, pk=r.hotel.pk)
 	if res.user != request.user: ##Se l'utente della sessione non e' il titolare della prenotazione
-		return HttpResponseForbidden("This reservation is not yours.")
+		messages.add_message(request, messages.WARNING, 'The reservation is not yours.')
+		return HttpResponseRedirect(reverse('portal:personal'))
+		#return HttpResponseForbidden("This reservation is not yours.")
 	if 'Ok' in request.POST:
 		form = ReservationForm(request.POST, instance = res)
 		if form.is_valid():
@@ -106,7 +112,9 @@ def delete_reservation(request, reservation_id):
 	r = get_object_or_404(Room, pk=res.room.pk)
 	h = get_object_or_404(Hotel, pk=r.hotel.pk)
 	if res.user != request.user: ##Se l'utente della sessione non e' il titolare della prenotazione
-		return HttpResponseForbidden("This reservation is not yours.")
+		messages.add_message(request, messages.WARNING, 'The reservation is not yours.')
+		return HttpResponseRedirect(reverse('portal:personal'))
+		#return HttpResponseForbidden("This reservation is not yours.")
 	if 'Ok' in request.POST:
 		Reservation.objects.filter(id=res.id).delete()
 		update_state_res(r)
