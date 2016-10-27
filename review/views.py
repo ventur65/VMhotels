@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.db.models import Avg
+from django.contrib import messages
 # Create your views here.
 
 @login_required
@@ -20,6 +21,7 @@ def add_review(request, hotel_id):
 			newrev.user = request.user
 			newrev.hotel = h
 			newrev.save()
+			messages.add_message(request, messages.INFO, 'The review is successfully added.')
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
 	else:
 		form = ReviewForm()
