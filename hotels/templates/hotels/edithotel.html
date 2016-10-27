@@ -11,7 +11,7 @@
 <div class="cover" style="background-image: url({% static 'images/edith.jpg' %});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
 {% block covercontent %}
 <br><br><br>
-<div style="background: rgba(255,255,255, 0.8); width: 80%; height: 700px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
+<div style="background: rgba(255,255,255, 0.8); width: 80%; height: 715px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 <h1 align="center">Editing Hotel {{ hotel.name }}</h1>
 <div class="col-xs-10" align="center">
 <form role="form" class="form-horizontal" enctype="multipart/form-data" method="post">
@@ -34,7 +34,9 @@
         	{% endfor %}
 		
         	<div class="col-md-6 text-center">
-        	{% bootstrap_button "Ok" button_type="submit" name="Ok" button_class="btn-primary" icon="ok" %}
+        	<button type="submit" class="btn btn-primary" value="Ok" name="Ok" onclick="clicked_check('The Hotel is successfully changed.');"> 						Ok
+   					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+				</button>
         	</div>
 </form>
 <a href="{% url 'hotels:hotel_detail' hotel.pk%}">{% bootstrap_button "Cancel" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>

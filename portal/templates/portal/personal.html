@@ -1,15 +1,38 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
+{% load humanize %} 
 
 {% block covercontent %}
 <br><br><br><br><br><br>
-<div style="background: rgba(255,255,255, 0.7); width: 80%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
+
+{% if messages %}
+  	<div style="background: rgba(255,255,255, 0.8); width: 80%; height: 600px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
+{% endif %}
+  
+{% if not messages %}
+  	<div style="background: rgba(255,255,255, 0.7); width: 80%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
+{% endif %}
+
+
 <h1 align="center">Personal Page of {{ request.user }}</h1>
 <br>
+
+  {% if messages %}
+	
+    {% for msg in messages %}       
+   
+        <div class="alert alert-{{msg.level_tag}}" role="alert">
+ 	{{msg.message}}
+	</div>
+   
+    {% endfor %}
+
+  {% endif %}
+  
 <div align="center">
 {% if owner %}
 <h2>Hotels:</h2>
-<div class="pre-scrollable" style="height:100px;">
+<div class="pre-scrollable" style="height:300px;">
 
 <ul>
 {% for h in hotel_list %}
@@ -23,12 +46,12 @@
 {% endif %}
 {% if customer %}
 <h2>Reservations:</h2>
-<div class="pre-scrollable" style="height:100px;">
+<div class="pre-scrollable" style="height:300px;">
 
 <ul>
 {% for r in reservation_list %}
 	<li><a href="{% url 'reservation:reservation_detail' r.pk %}">Reservation</a> First Name: {{ r.firstname }}  Last Name: {{ r.lastname }} -
-		Room {{ r.room.number }} Hotel {{ r.room.hotel }}: {{ r.idate|date }} to {{ r.fdate|date }} Last Update: {{ r.updated }}
+		Room {{ r.room.number }} Hotel {{ r.room.hotel }}: {{ r.idate|date }} to {{ r.fdate|date }} Last Update: {{ r.updated | naturaltime}}
 		{% if not r.is_active %}
 		-- in queue --
 		{% endif %}</li>
@@ -39,11 +62,12 @@
 
 </div>
 {% endif %}
-<br><br><br><br><br><br><br><br><br>
+
 {% if owner %}
-<a href="{% url 'hotels:create_hotel' %}">{% bootstrap_button "Add Hotel" button_type="link" name="AddHotel" button_class="btn-success" %}</a>
-<a href="{% url 'portal:update_data' %}">{% bootstrap_button "Edit Personal Data" button_type="link" name="EditUser" button_class="btn-success" %}</a>
+<a href="{% url 'hotels:create_hotel' %}">{% bootstrap_button "Add Hotel" button_type="link" name="AddHotel" button_class="btn-default" %}</a>
+<a href="{% url 'portal:update_data' %}">{% bootstrap_button "Edit Personal Data" button_type="link" name="EditUser" button_class="btn-default" %}</a>
 {% endif %}
+<a href="{% url 'main_page' %}">{% bootstrap_button "Search" button_type="link" name="Search" button_class="btn-default" %}</a>
 <!--{% if customer %}-->
 <!--AGGIUNGERE ROBA QUI-->
 <!--{% endif %}-->

@@ -7,6 +7,7 @@ from datetime import datetime
 from django.db.models import Avg, Min, Max
 from django.core.urlresolvers import reverse
 from django.db.models import Q
+from hotels.models import Service
 
 def main_page(request):
 	if request.method == 'POST':
@@ -17,11 +18,13 @@ def main_page(request):
 			
 			if len(your_search_query)>2:
 				for term in your_search_query.split():
-    					qset |= Q(name__contains=term)
-    				found_entries = Hotel.objects.filter(qset)
-    			else:
+					qset |= Q(name__contains=term)
+				found_entries = Hotel.objects.filter(qset)
+				if 'services' in request.POST:
+					print request.POST.getlist('services')
+			else:
     				found_entries = None
-			#found_entries = Hotel.objects.filter(name = request.POST['namesearch'])
+    			#found_entries = Hotel.objects.filter(name = request.POST['namesearch'])
 			return render(request, 'search.html', {'found_entries': found_entries, 'namesearch': True})
 		else:
 			form = SearchForm(request.POST)
@@ -34,6 +37,9 @@ def main_page(request):
 				rl = dict()
 				s = dict()
 				found_entries = Hotel.objects.filter(city=dest, room__beds__gte=beds).distinct()
+				if 'services' in request.POST:
+					slist = request.POST.getlist('services')
+					found_entries = found_entries.filter(services__name__in = slist)
 				if form.cleaned_data['rate']:
 					found_entries = found_entries.annotate(average=Avg('review__rate')).order_by('-average')
 				else:
@@ -45,4 +51,5 @@ def main_page(request):
 			return render(request, 'search.html', {'found_entries': found_entries, 'namesearch': False, 'days': days.days, 'rl': rl, 's': s})
 	elif request.method == 'GET':
 		form = SearchForm()
-	return render(request, 'index.html', {'form': form})
+	slist = Service.objects.all()
+	return render(request, 'index.html', {'form': form, 'slist': slist})

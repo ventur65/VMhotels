@@ -12,7 +12,7 @@ class Reservation(models.Model):
 	city = models.CharField(max_length=50)
 	address = models.CharField(max_length=100)
 	email = models.EmailField()
-	tel = PhoneNumberField()
+	tel = PhoneNumberField(unique = True, max_length = 15)
 	idate = models.DateField()
 	fdate = models.DateField()
 	is_active = models.BooleanField()

@@ -1,8 +1,11 @@
 {% load bootstrap3 %}
 
+{% load staticfiles %}
+
 {% block content %}
 
 <head>
+<script type="text/javascript" src="{% static 'js/window_confirm.js' %}"></script>
 </head>
 
 <h1 align="center">Delete Hotel {{ hotel.name }} ?</h1>
@@ -13,7 +16,9 @@
         {% csrf_token %}
         
         	<div class="col-md-6 text-center">
-        	{% bootstrap_button "Yes" button_type="submit" name="Ok" button_class="btn-primary" icon="ok" %}
+        	<button type="submit" class="btn btn-primary" value="Yes" name="Ok" onclick="clicked_check('The Hotel is removed properly.');"> Yes
+   			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+		</button>
         	</div>
 </form>
 <a href="{% url 'hotels:hotel_detail' hotel.id%}">{% bootstrap_button "No" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>

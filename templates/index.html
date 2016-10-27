@@ -5,7 +5,6 @@
 {% comment %} Main page of VMhotels. {% endcomment %}
 
 
-
 {% block cover %}
  <div class="cover" style="background-image: url({% static 'images/login.jpg' %});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
  <br><br><br><br><br>
@@ -56,6 +55,7 @@
     			<div class="row" align="center">
 				<form action="{% url 'main_page' %}" method="post">
 					{% csrf_token %}
+					
 					 <div class="row">
 					 
         					<div class="col-md-3">
@@ -83,12 +83,16 @@
 						{{ s.name }}
 						<input type="checkbox" name="services" value="{{ s.name }}" />
 						{% endfor %}
-					<input type="submit" class="btn-primary" value="Search" name="search"><br><br>
+					<button type="submit" class="btn btn-primary" value="Search" name="search"> Search 
+  						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button><br><br>
 				</form>
 				<form action="{% url 'main_page' %}" method="post">
-					{% csrf_token %}
+					{% csrf_token %}<span class="" aria-hidden="true"></span> 
 					Search by Name: <input type="search" name="namesearch"><br><br>
-					<input type="submit" class="btn-primary" value="Search by Name" name="namesearchbtn">
+					<button type="submit" class="btn btn-primary" value="Search by Name" name="namesearchbtn"> Search by Name
+  						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button>
 				</form>
 			</div>
 		</div>

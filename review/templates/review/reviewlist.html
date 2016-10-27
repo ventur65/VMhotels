@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
+{% load humanize %} 
 
 {% block covercontent %}
 	<br><br><br><br><br><br><br><br><br><br><div style="background: rgba(255,255,255, 0.9); width: 50%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
@@ -10,7 +11,7 @@ Average Rate: {{ average }}<br>
 <div class="pre-scrollable" style="height:700px;">
 <ul>
 {% for review in review_list %}
-    <li>{{ review.user.username }} - {{ review.created|date }} <br>
+    <li>{{ review.user.username }} - {{ review.created|naturaltime }} <br>
     	{% ifequal review.rate 1 %}
     	<span class="glyphicon glyphicon-star"></span>
     	{% endifequal %}

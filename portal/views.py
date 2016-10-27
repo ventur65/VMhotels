@@ -10,6 +10,7 @@ from reservation.models import Reservation
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 
 ## Create your views here.
 #@login_required
@@ -40,6 +41,7 @@ def editpersdata(request):
  		form = UserForm(request.POST, instance=u)
 		if form.is_valid():
 			form.save()
+			messages.add_message(request, messages.SUCCESS, 'The data are successfully changed.')
 			return HttpResponseRedirect(reverse('portal:personal'))
 	elif request.method == 'GET': ##caso GET
 		form = UserForm(instance = u)

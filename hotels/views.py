@@ -6,6 +6,7 @@ from .forms import HotelForm, RoomForm
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 
 # Create your views here.
 class HotelDetailView(generic.DetailView):
@@ -31,6 +32,7 @@ def create_hotel(request):
 			services = form.cleaned_data['services']
 			for service in services:
 				h.services.add(service)
+			messages.add_message(request, messages.INFO, 'The Hotel is successfully added.')
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
 	else:
 		form = HotelForm()
@@ -47,6 +49,7 @@ def create_room(request, hotel_id):
 				r = form.save(commit = False)
 				r.hotel = h
 				r.save() ##FARE CON TRY-CATCH
+				messages.add_message(request, messages.INFO, 'The room is successfully added.')
 				return HttpResponseRedirect(reverse('hotels:room_detail', args=(h.pk, r.pk,)))
 		else: #caso GET
 			form = RoomForm()
@@ -64,6 +67,7 @@ def edit_hotel(request, hotel_id):
 		form = HotelForm(request.POST, request.FILES, instance = h)
 		if form.is_valid():
 			form.save()
+			messages.add_message(request, messages.INFO, 'The Hotel is successfully changed.')
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
 	elif request.method == 'GET': ##caso GET
 		form = HotelForm(instance = h)
@@ -81,6 +85,7 @@ def edit_room(request, hotel_id, room_id):
 			form = RoomForm(request.POST, request.FILES, instance = r)
 			if form.is_valid():
 				form.save()
+				messages.add_message(request, messages.INFO, 'The room is successfully changed.')
 				return HttpResponseRedirect(reverse('hotels:room_detail', args=(h.pk, r.pk,)))
 		elif request.method == 'GET': ##caso GET
 			form = RoomForm(instance = r)
@@ -95,6 +100,7 @@ def delete_hotel(request, hotel_id):
 		return HttpResponseForbidden("This hotel is not yours.")
 	if 'Ok' in request.POST:
 		Hotel.objects.get(pk=h.id).delete()
+		messages.add_message(request, messages.WARNING, 'The Hotel is successfully removed.')
 		return HttpResponseRedirect(reverse('portal:personal'))
 	return render(request, 'hotels/delhotel.html', {'hotel': h,})
 	
@@ -108,6 +114,7 @@ def delete_room(request, hotel_id, room_id):
 	if h.pk == r.hotel.pk:
 		if 'Ok' in request.POST:
 			Room.objects.get(pk=r.id).delete()
+			messages.add_message(request, messages.WARNING, 'The room is successfully removed.')
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
 		return render(request, 'hotels/delroom.html', {'room': r, 'hotel': h,})
 	return HttpResponseForbidden("This Room doesn't exist in this Hotel.")

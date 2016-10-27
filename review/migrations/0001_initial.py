@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations, models
 from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('hotels', '0016_auto_20161005_2050'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('hotels', '0015_auto_20161005_2056'),
     ]
 
     operations = [
