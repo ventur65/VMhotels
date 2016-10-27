@@ -1,13 +1,5 @@
-function clicked() {
-       if (alert('Inserimento effettuato con successo.')) {
-           form.submit();
-       } else {
-           return false;
-       }
-    }
-    
-function clicked_check() {
-       if (confirm('Sicuro di voler procedere ?')) {
+function clicked_check(name) {
+       if (alert(name)) {
            form.submit();
        } else {
            return false;
