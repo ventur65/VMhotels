@@ -41,10 +41,10 @@ def editpersdata(request):
  		form = UserForm(request.POST, instance=u)
 		if form.is_valid():
 			form.save()
+			messages.add_message(request, messages.SUCCESS, 'The data are successfully changed.')
 			return HttpResponseRedirect(reverse('portal:personal'))
 	elif request.method == 'GET': ##caso GET
 		form = UserForm(instance = u)
-	messages.add_message(request, messages.SUCCESS, 'The data are successfully changed.')
 	return render(request, 'portal/upload.html', {'form' : form})
     
 def logout_view(request):
