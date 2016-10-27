@@ -1,7 +1,16 @@
 function clicked() {
-       if (confirm('Do you want to submit?')) {
+       if (alert('Inserimento effettuato con successo.')) {
            form.submit();
        } else {
            return false;
        }
     }
+    
+function clicked_check() {
+       if (confirm('Sicuro di voler procedere ?')) {
+           form.submit();
+       } else {
+           return false;
+       }
+    }
+    
