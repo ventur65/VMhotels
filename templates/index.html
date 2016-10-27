@@ -78,6 +78,11 @@
          						 {%  bootstrap_field form.rate %}
         					</div>
       					</div>
+      				<div class="row">
+						{% for s in slist %}
+						{{ s.name }}
+						<input type="checkbox" name="services" value="{{ s.name }}" />
+						{% endfor %}
 					<input type="submit" class="btn-primary" value="Search" name="search"><br><br>
 				</form>
 				<form action="{% url 'main_page' %}" method="post">
