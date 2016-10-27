@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
 
+{% load staticfiles %}
+
 {% block covercontent %}
 
 <head>
@@ -24,7 +26,9 @@
         
         	{% bootstrap_form form layout="horizontal" size='md' %}
         	<div class="col-md-6 text-center">
-        	{% bootstrap_button "Ok" button_type="submit" name="Ok" button_class="btn-primary" icon="ok" %}
+        	<button type="submit" class="btn btn-primary" value="Ok" name="Ok" onclick="clicked_check('The reservation is changed properly.');"> Ok
+   			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+		</button>
         	</div>
 </form>
 <a href="{% url 'reservation:reservation_detail' reservation.id%}">{% bootstrap_button "Cancel" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>
