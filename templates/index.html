@@ -5,7 +5,6 @@
 {% comment %} Main page of VMhotels. {% endcomment %}
 
 
-
 {% block cover %}
  <div class="cover" style="background-image: url({% static 'images/login.jpg' %});  width: 100%; height:800px; background-repeat: no-repeat; margin: 0; padding: 0; background-size: 100% 100%;">
  <br><br><br><br><br>
@@ -56,6 +55,7 @@
     			<div class="row" align="center">
 				<form action="{% url 'main_page' %}" method="post">
 					{% csrf_token %}
+					
 					 <div class="row">
 					 
         					<div class="col-md-3">

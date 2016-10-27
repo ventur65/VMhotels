@@ -9,15 +9,29 @@
 {% endif %}
   {% block covercontent %}
   	<br><br><br><br><br><br><br>
+  {% if messages %}
+  	<div style="background: rgba(255,255,255, 0.8); width: 80%; height: 600px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
+  {% endif %}
+  
+  {% if not messages %}
   	<div style="background: rgba(255,255,255, 0.8); width: 80%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
+  {% endif %}
 
 <header>
 <h1>{{ hotel.name }}</h1>
 </header>
 
-{% if error_message %}
-	<p><strong>{{ error_message }}</strong></p>
-{% endif %}
+  {% if messages %}
+	
+    {% for msg in messages %}       
+   
+        <div class="alert alert-{{msg.level_tag}}" role="alert">
+ 	{{msg.message}}
+	</div>
+   
+    {% endfor %}
+
+  {% endif %}
 
 <div class="section">
       <div class="container">
@@ -57,7 +71,7 @@
     </div>
 
 
-<br>
+<br><br><br>
 
 <p align="center"><br>
 

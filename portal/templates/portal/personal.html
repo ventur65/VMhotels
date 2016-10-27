@@ -6,6 +6,19 @@
 <div style="background: rgba(255,255,255, 0.7); width: 80%; height: 500px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 <h1 align="center">Personal Page of {{ request.user }}</h1>
 <br>
+
+  {% if messages %}
+	
+    {% for msg in messages %}       
+   
+        <div class="alert alert-{{msg.level_tag}}" role="alert">
+ 	{{msg.message}}
+	</div>
+   
+    {% endfor %}
+
+  {% endif %}
+  
 <div align="center">
 {% if owner %}
 <h2>Hotels:</h2>
