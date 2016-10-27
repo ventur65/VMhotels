@@ -29,9 +29,10 @@
                 	{% endfor %}
         	{% endfor %}
 		<br><br>
-		<div class="col-md-6 text-center">
-			{% bootstrap_button "Ok" button_type="submit" name="Create" button_class="btn-primary" icon="ok" %}
-			<input type="submit" onclick="clicked();" value="create" />
+		<div class="col-md-6 text-center">			
+			<button type="submit" class="btn btn-primary" value="create" name="create" onclick="clicked();"> Create
+   				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+			</button>
 		</div>
 </form>
 <a href="{% url 'portal:personal' %}">{% bootstrap_button "Cancel" button_type="link" name="Cancel" button_class="btn-default" icon="remove" %}</a>

@@ -15,8 +15,13 @@
 <div class="col-xs-10" align="center">
 <form role="form" class="form-horizontal" enctype="multipart/form-data" method="post">
 {% csrf_token %}
+
 {% bootstrap_form form layout="horizontal" size='md' %}
-{% bootstrap_button "Create" button_type="submit" name="Create" button_class="btn-primary" icon="ok" %}
+
+<button type="submit" class="btn btn-primary" value="Create" name="Create" onclick="clicked();"> Create
+   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+</button>
+
 </form>
 </div>
 </div>
