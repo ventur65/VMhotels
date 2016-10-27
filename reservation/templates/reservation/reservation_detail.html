@@ -12,9 +12,17 @@
  Hotel <a href="{% url 'hotels:hotel_detail' reservation.room.hotel.id %}">{{ reservation.room.hotel.name }}</a></h1>
 </header>
 
-{% if error_message %}
-	<p><strong>{{ error_message }}</strong></p>
-{% endif %}
+  {% if messages %}
+	
+    {% for msg in messages %}       
+   
+        <div class="alert alert-{{msg.level_tag}}" role="alert">
+ 	{{msg.message}}
+	</div>
+   
+    {% endfor %}
+
+  {% endif %}
 
 <br>
 <p align="center">

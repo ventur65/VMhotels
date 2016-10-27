@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
 from django.views import generic
 from django.core.mail import send_mail
+from django.contrib import messages
 # Create your views here.
 
 ##NON E' UNA VIEW.
@@ -52,11 +53,14 @@ def add_reservation(request, hotel_id, room_id):
 			if check_res(newres, r):
 				newres.is_active = True
 				newres.save()
+				messages.add_message(request, messages.INFO, 'The reservation is successfully added.')
 				return HttpResponseRedirect(reverse('portal:personal'))
 			else:
 				newres.is_active = False
 				newres.save()
-				return render(request, 'reservation/inqueue.html')
+				messages.add_message(request, messages.WARNING, 'Your reservation has been added to a queue: if the previous reservations are deleted, you will receive an email.')
+				#return render(request, 'reservation/inqueue.html')
+				return HttpResponseRedirect(reverse('portal:personal'))
 	elif request.method == 'GET':
 		form = ReservationForm()
 	return render(request, 'reservation/addreservation.html', {'form': form, 'hotel': h, 'room': r})
@@ -84,6 +88,7 @@ def edit_reservation(request, reservation_id):
 				res.is_active = True
 				res.save()
 				update_state_res(r)
+				messages.add_message(request, messages.SUCCESS, 'The reservation is successfully changed.')
 				return HttpResponseRedirect(reverse('reservation:reservation_detail', args=(res.id,)))
 			else:
 				res.is_active = False
@@ -105,5 +110,6 @@ def delete_reservation(request, reservation_id):
 	if 'Ok' in request.POST:
 		Reservation.objects.filter(id=res.id).delete()
 		update_state_res(r)
+		messages.add_message(request, messages.WARNING, 'The reservation is successfully removed.')
 		return HttpResponseRedirect(reverse('portal:personal'))
 	return render(request, 'reservation/deletereservation.html', {'hotel': h, 'room': r, 'reservation':res,})
