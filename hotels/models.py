@@ -50,7 +50,7 @@ class Room(models.Model):
 	beds = models.PositiveSmallIntegerField(default=1, 
 											validators = [
 												MinValueValidator(1)
-												]
+												],
 											)
 	number = models.PositiveSmallIntegerField(validators = [
 												MinValueValidator(1)

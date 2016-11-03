@@ -10,6 +10,17 @@
 <div style="background: rgba(255,255,255, 0.8); width: 80%; height: 680px; margin:0 auto; -moz-border-radius: 6px; border-radius: 6px;" align="center">
 <h1 align="center">Insert Hotel data</h1>
 <br>
+{% if messages %}
+	
+    {% for msg in messages %}       
+   
+    	<div class="alert alert-{{msg.level_tag}}" role="alert">
+ 			{{msg.message}}
+		</div>
+   
+    {% endfor %}
+
+{% endif %}
 <div class="col-xs-10" align="center">
 <form role="form" class="form-horizontal" enctype="multipart/form-data" method="post">
 {% csrf_token %}

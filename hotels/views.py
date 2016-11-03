@@ -7,6 +7,9 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
 from django.contrib import messages
+from django.forms.util import ErrorList
+from django.db import IntegrityError
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 class HotelDetailView(generic.DetailView):
@@ -25,6 +28,7 @@ def room_detail(request, hotel_id, room_id):
 def create_hotel(request):
 	if request.method == 'POST':
 		form = HotelForm(request.POST, request.FILES)
+		print form.errors.as_data()
 		if form.is_valid():
 			h = form.save(commit=False)
 			h.user = request.user
@@ -34,6 +38,8 @@ def create_hotel(request):
 				h.services.add(service)
 			messages.add_message(request, messages.INFO, 'The Hotel is successfully added.')
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
+		else:
+			messages.add_message(request, messages.WARNING, form.errors)
 	else:
 		form = HotelForm()
 	return render(request, 'hotels/inserthotel.html', {'form': form,})
@@ -45,12 +51,16 @@ def create_room(request, hotel_id):
 	if request.user == h.user:
 		if request.method == 'POST':
 			form = RoomForm(request.POST, request.FILES)
-			if form.is_valid():
-				r = form.save(commit = False)
-				r.hotel = h
-				r.save() ##FARE CON TRY-CATCH
-				messages.add_message(request, messages.INFO, 'The room is successfully added.')
-				return HttpResponseRedirect(reverse('hotels:room_detail', args=(h.pk, r.pk,)))
+			try:
+				if form.is_valid():
+					r = form.save(commit = False)
+					r.hotel = h
+					r.save()
+					messages.add_message(request, messages.INFO, 'The room is successfully added.')
+					return HttpResponseRedirect(reverse('hotels:room_detail', args=(h.pk, r.pk,)))
+			except IntegrityError:
+				form._errors['number'] = ErrorList()
+				form._errors['number'].append('This number already exists')
 		else: #caso GET
 			form = RoomForm()
 		return render(request, 'hotels/insertroom.html', {'form': form,})
@@ -69,6 +79,8 @@ def edit_hotel(request, hotel_id):
 			form.save()
 			messages.add_message(request, messages.INFO, 'The Hotel is successfully changed.')
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
+		else:
+			messages.add_message(request, messages.WARNING, form.errors)
 	elif request.method == 'GET': ##caso GET
 		form = HotelForm(instance = h)
 	return render(request, 'hotels/edithotel.html', {'form': form, 'hotel': h}) 
@@ -83,10 +95,14 @@ def edit_room(request, hotel_id, room_id):
 	if h.pk == r.hotel.pk: ##Se la stanza e' di questo hotel
 		if 'Ok' in request.POST:
 			form = RoomForm(request.POST, request.FILES, instance = r)
-			if form.is_valid():
-				form.save()
-				messages.add_message(request, messages.INFO, 'The room is successfully changed.')
-				return HttpResponseRedirect(reverse('hotels:room_detail', args=(h.pk, r.pk,)))
+			try:
+				if form.is_valid():
+					form.save()
+					messages.add_message(request, messages.INFO, 'The room is successfully changed.')
+					return HttpResponseRedirect(reverse('hotels:room_detail', args=(h.pk, r.pk,)))
+			except IntegrityError:
+				form._errors['number'] = ErrorList()
+				form._errors['number'].append('This number already exists')
 		elif request.method == 'GET': ##caso GET
 			form = RoomForm(instance = r)
 		return render(request, 'hotels/editroom.html', {'form': form, 'hotel': h, 'room': r})
@@ -96,7 +112,7 @@ def edit_room(request, hotel_id, room_id):
 @permission_required('hotels.delete_hotel')
 def delete_hotel(request, hotel_id):
 	h = get_object_or_404(Hotel, pk=hotel_id)
-	if h.user != request.user: ##Se l'utente della sessione non e' il titolare della prenotazione
+	if h.user != request.user: ##Se l'utente della sessione non e' il proprietario
 		return HttpResponseForbidden("This hotel is not yours.")
 	if 'Ok' in request.POST:
 		Hotel.objects.get(pk=h.id).delete()
@@ -109,7 +125,7 @@ def delete_hotel(request, hotel_id):
 def delete_room(request, hotel_id, room_id):
 	r = get_object_or_404(Room, pk=room_id)
 	h = get_object_or_404(Hotel, pk=hotel_id)
-	if h.user != request.user: ##Se l'utente della sessione non e' il titolare della prenotazione
+	if h.user != request.user: ##Se l'utente della sessione non e' il proprietario
 		return HttpResponseForbidden("This hotel is not yours.")
 	if h.pk == r.hotel.pk:
 		if 'Ok' in request.POST:

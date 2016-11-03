@@ -15,9 +15,11 @@ def check_res(newres, room):
 	for res in Reservation.objects.filter(room = room, is_active=True):
 		if (res == newres):
 			continue
-		if (newres.idate >= res.idate) and (newres.idate <= res.fdate):
+#		if (newres.idate >= res.idate) and (newres.idate <= res.fdate):
+		if res.idate <= newres.idate <= res.fdate:
 			return False
-		elif (newres.fdate >= res.idate) and (newres.fdate <= res.fdate):
+#		elif (newres.fdate >= res.idate) and (newres.fdate <= res.fdate):
+		elif res.idate <= newres.fdate <= res.fdate:
 			return False
 		elif (newres.idate >= res.idate) and (newres.fdate <= res.fdate):
 			return False
@@ -85,22 +87,19 @@ def edit_reservation(request, reservation_id):
 	if res.user != request.user: ##Se l'utente della sessione non e' il titolare della prenotazione
 		messages.add_message(request, messages.WARNING, 'The reservation is not yours.')
 		return HttpResponseRedirect(reverse('portal:personal'))
-		#return HttpResponseForbidden("This reservation is not yours.")
 	if 'Ok' in request.POST:
 		form = ReservationForm(request.POST, instance = res)
 		if form.is_valid():
 			form.save(commit=False)
 			if check_res(res, r):
 				res.is_active = True
-				res.save()
-				update_state_res(r)
 				messages.add_message(request, messages.SUCCESS, 'The reservation is successfully changed.')
-				return HttpResponseRedirect(reverse('reservation:reservation_detail', args=(res.id,)))
 			else:
 				res.is_active = False
-				res.save()
-				update_state_res(r)
-				return render(request, 'reservation/inqueue.html')
+				messages.add_message(request, messages.WARNING, 'Reservation changed. Your reservation has been added to a queue: if the previous reservations are deleted, you will receive an email.')
+			res.save()
+			update_state_res(r)
+			return HttpResponseRedirect(reverse('portal:personal'))
 	elif request.method == 'GET': ##caso GET
 		form = ReservationForm(instance = res)
 	return render(request, 'reservation/editreservation.html', {'form': form, 'hotel': h, 'room': r, 'reservation':res,})
@@ -116,7 +115,8 @@ def delete_reservation(request, reservation_id):
 		return HttpResponseRedirect(reverse('portal:personal'))
 		#return HttpResponseForbidden("This reservation is not yours.")
 	if 'Ok' in request.POST:
-		Reservation.objects.filter(id=res.id).delete()
+#		Reservation.objects.filter(id=res.id).delete()
+		res.delete()
 		update_state_res(r)
 		messages.add_message(request, messages.WARNING, 'The reservation is successfully removed.')
 		return HttpResponseRedirect(reverse('portal:personal'))
