@@ -15,10 +15,8 @@ def check_res(newres, room):
 	for res in Reservation.objects.filter(room = room, is_active=True):
 		if (res == newres):
 			continue
-#		if (newres.idate >= res.idate) and (newres.idate <= res.fdate):
 		if res.idate <= newres.idate <= res.fdate:
 			return False
-#		elif (newres.fdate >= res.idate) and (newres.fdate <= res.fdate):
 		elif res.idate <= newres.fdate <= res.fdate:
 			return False
 		elif (newres.idate >= res.idate) and (newres.fdate <= res.fdate):
