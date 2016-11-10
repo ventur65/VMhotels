@@ -20,10 +20,18 @@ def create_reserv (ffdate):
 class TestBasic(TestCase):
     "Basic tests"
     
+    def setUp(self):
+		iidate = datetime.today()
+ 		user = User.objects.create_user(username='prova', email='ciao@mail.it')
+		hotel = Hotel.objects.create(user=user)
+		room = Room.objects.create(hotel=hotel, number=1, cost=1)
+		ffdate = datetime.today() - timedelta(days=7)
+		self.res = Reservation.objects.create(user=user, idate=iidate, fdate=ffdate, room=room, is_active=True)
+    
     def test_res_with_fdate_in_past(self):
     	fdate = datetime.today() - timedelta(days=7)
-    	idate = create_reserv (fdate)
-    	self.assertTrue(idate < fdate)
+    	idate = self.res.idate
+    	self.assertFalse(idate < fdate)
     	
 
     def test_basic(self):
