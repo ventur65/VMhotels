@@ -29,7 +29,7 @@ class TestBasic(TestCase):
 		self.res = Reservation.objects.create(user=user, idate=iidate, fdate=ffdate, room=room, is_active=True)
     
     def test_res_with_fdate_in_past(self):
-    	fdate = datetime.today() - timedelta(days=7)
+    	fdate = self.res.fdate
     	idate = self.res.idate
     	self.assertFalse(idate < fdate)
     	
