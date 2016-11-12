@@ -5,6 +5,7 @@ from hotels.models import Room, Hotel
 from django.test import TestCase
 
 from .models import Reservation
+from .views import *
 
 def create_reserv (ffdate):
 	"""
@@ -20,18 +21,25 @@ def create_reserv (ffdate):
 class TestBasic(TestCase):
     "Basic tests"
     
-    def setUp(self):
-		iidate = datetime.today()
+    def setUp(self):		
  		user = User.objects.create_user(username='prova', email='ciao@mail.it')
-		hotel = Hotel.objects.create(user=user)
-		room = Room.objects.create(hotel=hotel, number=1, cost=1)
-		ffdate = datetime.today() - timedelta(days=7)
-		self.res = Reservation.objects.create(user=user, idate=iidate, fdate=ffdate, room=room, is_active=True)
+		self.hotel = Hotel.objects.create(user=user)
+		self.room = Room.objects.create(hotel=self.hotel, number=1, cost=1)
+		iidate = datetime.now().date()
+		ffdate = datetime.now().date() + timedelta(days=7)
+		self.res = Reservation.objects.create(user=user, idate=iidate, fdate=ffdate, room=self.room, is_active=True)
     
     def test_res_with_fdate_in_past(self):
     	fdate = self.res.fdate
     	idate = self.res.idate
     	self.assertFalse(idate < fdate)
+    	
+    def test_res_with_same_idate(self):
+    	iidate = self.res.idate
+    	ffdate = self.res.fdate
+    	uprova = User.objects.create_user(username='Giova', email='gio@mail.it')
+    	instance = Reservation.objects.create(user=uprova, idate=iidate, fdate=ffdate, room=self.room, is_active=True, tel='+393335661378')
+    	self.assertTrue(check_res(instance,self.room))
     	
 
     def test_basic(self):
