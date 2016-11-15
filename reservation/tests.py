@@ -30,7 +30,7 @@ class TestBasic(TestCase):
 	self.room = Room.objects.create(hotel=self.hotel, number=1, cost=1)
 	iidate = datetime.now().date()
 	ffdate = datetime.now().date() + timedelta(days=7)
-	self.res = Reservation.objects.create(user=self.user, idate=iidate, fdate=ffdate, room=self.room, is_active=True)
+	self.res = Reservation.objects.create(user=self.user, idate=iidate, fdate=ffdate, room=self.room, is_active=True, firstname='UEIIII')
 	self.c = Client()
 
     
@@ -51,9 +51,11 @@ class TestBasic(TestCase):
     	iidate = datetime.now().date() + timedelta(days=10)
 	ffdate = datetime.now().date() + timedelta(days=18)   	
 	
-	request = self.client.post("include url to post the data given ---->CIAO VENTU QUALE CAZZO E'", {'firstname': 'john', 'lastname': 'prov', 'idate': iidate, 'fdate': ffdate, 'city': 'fabbrico', 'address': 'ciao', 'email': 'prova@gmail.com', 'tel': '+393335661379'})
-	#response = add_reservation(request, self.hotel, self.room)
-	self.assertEqual(request.status_code, 200)
+	request = self.client.post("/reservation/"+str(self.hotel.id)+"/"+str(self.room.id)+"/add/", {'firstname': 'john', 'lastname': 'prov', 'idate': iidate, 'fdate': ffdate, 'city': 'fabbrico', 'address': 'ciao', 'email': 'prova@gmail.com', 'tel': '+393335661379'})
+	
+	print Reservation.objects.get(idate= iidate) #dalla stampa degli oggetti resetvation non ritorna la reservation creata la riga prima con la post
+	
+	self.assertEqual(request.status_code, 302)
 
        
            	
