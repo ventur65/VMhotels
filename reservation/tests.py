@@ -100,3 +100,48 @@ class AddReservationViewTests(TestCase):
 		setattr(request, '_messages', messages)
    		response = add_reservation(request, self.hotel.pk, self.room.pk)	
    		self.assertTrue(request.user.is_anonymous)
+   		
+   	def test_add_reservation_with_anonymouse_user(self):
+		logged = self.client.login(username='', password='')
+		data = {
+    		'firstname': 'johnny',
+    		'lastname': 'prova',
+    		'idate': '2016-12-25',
+    		'fdate': "2016-12-30",
+    		'city': 'fabbrico',
+    		'address': 'ciao',
+    		'email': 'prova@gmail.com',
+    		'tel_0': "+39",
+    		'tel_1': '3335661359',
+    		'Ok': "Ok",
+    	}
+   		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), data = data, follow = True)
+   		request.user = AnonymousUser()
+   		setattr(request, 'session', 'session')
+		messages = FallbackStorage(request)
+		setattr(request, '_messages', messages)
+   		response = add_reservation(request, self.hotel.pk, self.room.pk)	
+   		self.assertTrue(request.user.is_anonymous())
+   		
+   	def test_add_reservation_with_user_without_permission(self):
+   		user_no_perm = User.objects.create_user(username='noperm', email='permission@mail.it', password='permission')
+		logged = self.client.login(username='noperm', password='permission')
+		data = {
+    		'firstname': 'gianluca',
+    		'lastname': 'prova',
+    		'idate': '2017-12-25',
+    		'fdate': "2017-12-30",
+    		'city': 'fabbrico',
+    		'address': 'ciao',
+    		'email': 'prova@gmail.com',
+    		'tel_0': "+39",
+    		'tel_1': '3335661359',
+    		'Ok': "Ok",
+    	}
+   		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), data = data, follow = True)
+   		request.user = user_no_perm
+   		setattr(request, 'session', 'session')
+		messages = FallbackStorage(request)
+		setattr(request, '_messages', messages)
+   		response = add_reservation(request, self.hotel.pk, self.room.pk)
+   		self.assertQuerysetEqual(user_no_perm.user_permissions.all(), [])
