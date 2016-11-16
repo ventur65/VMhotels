@@ -8,6 +8,7 @@ from .views import *
 from .forms import ReservationForm
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.messages.storage.fallback import FallbackStorage
 
 class AddReservationViewTests(TestCase):
 	def setUp(self):
@@ -29,13 +30,13 @@ class AddReservationViewTests(TestCase):
 		ffdate = datetime.now().date() + timedelta(days=7)
 		cls.res = Reservation.objects.create(user = cls.user, idate = iidate, fdate = ffdate, room = cls.room, firstname = 'giovanni', is_active = True)
 		
-	def test_add_reservation_with_invalid_date(self):
+	def test_add_reservation_adding_successful(self):
 		self.client.login(username='prova', password='prova')
 		data = {
     		'firstname': 'john',
     		'lastname': 'prov',
-    		'idate': 'ciao',
-    		'fdate': "2016-11-23",
+    		'idate': '2016-11-25',
+    		'fdate': "2016-11-30",
     		'city': 'fabbrico',
     		'address': 'ciao',
     		'email': 'prova@gmail.com',
@@ -43,12 +44,35 @@ class AddReservationViewTests(TestCase):
     		'tel_1': '3335661379',
     		'Ok': "Ok",
     	}
-   		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), data = data)
+   		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), data = data, follow = True)
+   		setattr(request, 'session', 'session')
+		messages = FallbackStorage(request)
+		setattr(request, '_messages', messages)
    		request.user = self.user
    		response = add_reservation(request, self.hotel.pk, self.room.pk)
-   		print response
-   		self.assertContains(response, 'Enter a valid date.')
-    	
+   		r = Reservation.objects.get(firstname='john')
+   		self.assertIsNotNone(r)
+	
+	def test_add_reservation_with_invalid_date(self):
+		self.client.login(username='prova', password='prova')
+    		data = {
+			'firstname': 'john',
+    			'lastname': 'prov',
+    			'idate': 'ciao',
+    			'fdate': "2016-11-23",
+    			'city': 'fabbrico',
+    			'address': 'ciao',
+    			'email': 'prova@gmail.com',
+    			'tel_0': "+39",
+    			'tel_1': '3335661379',
+    			'Ok': "Ok",
+		}
+		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), data = data)
+		request.user = self.user
+		response = add_reservation(request, self.hotel.pk, self.room.pk)
+#		print response
+		self.assertContains(response, 'Enter a valid date.')
+		
 	def test_add_reservation(self):
 		self.client.login(username='prova', password='prova')
 		response = self.client.get(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)))
