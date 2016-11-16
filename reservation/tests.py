@@ -34,17 +34,19 @@ class AddReservationViewTests(TestCase):
 	def test_add_reservation_adding_successful(self):
 		self.client.login(username='prova', password='prova')
 		data = {
-    		'firstname': 'john',
-    		'lastname': 'prov',
-    		'idate': '2016-11-25',
-    		'fdate': "2016-11-30",
-    		'city': 'fabbrico',
-    		'address': 'ciao',
-    		'email': 'prova@gmail.com',
-    		'tel_0': "+39",
-    		'tel_1': '3335661379',
-    		'Ok': "Ok",
-    	}
+    			'firstname': 'john',
+    			'lastname': 'prov',
+    			'idate': '2016-11-25',
+    			'fdate': "2016-11-30",
+    			'city': 'fabbrico',
+    			'address': 'ciao',
+    			'email': 'prova@gmail.com',
+    			'tel_0': "+39",
+    			'tel_1': '3335661379',
+    			'Ok': "Ok",
+    		}
+    		res_form = ReservationForm(data=data)
+    		self.assertTrue(res_form.is_valid())
    		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), data = data, follow = True)
    		setattr(request, 'session', 'session')
 		messages = FallbackStorage(request)
