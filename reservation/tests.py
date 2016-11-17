@@ -11,6 +11,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.messages.storage.fallback import FallbackStorage
 from django.contrib.auth.models import AnonymousUser
 from django.test import Client
+from django.http import Http404
 
 class AddReservationViewTests(TestCase):
 	def setUp(self):
@@ -32,6 +33,8 @@ class AddReservationViewTests(TestCase):
 		iidate = datetime.now().date()
 		ffdate = datetime.now().date() + timedelta(days=7)
 		cls.res = Reservation.objects.create(user = cls.user, idate = iidate, fdate = ffdate, room = cls.room, firstname = 'giovanni', is_active = True)
+		cls.hotel2 = Hotel.objects.create(name = 'hotel2', user = cls.owner, email='gg@gg.it', tel='0522650200', city='roma')
+		cls.room2 = Room.objects.create(hotel=cls.hotel2, number = 2, cost = 1)
 	
 	def test_add_reservation_denies_anonymous(self):
 		#GET
@@ -200,3 +203,67 @@ class AddReservationViewTests(TestCase):
 		request.user = self.user
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
 		self.assertContains(response, 'Date in the past')
+	
+	def test_add_reservation_with_invalid_hotel(self):
+		valid_idate_no_hotel = datetime.now().date() + timedelta(days=20)
+		valid_fdate_no_hotel = datetime.now().date() + timedelta(days=25)
+		invalid_hotel_id = 55
+		data = {
+    			'firstname': 'nohotel',
+    			'lastname': 'nohotel',
+    			'idate': valid_idate_no_hotel,
+    			'fdate': valid_fdate_no_hotel,
+    			'city': 'fabbrico',
+    			'address': 'ciao',
+    			'email': 'prova@gmail.com',
+    			'tel_0': "+39",
+    			'tel_1': '3335661379',
+    			'Ok': "Ok",
+    		}
+#		GET
+		request = self.factory.get(reverse('reservation:add_reservation', args = (invalid_hotel_id, self.room.pk)), follow = True)
+   		setattr(request, 'session', 'session')
+		messages = FallbackStorage(request)
+		setattr(request, '_messages', messages)
+   		request.user = self.user	
+   		with self.assertRaises(Http404):
+   			response = add_reservation(request, invalid_hotel_id, self.room.pk)
+#		POST
+		res_form = ReservationForm(data=data)
+		self.assertTrue(res_form.is_valid())		
+   		request = self.factory.post(reverse('reservation:add_reservation', args = (invalid_hotel_id, self.room.pk)), data=data,  follow = True)
+   		setattr(request, 'session', 'session')
+		messages = FallbackStorage(request)
+		setattr(request, '_messages', messages)
+   		request.user = self.user	
+   		with self.assertRaises(Http404):
+   			response = add_reservation(request, invalid_hotel_id, self.room.pk)
+   	
+   	def test_add_reservation_with_invalid_room(self):
+		valid_idate_no_room = datetime.now().date() + timedelta(days=8)
+		valid_fdate_no_room = datetime.now().date() + timedelta(days=10)
+		data = {
+    			'firstname': 'alle',
+    			'lastname': 'alle',
+    			'idate': valid_idate_no_room,
+    			'fdate': valid_fdate_no_room,
+    			'city': 'fabbrico',
+    			'address': 'ciao',
+    			'email': 'prova222@gmail.com',
+    			'tel_0': "+39",
+    			'tel_1': '3335661355',
+    			'Ok': "Ok",
+    		}
+		res_form = ReservationForm(data=data)
+		self.assertTrue(res_form.is_valid())
+   		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room2.pk)), data = data, follow = True)
+   		setattr(request, 'session', 'session')
+		messages = FallbackStorage(request)
+		setattr(request, '_messages', messages)
+   		request.user = self.user
+   		response = add_reservation(request, self.hotel.pk, self.room2.pk)
+   		#r = Reservation.objects.get(firstname='john')
+   		response.client = Client()
+   		response.client.login(username='prova', password='prova')
+   		self.assertTrue(self.hotel.pk != self.room2.hotel.pk)
+   		self.assertEqual(response.get('location'), reverse('portal:personal'))
