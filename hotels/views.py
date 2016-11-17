@@ -19,9 +19,11 @@ class HotelDetailView(generic.DetailView):
 def room_detail(request, hotel_id, room_id):
 	hotel = get_object_or_404(Hotel, pk=hotel_id)
 	room = get_object_or_404(Room, pk=room_id)
-	services = hotel.services.all()
-	context = {'hotel': hotel, 'room': room, 'services': services}
-	return render(request, 'hotels/room_detail.html', context)
+	if hotel.pk == room.hotel.pk:
+		services = hotel.services.all()
+		context = {'hotel': hotel, 'room': room, 'services': services}
+		return render(request, 'hotels/room_detail.html', context)
+	return HttpResponseForbidden("This room doesn't exists in this Hotel.")
 
 @login_required
 @permission_required('hotels.add_hotel')
@@ -133,4 +135,4 @@ def delete_room(request, hotel_id, room_id):
 			messages.add_message(request, messages.WARNING, 'The room is successfully removed.')
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
 		return render(request, 'hotels/delroom.html', {'room': r, 'hotel': h,})
-	return HttpResponseForbidden("This Room doesn't exist in this Hotel.")
+	return HttpResponseForbidden("This Room doesn't exists in this Hotel.")
