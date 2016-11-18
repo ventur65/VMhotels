@@ -62,8 +62,8 @@ class AddReservationViewTests(TestCase):
 		request.user = user_no_perm
 		self.assertTrue(request.user.is_authenticated)
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
-		response.client = Client()
-		response.client.login(username = 'noperm', password = 'nopermission')
+#		response.client = Client()
+#		response.client.login(username = 'noperm', password = 'nopermission')
 		self.assertEqual(response.get('location'), reverse('portal:django.contrib.auth.views.login')+
 							'?next='+reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)))
 		#POST
@@ -71,8 +71,8 @@ class AddReservationViewTests(TestCase):
 		request.user = user_no_perm
 		self.assertTrue(request.user.is_authenticated)
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
-		response.client = Client()
-		response.client.login(username = 'noperm', password = 'nopermission')
+#		response.client = Client()
+#		response.client.login(username = 'noperm', password = 'nopermission')
 		self.assertEqual(response.get('location'), reverse('portal:django.contrib.auth.views.login')+
 							'?next='+reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)))
 	
@@ -107,9 +107,9 @@ class AddReservationViewTests(TestCase):
    		request.user = self.user
    		response = add_reservation(request, self.hotel.pk, self.room.pk)
    		storage = get_messages(request)
-   		message = None
+   		message = []
    		for mm in storage:
-   			message = mm	
+   			message.append(mm)	
    		r = Reservation.objects.get(firstname='john')
    		response.client = Client()
    		response.client.login(username='prova', password='prova')
@@ -124,7 +124,8 @@ class AddReservationViewTests(TestCase):
    		self.assertEqual(r.email, 'prova@gmail.com')
    		self.assertEqual(r.tel, '+393335661379')
    		self.assertTrue(r.is_active)
-   		self.assertEqual(str(message),'The reservation is successfully added.')
+   		self.assertEqual(len(message), 1)
+   		self.assertEqual(str(message[0]),'The reservation is successfully added.')
    	
    	def test_add_reservation_in_queue(self):
    		idate_already_exists = datetime.now().date()
@@ -148,15 +149,16 @@ class AddReservationViewTests(TestCase):
    		request.user = self.user
    		response = add_reservation(request, self.hotel.pk, self.room.pk)
    		storage = get_messages(request)
-   		message = None
+   		message = []
    		for mm in storage:
-   			message = mm	
+   			message.append(mm)	
    		response.client = Client()
    		response.client.login(username='prova', password='prova')
    		self.assertEqual(response.get('location'), reverse('portal:personal'))
    		r = Reservation.objects.get(firstname='john')
    		self.assertFalse(r.is_active)
-   		self.assertEqual(str(message),'Your reservation has been added to a queue: if the previous reservations are deleted, you will receive an email.')
+   		self.assertEqual(len(message), 1)
+   		self.assertEqual(str(message[0]),'Your reservation has been added to a queue: if the previous reservations are deleted, you will receive an email.')
    		
 	def test_add_reservation_with_blank_data(self):
 		data = {
@@ -243,8 +245,14 @@ class AddReservationViewTests(TestCase):
    		response = add_reservation(request, self.hotel.pk, self.room2.pk)
    		response.client = Client()
    		response.client.login(username='prova', password = 'prova')
+   		storage = get_messages(request)
+   		message = []
+   		for mm in storage:
+   			message.append(mm)
    		self.assertTrue(self.hotel.pk != self.room2.hotel.pk)
    		self.assertEqual(response.get('location'), reverse('portal:personal'))
+   		self.assertEqual(len(message), 1)
+   		self.assertEqual(str(message[0]),'This room is not in this Hotel.')
    		#POST
    		data = dict()
    		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room2.pk)), data = data, follow = True)
@@ -254,11 +262,12 @@ class AddReservationViewTests(TestCase):
    		request.user = self.user
    		response = add_reservation(request, self.hotel.pk, self.room2.pk)
    		storage = get_messages(request)
-   		message = None
+   		message = []
    		for mm in storage:
-   			message = mm
+   			message.append(mm)
    		response.client = Client()
    		response.client.login(username='prova', password='prova')
    		self.assertTrue(self.hotel.pk != self.room2.hotel.pk)
    		self.assertEqual(response.get('location'), reverse('portal:personal'))
-   		self.assertEqual(str(message),'This room is not in this Hotel.')
+   		self.assertEqual(len(message), 1)
+   		self.assertEqual(str(message[0]),'This room is not in this Hotel.')
