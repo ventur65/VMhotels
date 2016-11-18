@@ -41,7 +41,7 @@ class AddReservationViewTests(TestCase):
 		#GET
 		request = self.factory.get(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), follow = True)
 		request.user = AnonymousUser()
-		self.assertTrue(request.user.is_anonymous)
+		self.assertTrue(request.user.is_anonymous())
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
 		response.client = Client()
 #		response.client.login(username = 'prova', password = 'prova')
@@ -69,7 +69,7 @@ class AddReservationViewTests(TestCase):
 		#POST
 		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), follow = True)
 		request.user = user_no_perm
-		self.assertTrue(request.user.is_authenticated)
+		self.assertTrue(request.user.is_authenticated())
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
 		response.client = Client()
 		response.client.login(username = 'noperm', password = 'nopermission')
@@ -79,7 +79,7 @@ class AddReservationViewTests(TestCase):
 	def test_add_reservation_get_user_with_perm(self):
 		request = self.factory.get(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), follow = True)
 		request.user = self.user
-		self.assertTrue(request.user.is_authenticated)
+		self.assertTrue(request.user.is_authenticated())
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
 		self.assertEqual(response.status_code, 200)
 		
