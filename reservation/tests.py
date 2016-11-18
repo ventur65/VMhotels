@@ -50,7 +50,7 @@ class AddReservationViewTests(TestCase):
 		#POST
 		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), follow = True)
 		request.user = AnonymousUser()
-		self.assertTrue(request.user.is_anonymous)
+		self.assertTrue(request.user.is_anonymous())
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
 		self.assertEqual(response.get('location'), reverse('portal:django.contrib.auth.views.login')+
 							'?next='+reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)))
