@@ -60,7 +60,7 @@ class AddReservationViewTests(TestCase):
 		#GET
 		request = self.factory.get(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), follow = True)
 		request.user = user_no_perm
-		self.assertTrue(request.user.is_authenticated)
+		self.assertTrue(request.user.is_authenticated())
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
 		response.client = Client()
 		response.client.login(username = 'noperm', password = 'nopermission')
