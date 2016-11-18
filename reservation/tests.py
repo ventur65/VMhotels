@@ -105,7 +105,11 @@ class AddReservationViewTests(TestCase):
 		messages = FallbackStorage(request)
 		setattr(request, '_messages', messages)
    		request.user = self.user
-   		response = add_reservation(request, self.hotel.pk, self.room.pk)		
+   		response = add_reservation(request, self.hotel.pk, self.room.pk)
+   		storage = get_messages(request)
+   		message = None
+   		for mm in storage:
+   			message = mm	
    		r = Reservation.objects.get(firstname='john')
    		response.client = Client()
    		response.client.login(username='prova', password='prova')
@@ -120,6 +124,7 @@ class AddReservationViewTests(TestCase):
    		self.assertEqual(r.email, 'prova@gmail.com')
    		self.assertEqual(r.tel, '+393335661379')
    		self.assertTrue(r.is_active)
+   		self.assertEqual(str(message),'The reservation is successfully added.')
    	
    	def test_add_reservation_in_queue(self):
    		idate_already_exists = datetime.now().date()
