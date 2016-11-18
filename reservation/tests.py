@@ -14,13 +14,55 @@ from django.test import Client
 from django.http import Http404
 from django.contrib.messages import get_messages
 
+class Check_Res_Tests(TestCase):
+	def setUp(self):
+		self.factory = RequestFactory()
+		
+	@classmethod
+	def setUpTestData(cls):
+		cls.owner = User.objects.create_user(username = 'owner', email = 'owner@mail.it', password='owner')
+		cls.customer = User.objects.create_user(username='customer', email = 'customer@mail.it', password='customer')
+		cls.h1 = Hotel.objects.create(name = 'h1', user = cls.owner)
+		cls.room = Room.objects.create(hotel = cls.h1, number = 1, cost = 1)
+		idate = datetime.now().date() + timedelta(days = 10)
+		fdate = datetime.now().date() + timedelta(days = 20)
+		cls.res1 = Reservation.objects.create(user = cls.customer, idate = idate, 
+						fdate = fdate, room = cls.room, is_active = True, firstname='res1')
+	
+	def test_check_res(self):
+		idate_in_period = datetime.now().date() + timedelta(days = 15)
+		idate_out_period = datetime.now().date() + timedelta(days = 5)
+		fdate_in_period = datetime.now().date() + timedelta(days = 17)
+		fdate_out_period = datetime.now().date() + timedelta(days = 25)
+		
+		res2 = Reservation.objects.create(user = self.customer, idate = idate_in_period,
+					fdate = fdate_out_period, room = self.room, firstname = 'res2', is_active = False)
+		res3 = Reservation.objects.create(user = self.customer, idate = idate_out_period,
+					fdate = fdate_in_period, room = self.room, firstname = 'res3', is_active = False)
+		res4 = Reservation.objects.create(user = self.customer, idate = idate_in_period,
+					fdate = fdate_in_period, room = self.room, firstname = 'res4', is_active = False)
+		res5 = Reservation.objects.create(user = self.customer, idate = idate_out_period,
+					fdate = fdate_out_period, room = self.room, firstname = 'res5', is_active = False)
+		idate_ok = idate_out_period
+		fdate_ok = datetime.now().date()+timedelta(days=8)
+		res6 = Reservation.objects.create(user = self.customer, idate = idate_ok,
+					fdate = fdate_ok, room = self.room, firstname = 'res6', is_active = False)
+					
+		self.assertFalse(check_res(res2, self.room))
+		self.assertFalse(check_res(res3, self.room))
+		self.assertFalse(check_res(res4, self.room))
+		self.assertFalse(check_res(res5, self.room))
+		self.assertTrue(check_res(res6, self.room))
+		
+		
+
 class AddReservationViewTests(TestCase):
 	def setUp(self):
 		self.factory = RequestFactory()
 		
 	@classmethod
 	def setUpTestData(cls):
-		cls.user = User.objects.create_user(username='prova', email='ciao@mail.it', password='prova')
+		cls.user = User.objects.create_user(username='prova', email='prova@mail.it', password='prova')
 		customers, created = Group.objects.get_or_create(name='customers')
 		owners, c = Group.objects.get_or_create(name='owners')
 		cls.owner = User.objects.create_user(username='owner', email='owner@mail.it', password='owner')
