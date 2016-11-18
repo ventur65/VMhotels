@@ -51,8 +51,6 @@ class AddReservationViewTests(TestCase):
 		request.user = AnonymousUser()
 		self.assertTrue(request.user.is_anonymous)
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
-		response.client = Client()
-		response.client.login(username = 'prova', password = 'prova')
 		self.assertEqual(response.get('location'), reverse('portal:django.contrib.auth.views.login')+
 							'?next='+reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)))
 		
@@ -64,7 +62,7 @@ class AddReservationViewTests(TestCase):
 		self.assertTrue(request.user.is_authenticated)
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
 		response.client = Client()
-		response.client.login(username = 'prova', password = 'prova')
+		response.client.login(username = 'noperm', password = 'nopermission')
 		self.assertEqual(response.get('location'), reverse('portal:django.contrib.auth.views.login')+
 							'?next='+reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)))
 		#POST
