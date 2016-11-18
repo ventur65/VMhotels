@@ -147,11 +147,16 @@ class AddReservationViewTests(TestCase):
    		setattr(request, '_messages', messages)
    		request.user = self.user
    		response = add_reservation(request, self.hotel.pk, self.room.pk)
+   		storage = get_messages(request)
+   		message = None
+   		for mm in storage:
+   			message = mm	
    		response.client = Client()
    		response.client.login(username='prova', password='prova')
    		self.assertEqual(response.get('location'), reverse('portal:personal'))
    		r = Reservation.objects.get(firstname='john')
    		self.assertFalse(r.is_active)
+   		self.assertEqual(str(message),'Your reservation has been added to a queue: if the previous reservations are deleted, you will receive an email.')
    		
 	def test_add_reservation_with_blank_data(self):
 		data = {
