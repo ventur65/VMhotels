@@ -12,6 +12,7 @@ from django.contrib.messages.storage.fallback import FallbackStorage
 from django.contrib.auth.models import AnonymousUser
 from django.test import Client
 from django.http import Http404
+from django.contrib.messages import get_messages
 
 class AddReservationViewTests(TestCase):
 	def setUp(self):
@@ -242,7 +243,12 @@ class AddReservationViewTests(TestCase):
 		setattr(request, '_messages', messages)
    		request.user = self.user
    		response = add_reservation(request, self.hotel.pk, self.room2.pk)
+   		storage = get_messages(request)
+   		message = None
+   		for mm in storage:
+   			message = mm
    		response.client = Client()
    		response.client.login(username='prova', password='prova')
    		self.assertTrue(self.hotel.pk != self.room2.hotel.pk)
    		self.assertEqual(response.get('location'), reverse('portal:personal'))
+   		self.assertEqual(str(message),'This room is not in this Hotel.')
