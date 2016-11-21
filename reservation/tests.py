@@ -14,7 +14,7 @@ from django.test import Client
 from django.http import Http404
 from django.contrib.messages import get_messages
 
-class Check_Res_Tests(TestCase):
+class Check_Update_Tests(TestCase):
 	def setUp(self):
 		self.factory = RequestFactory()
 		
@@ -54,7 +54,24 @@ class Check_Res_Tests(TestCase):
 		self.assertFalse(check_res(res5, self.room))
 		self.assertTrue(check_res(res6, self.room))
 		
-		
+	def test_update_state_res(self):
+		idate_res2 = datetime.now().date() + timedelta(days = 30)
+		fdate_res2 = datetime.now().date() + timedelta(days = 40)
+		res2 = Reservation.objects.create(user = self.customer, idate = idate_res2,
+					fdate = fdate_res2, room = self.room, firstname = 'res2', is_active = False)
+		res3 = Reservation.objects.create(user = self.customer, idate = idate_res2,
+					fdate = fdate_res2, room = self.room, firstname = 'res3', is_active = False)
+		self.assertFalse(res2.is_active)
+		self.assertFalse(res3.is_active)
+		self.assertTrue(check_res(res2, self.room))
+		self.assertTrue(check_res(res3, self.room))
+		update_state_res(self.room)
+		res2 = Reservation.objects.get(firstname = 'res2')
+		res3 = Reservation.objects.get(firstname = 'res3')
+		self.assertTrue(self.res1.is_active)
+		self.assertTrue(res2.is_active)
+		self.assertFalse(res3.is_active)
+		self.assertFalse(check_res(res3, self.room))
 
 class AddReservationViewTests(TestCase):
 	def setUp(self):
@@ -79,14 +96,27 @@ class AddReservationViewTests(TestCase):
 		cls.hotel2 = Hotel.objects.create(name = 'hotel2', user = cls.owner, email='gg@gg.it', tel='0522650200', city='roma')
 		cls.room2 = Room.objects.create(hotel=cls.hotel2, number = 2, cost = 1)
 	
+	def create_res_data(self, idate, fdate):
+		data = {
+    			'firstname': 'john',
+    			'lastname': 'prov',
+    			'idate': idate,
+    			'fdate': fdate,
+    			'city': 'fabbrico',
+    			'address': 'ciao',
+    			'email': 'prova@gmail.com',
+    			'tel_0': "+39",
+    			'tel_1': '3335661379',
+    			'Ok': "Ok",
+		}
+		return data
+			
 	def test_add_reservation_denies_anonymous(self):
 		#GET
 		request = self.factory.get(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), follow = True)
 		request.user = AnonymousUser()
 		self.assertTrue(request.user.is_anonymous())
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
-#		response.client = Client()
-#		response.client.login(username = 'prova', password = 'prova')
 		self.assertEqual(response.get('location'), reverse('portal:django.contrib.auth.views.login')+
 							'?next='+reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)))
 		#POST
@@ -104,8 +134,6 @@ class AddReservationViewTests(TestCase):
 		request.user = user_no_perm
 		self.assertTrue(request.user.is_authenticated())
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
-#		response.client = Client()
-#		response.client.login(username = 'noperm', password = 'nopermission')
 		self.assertEqual(response.get('location'), reverse('portal:django.contrib.auth.views.login')+
 							'?next='+reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)))
 		#POST
@@ -113,8 +141,6 @@ class AddReservationViewTests(TestCase):
 		request.user = user_no_perm
 		self.assertTrue(request.user.is_authenticated())
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
-#		response.client = Client()
-#		response.client.login(username = 'noperm', password = 'nopermission')
 		self.assertEqual(response.get('location'), reverse('portal:django.contrib.auth.views.login')+
 							'?next='+reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)))
 	
@@ -128,18 +154,7 @@ class AddReservationViewTests(TestCase):
 	def test_add_reservation_adding_successful(self):
 		valid_idate = datetime.now().date() + timedelta(days=8)
 		valid_fdate = datetime.now().date() + timedelta(days=10)
-		data = {
-    			'firstname': 'john',
-    			'lastname': 'prov',
-    			'idate': valid_idate,
-    			'fdate': valid_fdate,
-    			'city': 'fabbrico',
-    			'address': 'ciao',
-    			'email': 'prova@gmail.com',
-    			'tel_0': "+39",
-    			'tel_1': '3335661379',
-    			'Ok': "Ok",
-    		}
+		data = self.create_res_data(valid_idate, valid_fdate)
 		res_form = ReservationForm(data=data)
 		self.assertTrue(res_form.is_valid())
    		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), data = data, follow = True)
@@ -172,18 +187,7 @@ class AddReservationViewTests(TestCase):
    	def test_add_reservation_in_queue(self):
    		idate_already_exists = datetime.now().date()
    		fdate_already_exists = datetime.now().date() + timedelta(days = 4)
-   		data = {
-   			'firstname': 'john',
-   			'lastname': 'prov',
-   			'idate': idate_already_exists,
-   			'fdate': fdate_already_exists,
-   			'city': 'fabbrico',
-   			'address': 'via don sturzo',
-   			'email': 'prova@gmail.com',
-   			'tel_0': '+39',
-   			'tel_1': '3335661379',
-   			'Ok': 'Ok',
-   		}
+   		data = self.create_res_data(idate_already_exists, fdate_already_exists)
    		request = self.factory.post(reverse('reservation:add_reservation', args=(self.hotel.pk, self.room.pk)), data = data, follow = True)
    		setattr(request, 'session', 'session')
    		messages = FallbackStorage(request)
@@ -215,41 +219,29 @@ class AddReservationViewTests(TestCase):
 	def test_add_reservation_with_invalid_date(self):
 		invalid_idate = 'invalid'
 		valid_fdate = datetime.now().date() + timedelta(days=7)
-    		data = {
-			'firstname': 'john',
-			'lastname': 'prov',
-			'idate': invalid_idate,
-			'fdate': valid_fdate,
-			'city': 'fabbrico',
-			'address': 'ciao',
-			'email': 'prova@gmail.com',
-			'tel_0': "+39",
-			'tel_1': '3335661379',
-			'Ok': "Ok",
-		}
+		data = self.create_res_data(invalid_idate, valid_fdate)
 		form = ReservationForm(data)
 		self.assertFalse(form.is_valid())
 		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), data = data)
 		request.user = self.user
 		response = add_reservation(request, self.hotel.pk, self.room.pk)
-#		print response
 		self.assertContains(response, 'Enter a valid date.')
+		
+	def test_add_reservation_with_idate_after_fdate(self):
+		idate_after_fdate = datetime.now().date() + timedelta(days = 8)
+		valid_fdate = datetime.now().date() + timedelta(days=7)
+		data = self.create_res_data(idate_after_fdate, valid_fdate)
+		form = ReservationForm(data)
+		self.assertFalse(form.is_valid())
+		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), data = data)
+		request.user = self.user
+		response = add_reservation(request, self.hotel.pk, self.room.pk)
+		self.assertContains(response, 'Initial Date must be earlier than Final Date')
 		
 	def test_add_reservation_with_date_in_the_past(self):
 		past_idate = datetime.now().date() + timedelta(days = -7)
 		past_fdate = datetime.now().date() + timedelta(days = -4)
-		data = {
-			'firstname': 'john',
-			'lastname': 'prov',
-			'idate': past_idate,
-			'fdate': past_fdate,
-			'city': 'fabbrico',
-			'address': 'ciao',
-			'email': 'prova@gmail.com',
-			'tel_0': "+39",
-			'tel_1': '3335661379',
-			'Ok': "Ok",
-		}
+		data = self.create_res_data(past_idate, past_fdate)
 		form = ReservationForm(data)
 		self.assertFalse(form.is_valid())
 		request = self.factory.post(reverse('reservation:add_reservation', args = (self.hotel.pk, self.room.pk)), data = data)

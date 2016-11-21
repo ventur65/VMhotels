@@ -32,7 +32,7 @@ def update_state_res(room):
 		if check_res(non_active_res, room):
 			non_active_res.is_active = True
 			non_active_res.save()
-			if non_active_res.idate < date.today():
+			if non_active_res.idate > date.today():
 				subject = 'Reservation VMHotels'
 				mex = "Your reservation for Room " + str(non_active_res.room.number) + " Hotel "+ non_active_res.room.hotel.name + " from " + str(non_active_res.idate) + " to " + str(non_active_res.fdate) + " is now valid."
 				frommail = 'progettovmhotels@gmail.com'
