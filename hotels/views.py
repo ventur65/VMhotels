@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidde
 from django.views import generic
 from .models import Room, Hotel
 from .forms import HotelForm, RoomForm
+from reservation.models import Reservation
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.core.urlresolvers import reverse
@@ -136,3 +137,12 @@ def delete_room(request, hotel_id, room_id):
 			return HttpResponseRedirect(reverse('hotels:hotel_detail', args=(h.pk,)))
 		return render(request, 'hotels/delroom.html', {'room': r, 'hotel': h,})
 	return HttpResponseForbidden("This Room doesn't exists in this Hotel.")
+	
+@login_required	
+def info_res(request, hotel_id):
+	context = {}
+	h = get_object_or_404(Hotel, pk=hotel_id)
+	u = request.user
+	res = Reservation.objects.filter(room__hotel=h).filter(room__hotel__user=u).order_by('room__number')
+	context = {'request': request, 'reservation_list': res, 'customer': True}
+	return render(request, 'portal/personal.html', context)

@@ -103,6 +103,12 @@
     <span class="glyphicon glyphicon-remove"></span> Delete Hotel
 </button>
 </a>
+
+<a href="{% url 'hotels:reservation_hotel' hotel.id %}">
+<button type="button" class="btn btn-default">
+    <span class="glyphicon glyphicon-equalizer"></span> Reservations
+</button>
+</a>
 {% endif %}
 </p>
 
