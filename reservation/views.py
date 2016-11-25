@@ -37,7 +37,10 @@ def update_state_res(room):
 				mex = "Your reservation for Room " + str(non_active_res.room.number) + " Hotel "+ non_active_res.room.hotel.name + " from " + str(non_active_res.idate) + " to " + str(non_active_res.fdate) + " is now valid."
 				frommail = 'progettovmhotels@gmail.com'
 				to = [non_active_res.email]
-				send_mail(subject, mex, frommail, to, fail_silently = False)
+				try:
+					send_mail(subject, mex, frommail, to, fail_silently = False)
+				except:
+					"ERRORE: MAIL NON INVIATA!"
 
 @login_required
 @permission_required('reservation.add_reservation')

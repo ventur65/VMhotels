@@ -17,7 +17,7 @@ class ReservationAdmin(admin.ModelAdmin):
 		('Final Date', {'fields': ['fdate']}),
 		('Is Active', {'fields': ['is_active']}),
 	]
-	list_display = ['user', 'room', 'idate', 'fdate', 'updated']
-	search_fields = ['user', 'room', 'idate', 'fdate']
+	list_display = ['user', 'room', 'idate', 'fdate', 'updated', 'is_active']
+	search_fields = ['user', 'room', 'idate', 'fdate', 'is_active']
 	
 admin.site.register(Reservation, ReservationAdmin)

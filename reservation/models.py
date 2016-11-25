@@ -19,3 +19,5 @@ class Reservation(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
 	
+	def __unicode__(self):
+		return self.room + " Idate: " + str(self.idate) + " Fdate: " + str(self.fdate) + " Active " + str(self.is_active)

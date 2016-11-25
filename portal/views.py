@@ -62,7 +62,7 @@ class RegistrationView(BaseRegistrationView):
 		)
 		if 'owner' in str(self.request.path):
 			g = Group.objects.get(name='owners')
-		elif 'customer' in str(self.request.path):
+		else:
 			g = Group.objects.get(name='customers')
 		new_user.groups.add(g)
 		new_user.user_permissions = [p for p in g.permissions.all()]

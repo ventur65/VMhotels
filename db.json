@@ -1,0 +1,1945 @@
+[
+{
+  "fields": {
+    "name": "owners",
+    "permissions": [
+      [
+        "add_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "change_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "delete_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "add_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "change_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "delete_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "add_service",
+        "hotels",
+        "service"
+      ],
+      [
+        "change_service",
+        "hotels",
+        "service"
+      ],
+      [
+        "delete_service",
+        "hotels",
+        "service"
+      ]
+    ]
+  },
+  "model": "auth.group",
+  "pk": 1
+},
+{
+  "fields": {
+    "name": "customers",
+    "permissions": [
+      [
+        "add_reservation",
+        "reservation",
+        "reservation"
+      ],
+      [
+        "change_reservation",
+        "reservation",
+        "reservation"
+      ],
+      [
+        "delete_reservation",
+        "reservation",
+        "reservation"
+      ],
+      [
+        "add_review",
+        "review",
+        "review"
+      ],
+      [
+        "change_review",
+        "review",
+        "review"
+      ],
+      [
+        "delete_review",
+        "review",
+        "review"
+      ]
+    ]
+  },
+  "model": "auth.group",
+  "pk": 2
+},
+{
+  "fields": {
+    "username": "gianluca",
+    "first_name": "Gianluca",
+    "last_name": "Maugeri",
+    "is_active": true,
+    "is_superuser": true,
+    "is_staff": true,
+    "last_login": "2016-11-25T11:21:44Z",
+    "groups": [
+      [
+        "customers"
+      ],
+      [
+        "owners"
+      ]
+    ],
+    "user_permissions": [
+      [
+        "add_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "change_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "delete_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "add_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "change_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "delete_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "add_service",
+        "hotels",
+        "service"
+      ],
+      [
+        "change_service",
+        "hotels",
+        "service"
+      ],
+      [
+        "delete_service",
+        "hotels",
+        "service"
+      ],
+      [
+        "add_reservation",
+        "reservation",
+        "reservation"
+      ],
+      [
+        "change_reservation",
+        "reservation",
+        "reservation"
+      ],
+      [
+        "delete_reservation",
+        "reservation",
+        "reservation"
+      ],
+      [
+        "add_review",
+        "review",
+        "review"
+      ],
+      [
+        "change_review",
+        "review",
+        "review"
+      ],
+      [
+        "delete_review",
+        "review",
+        "review"
+      ]
+    ],
+    "password": "pbkdf2_sha256$20000$84dtuHZ2DNse$9MIB8IA/JScJoJo3xDgVexXpfcwszFMxexZ53cHIsTU=",
+    "email": "gianluca@gmail.com",
+    "date_joined": "2016-10-13T07:02:39Z"
+  },
+  "model": "auth.user",
+  "pk": 1
+},
+{
+  "fields": {
+    "username": "owner1",
+    "first_name": "",
+    "last_name": "",
+    "is_active": true,
+    "is_superuser": false,
+    "is_staff": false,
+    "last_login": "2016-11-25T11:26:38Z",
+    "groups": [
+      [
+        "owners"
+      ]
+    ],
+    "user_permissions": [
+      [
+        "add_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "change_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "delete_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "add_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "change_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "delete_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "add_service",
+        "hotels",
+        "service"
+      ],
+      [
+        "change_service",
+        "hotels",
+        "service"
+      ],
+      [
+        "delete_service",
+        "hotels",
+        "service"
+      ]
+    ],
+    "password": "pbkdf2_sha256$20000$5XSf1CXuAiYn$vCOIURTeOaJpn9bBb35gF52Kh+0P0ND7FsyULz5l34E=",
+    "email": "",
+    "date_joined": "2016-11-22T08:43:57Z"
+  },
+  "model": "auth.user",
+  "pk": 8
+},
+{
+  "fields": {
+    "username": "owner2",
+    "first_name": "",
+    "last_name": "",
+    "is_active": true,
+    "is_superuser": false,
+    "is_staff": false,
+    "last_login": "2016-11-25T11:20:05Z",
+    "groups": [
+      [
+        "owners"
+      ]
+    ],
+    "user_permissions": [
+      [
+        "add_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "change_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "delete_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "add_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "change_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "delete_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "add_service",
+        "hotels",
+        "service"
+      ],
+      [
+        "change_service",
+        "hotels",
+        "service"
+      ],
+      [
+        "delete_service",
+        "hotels",
+        "service"
+      ]
+    ],
+    "password": "pbkdf2_sha256$20000$zSGIC1uaPQr5$x6yUNC5LG/VkVguyMOpwql1wHjxrB9g62dR+upvDnW0=",
+    "email": "owner2@gmail.com",
+    "date_joined": "2016-11-22T08:59:45Z"
+  },
+  "model": "auth.user",
+  "pk": 9
+},
+{
+  "fields": {
+    "username": "owner3",
+    "first_name": "",
+    "last_name": "",
+    "is_active": true,
+    "is_superuser": false,
+    "is_staff": false,
+    "last_login": "2016-11-25T10:54:33Z",
+    "groups": [
+      [
+        "owners"
+      ]
+    ],
+    "user_permissions": [
+      [
+        "add_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "change_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "delete_hotel",
+        "hotels",
+        "hotel"
+      ],
+      [
+        "add_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "change_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "delete_room",
+        "hotels",
+        "room"
+      ],
+      [
+        "add_service",
+        "hotels",
+        "service"
+      ],
+      [
+        "change_service",
+        "hotels",
+        "service"
+      ],
+      [
+        "delete_service",
+        "hotels",
+        "service"
+      ]
+    ],
+    "password": "pbkdf2_sha256$20000$l2jIRF98gYz4$Pl4tYy/9azVAUq0C3VsJLH1goe5KT5B54LXFZyRfKno=",
+    "email": "owner3@gmail.com",
+    "date_joined": "2016-11-22T09:16:01Z"
+  },
+  "model": "auth.user",
+  "pk": 10
+},
+{
+  "fields": {
+    "username": "customer1",
+    "first_name": "",
+    "last_name": "",
+    "is_active": true,
+    "is_superuser": false,
+    "is_staff": false,
+    "last_login": "2016-11-25T10:58:51Z",
+    "groups": [
+      [
+        "customers"
+      ]
+    ],
+    "user_permissions": [
+      [
+        "add_reservation",
+        "reservation",
+        "reservation"
+      ],
+      [
+        "change_reservation",
+        "reservation",
+        "reservation"
+      ],
+      [
+        "delete_reservation",
+        "reservation",
+        "reservation"
+      ],
+      [
+        "add_review",
+        "review",
+        "review"
+      ],
+      [
+        "change_review",
+        "review",
+        "review"
+      ],
+      [
+        "delete_review",
+        "review",
+        "review"
+      ]
+    ],
+    "password": "pbkdf2_sha256$20000$dQlAV3AnCS0P$I6tKVozZWrGHl+Z+fWC6BtxbbN9ZcSfJSL/eEG3fNBE=",
+    "email": "customer1@gmail.com",
+    "date_joined": "2016-11-22T09:34:44Z"
+  },
+  "model": "auth.user",
+  "pk": 11
+},
+{
+  "fields": {
+    "username": "customer2",
+    "first_name": "",
+    "last_name": "",
+    "is_active": true,
+    "is_superuser": false,
+    "is_staff": false,
+    "last_login": "2016-11-25T11:43:18Z",
+    "groups": [
+      [
+        "customers"
+      ]
+    ],
+    "user_permissions": [
+      [
+        "add_reservation",
+        "reservation",
+        "reservation"
+      ],
+      [
+        "change_reservation",
+        "reservation",
+        "reservation"
+      ],
+      [
+        "delete_reservation",
+        "reservation",
+        "reservation"
+      ],
+      [
+        "add_review",
+        "review",
+        "review"
+      ],
+      [
+        "change_review",
+        "review",
+        "review"
+      ],
+      [
+        "delete_review",
+        "review",
+        "review"
+      ]
+    ],
+    "password": "pbkdf2_sha256$20000$42F8fr7sBxsw$RAwZ917peu/lwKY+2p3QK2mK1ZilPi4XkHQ87QYHtiM=",
+    "email": "customer2@gmail.com",
+    "date_joined": "2016-11-22T09:38:48Z"
+  },
+  "model": "auth.user",
+  "pk": 12
+},
+{
+  "fields": {
+    "expire_date": "2016-11-07T15:33:37Z",
+    "session_data": "OWU3ZTFiNjBiYzQ2NjI1NGFkNjJjYmNiMmQ2NTZmNmY0ZTRmM2M4ZDp7Il9hdXRoX3VzZXJfaGFzaCI6ImYyZDJjNmYxNDVkZGUzNDU4N2JlMjEwNjU2YjI3ZTFjMzhkMTg2YTciLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0="
+  },
+  "model": "sessions.session",
+  "pk": "0gz27lzcynl43psylqmcty6jms9i4g9a"
+},
+{
+  "fields": {
+    "expire_date": "2016-12-07T14:02:04Z",
+    "session_data": "NDcwNjQ0MDUyMzY3NmRiM2FhYjg3ZWE3MDgyN2EyYWZjMzI4MmE1MDp7Il9hdXRoX3VzZXJfaGFzaCI6IjQ3MTNmY2Y2Njg0MzkxMmIyZWVjZjQxMzkwOGVhMDRhN2Q2ODMyMDAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMiJ9"
+  },
+  "model": "sessions.session",
+  "pk": "5uqy57hvmd5wb9eashv88662m4p8r6j3"
+},
+{
+  "fields": {
+    "expire_date": "2016-12-09T11:43:18Z",
+    "session_data": "NDcwNjQ0MDUyMzY3NmRiM2FhYjg3ZWE3MDgyN2EyYWZjMzI4MmE1MDp7Il9hdXRoX3VzZXJfaGFzaCI6IjQ3MTNmY2Y2Njg0MzkxMmIyZWVjZjQxMzkwOGVhMDRhN2Q2ODMyMDAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMiJ9"
+  },
+  "model": "sessions.session",
+  "pk": "evi926bo3c2j8w29xj3wj1lky95euqkr"
+},
+{
+  "fields": {
+    "expire_date": "2016-12-08T16:16:58Z",
+    "session_data": "MGEzZTZhOTI5NTczYTk1NTUzNWY2ODYxNzQ2MWQ2NjM1NTQxMzIwZjp7Il9hdXRoX3VzZXJfaGFzaCI6IjljNWZlN2MxZTQxNjQ2ZmNhZTY2NzZlOGJiOGEyNjQ0MmU5NTUwNjgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMCJ9"
+  },
+  "model": "sessions.session",
+  "pk": "n29z0wadmngkrup9i86iul5bx5cz3i0x"
+},
+{
+  "fields": {
+    "expire_date": "2016-11-11T12:54:25Z",
+    "session_data": "OWU3ZTFiNjBiYzQ2NjI1NGFkNjJjYmNiMmQ2NTZmNmY0ZTRmM2M4ZDp7Il9hdXRoX3VzZXJfaGFzaCI6ImYyZDJjNmYxNDVkZGUzNDU4N2JlMjEwNjU2YjI3ZTFjMzhkMTg2YTciLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0="
+  },
+  "model": "sessions.session",
+  "pk": "vsq21qxeixt0eaxzvd7r88s7lh5qdzmt"
+},
+{
+  "fields": {
+    "expire_date": "2016-12-06T09:41:47Z",
+    "session_data": "NWU4MTVkZDBlODljMTMzYWY1NzE2NjVhZWZiNzE1MzkzYTE4MTJmYzp7Il9hdXRoX3VzZXJfaGFzaCI6IjE5YTNlYTk1ZjM1MmY1NjE0YWY0YjQ4Zjc1OWE5ODYwM2NlYWRlOTEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMSJ9"
+  },
+  "model": "sessions.session",
+  "pk": "xgixaf6oyh83nhdxwc89ghv3z7fptk08"
+},
+{
+  "fields": {
+    "name": "Piscina"
+  },
+  "model": "hotels.service",
+  "pk": 1
+},
+{
+  "fields": {
+    "name": "Wi-Fi"
+  },
+  "model": "hotels.service",
+  "pk": 2
+},
+{
+  "fields": {
+    "name": "Bar"
+  },
+  "model": "hotels.service",
+  "pk": 3
+},
+{
+  "fields": {
+    "name": "Sky"
+  },
+  "model": "hotels.service",
+  "pk": 4
+},
+{
+  "fields": {
+    "city": "Roma",
+    "tel": "+390522651972",
+    "description": "Hotel lusso",
+    "image": "Luxor Hotel/1435243544-hotel-03.jpg",
+    "user": [
+      "owner1"
+    ],
+    "address": "Via don sturzo, 67",
+    "services": [
+      1,
+      3
+    ],
+    "email": "luxorhotel@gmail.com",
+    "name": "Luxor Hotel"
+  },
+  "model": "hotels.hotel",
+  "pk": 17
+},
+{
+  "fields": {
+    "city": "Milano",
+    "tel": "+390522671982",
+    "description": "Hotel in centro a Milano",
+    "image": "Hotel Milano/hotel2",
+    "user": [
+      "owner1"
+    ],
+    "address": "via roma, 45",
+    "services": [
+      1,
+      2
+    ],
+    "email": "milanhotel@gmail.com",
+    "name": "Hotel Milano"
+  },
+  "model": "hotels.hotel",
+  "pk": 18
+},
+{
+  "fields": {
+    "city": "Torino",
+    "tel": "+390522765192",
+    "description": "Hotel in centro",
+    "image": "Hotel Torino/hoteltorino.jpg",
+    "user": [
+      "owner1"
+    ],
+    "address": "via pozzi, 45",
+    "services": [
+      1,
+      2,
+      3
+    ],
+    "email": "turinhotel@gmail.com",
+    "name": "Hotel Torino"
+  },
+  "model": "hotels.hotel",
+  "pk": 19
+},
+{
+  "fields": {
+    "city": "Catania",
+    "tel": "+390522641298",
+    "description": "Hotel in centro a catania",
+    "image": "Hotel Nettuno/cataniahotel.jpg",
+    "user": [
+      "owner2"
+    ],
+    "address": "via napoleone, 56",
+    "services": [
+      2,
+      4
+    ],
+    "email": "nettuno@gmail.com",
+    "name": "Hotel Nettuno"
+  },
+  "model": "hotels.hotel",
+  "pk": 20
+},
+{
+  "fields": {
+    "city": "Bolzano",
+    "tel": "+390522561398",
+    "description": "Hotel nei pressi di Bolzano",
+    "image": "Chrys Hotel/chryshotel.jpg",
+    "user": [
+      "owner2"
+    ],
+    "address": "via bolzen, 18",
+    "services": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "email": "bolzenhotel@email.it",
+    "name": "Chrys Hotel"
+  },
+  "model": "hotels.hotel",
+  "pk": 21
+},
+{
+  "fields": {
+    "city": "Roma",
+    "tel": "+390522341876",
+    "description": "Hotel lusso di Venezia",
+    "image": "Excelsior/Excelsior-1.jpg",
+    "user": [
+      "owner2"
+    ],
+    "address": "Via leonardo da vinci, 46",
+    "services": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "email": "excelsiorhotel@email.it",
+    "name": "Excelsior"
+  },
+  "model": "hotels.hotel",
+  "pk": 22
+},
+{
+  "fields": {
+    "city": "Roma",
+    "tel": "+390522789561",
+    "description": "Hotel di Perugia",
+    "image": "San Genesio Hotel/perugia.jpg",
+    "user": [
+      "owner3"
+    ],
+    "address": "via s. genesio, 68",
+    "services": [
+      1,
+      2,
+      3
+    ],
+    "email": "perugiahotel@gmail.com",
+    "name": "San Genesio Hotel"
+  },
+  "model": "hotels.hotel",
+  "pk": 23
+},
+{
+  "fields": {
+    "city": "Ravenna",
+    "tel": "+390522871392",
+    "description": "Hotel di Ravenna",
+    "image": "Ravenna Hotel/ravenna.jpg",
+    "user": [
+      "owner3"
+    ],
+    "address": "via guidetti, 28",
+    "services": [
+      1,
+      3
+    ],
+    "email": "ravennahotels@gmail.com",
+    "name": "Ravenna Hotel"
+  },
+  "model": "hotels.hotel",
+  "pk": 24
+},
+{
+  "fields": {
+    "city": "Bari",
+    "tel": "+390522671098",
+    "description": "grand hotel di bari",
+    "image": "Grand Hotel Bari/bari.jpg",
+    "user": [
+      "owner3"
+    ],
+    "address": "via gobetti, 82",
+    "services": [
+      1,
+      2
+    ],
+    "email": "ghotel@gmai.com",
+    "name": "Grand Hotel Bari"
+  },
+  "model": "hotels.hotel",
+  "pk": 25
+},
+{
+  "fields": {
+    "description": "camera da 4",
+    "image": "Luxor Hotel/23/c1.jpg",
+    "hotel": 17,
+    "number": 23,
+    "beds": 4,
+    "cost": 200.0
+  },
+  "model": "hotels.room",
+  "pk": 30
+},
+{
+  "fields": {
+    "description": "Camera da 2",
+    "image": "Luxor Hotel/56/c2.jpg",
+    "hotel": 17,
+    "number": 56,
+    "beds": 2,
+    "cost": 200.0
+  },
+  "model": "hotels.room",
+  "pk": 31
+},
+{
+  "fields": {
+    "description": "camera da 6",
+    "image": "Luxor Hotel/26/c3.jpg",
+    "hotel": 17,
+    "number": 26,
+    "beds": 6,
+    "cost": 300.0
+  },
+  "model": "hotels.room",
+  "pk": 32
+},
+{
+  "fields": {
+    "description": "Camera piccola",
+    "image": "Luxor Hotel/12/c4.jpg",
+    "hotel": 17,
+    "number": 12,
+    "beds": 2,
+    "cost": 350.0
+  },
+  "model": "hotels.room",
+  "pk": 33
+},
+{
+  "fields": {
+    "description": "Camera bella",
+    "image": "Hotel Milano/23/c1.jpg",
+    "hotel": 18,
+    "number": 23,
+    "beds": 2,
+    "cost": 240.0
+  },
+  "model": "hotels.room",
+  "pk": 34
+},
+{
+  "fields": {
+    "description": "Camera da 5",
+    "image": "Hotel Milano/56/c2.jpg",
+    "hotel": 18,
+    "number": 56,
+    "beds": 5,
+    "cost": 150.0
+  },
+  "model": "hotels.room",
+  "pk": 35
+},
+{
+  "fields": {
+    "description": "Camera da 3 persone",
+    "image": "Hotel Milano/14/c3.jpg",
+    "hotel": 18,
+    "number": 14,
+    "beds": 3,
+    "cost": 150.0
+  },
+  "model": "hotels.room",
+  "pk": 36
+},
+{
+  "fields": {
+    "description": "Camera ",
+    "image": "Hotel Torino/16/c1.jpg",
+    "hotel": 19,
+    "number": 16,
+    "beds": 2,
+    "cost": 400.0
+  },
+  "model": "hotels.room",
+  "pk": 37
+},
+{
+  "fields": {
+    "description": "camera quattro",
+    "image": "Hotel Torino/56/c2.jpg",
+    "hotel": 19,
+    "number": 56,
+    "beds": 4,
+    "cost": 400.0
+  },
+  "model": "hotels.room",
+  "pk": 38
+},
+{
+  "fields": {
+    "description": "camera da tre",
+    "image": "Hotel Torino/67/c3.jpg",
+    "hotel": 19,
+    "number": 67,
+    "beds": 3,
+    "cost": 370.0
+  },
+  "model": "hotels.room",
+  "pk": 39
+},
+{
+  "fields": {
+    "description": "camera da 5",
+    "image": "Hotel Torino/80/c4.jpg",
+    "hotel": 19,
+    "number": 80,
+    "beds": 5,
+    "cost": 250.0
+  },
+  "model": "hotels.room",
+  "pk": 40
+},
+{
+  "fields": {
+    "description": "camera lusso",
+    "image": "Hotel Torino/2/c5.jpg",
+    "hotel": 19,
+    "number": 2,
+    "beds": 2,
+    "cost": 500.0
+  },
+  "model": "hotels.room",
+  "pk": 41
+},
+{
+  "fields": {
+    "description": "camera da due",
+    "image": "Hotel Nettuno/34/c1.jpg",
+    "hotel": 20,
+    "number": 34,
+    "beds": 2,
+    "cost": 300.0
+  },
+  "model": "hotels.room",
+  "pk": 42
+},
+{
+  "fields": {
+    "description": "",
+    "image": "Hotel Nettuno/99/c2.jpg",
+    "hotel": 20,
+    "number": 99,
+    "beds": 4,
+    "cost": 360.0
+  },
+  "model": "hotels.room",
+  "pk": 43
+},
+{
+  "fields": {
+    "description": "Camera da 6",
+    "image": "Hotel Nettuno/29/c3.jpeg",
+    "hotel": 20,
+    "number": 29,
+    "beds": 6,
+    "cost": 800.0
+  },
+  "model": "hotels.room",
+  "pk": 44
+},
+{
+  "fields": {
+    "description": "Camera doppia",
+    "image": "Chrys Hotel/33/c1.jpg",
+    "hotel": 21,
+    "number": 33,
+    "beds": 2,
+    "cost": 300.0
+  },
+  "model": "hotels.room",
+  "pk": 45
+},
+{
+  "fields": {
+    "description": "Camera 4",
+    "image": "Chrys Hotel/76/c2.jpg",
+    "hotel": 21,
+    "number": 76,
+    "beds": 4,
+    "cost": 450.0
+  },
+  "model": "hotels.room",
+  "pk": 46
+},
+{
+  "fields": {
+    "description": "bella camera",
+    "image": "Chrys Hotel/89/c3.jpg",
+    "hotel": 21,
+    "number": 89,
+    "beds": 5,
+    "cost": 600.0
+  },
+  "model": "hotels.room",
+  "pk": 47
+},
+{
+  "fields": {
+    "description": "Camera due",
+    "image": "Chrys Hotel/102/c4.jpg",
+    "hotel": 21,
+    "number": 102,
+    "beds": 2,
+    "cost": 700.0
+  },
+  "model": "hotels.room",
+  "pk": 48
+},
+{
+  "fields": {
+    "description": "quattro",
+    "image": "Chrys Hotel/248/c5.jpg",
+    "hotel": 21,
+    "number": 248,
+    "beds": 4,
+    "cost": 500.0
+  },
+  "model": "hotels.room",
+  "pk": 49
+},
+{
+  "fields": {
+    "description": "Camera da due",
+    "image": "Excelsior/234/c1.jpg",
+    "hotel": 22,
+    "number": 234,
+    "beds": 2,
+    "cost": 500.0
+  },
+  "model": "hotels.room",
+  "pk": 50
+},
+{
+  "fields": {
+    "description": "Camera molto bella",
+    "image": "Excelsior/24/c2.jpg",
+    "hotel": 22,
+    "number": 24,
+    "beds": 2,
+    "cost": 400.0
+  },
+  "model": "hotels.room",
+  "pk": 51
+},
+{
+  "fields": {
+    "description": "super lusso",
+    "image": "Excelsior/78/c3.jpg",
+    "hotel": 22,
+    "number": 78,
+    "beds": 2,
+    "cost": 900.0
+  },
+  "model": "hotels.room",
+  "pk": 52
+},
+{
+  "fields": {
+    "description": "da quattro",
+    "image": "Excelsior/89/c5.jpg",
+    "hotel": 22,
+    "number": 89,
+    "beds": 4,
+    "cost": 390.0
+  },
+  "model": "hotels.room",
+  "pk": 53
+},
+{
+  "fields": {
+    "description": "2",
+    "image": "San Genesio Hotel/56/c1.jpg",
+    "hotel": 23,
+    "number": 56,
+    "beds": 2,
+    "cost": 450.0
+  },
+  "model": "hotels.room",
+  "pk": 54
+},
+{
+  "fields": {
+    "description": "4",
+    "image": "San Genesio Hotel/58/c2.jpg",
+    "hotel": 23,
+    "number": 58,
+    "beds": 4,
+    "cost": 350.0
+  },
+  "model": "hotels.room",
+  "pk": 55
+},
+{
+  "fields": {
+    "description": "camera per famiglia ",
+    "image": "San Genesio Hotel/94/c3.jpg",
+    "hotel": 23,
+    "number": 94,
+    "beds": 6,
+    "cost": 300.0
+  },
+  "model": "hotels.room",
+  "pk": 56
+},
+{
+  "fields": {
+    "description": "Lusso camera",
+    "image": "Ravenna Hotel/45/c1.jpg",
+    "hotel": 24,
+    "number": 45,
+    "beds": 2,
+    "cost": 580.0
+  },
+  "model": "hotels.room",
+  "pk": 57
+},
+{
+  "fields": {
+    "description": "da quattro",
+    "image": "Ravenna Hotel/76/c2.jpg",
+    "hotel": 24,
+    "number": 76,
+    "beds": 4,
+    "cost": 560.0
+  },
+  "model": "hotels.room",
+  "pk": 58
+},
+{
+  "fields": {
+    "description": "da cinque",
+    "image": "Ravenna Hotel/78/c3.jpg",
+    "hotel": 24,
+    "number": 78,
+    "beds": 5,
+    "cost": 560.0
+  },
+  "model": "hotels.room",
+  "pk": 59
+},
+{
+  "fields": {
+    "description": "da due",
+    "image": "Grand Hotel Bari/47/c1.jpg",
+    "hotel": 25,
+    "number": 47,
+    "beds": 2,
+    "cost": 340.0
+  },
+  "model": "hotels.room",
+  "pk": 60
+},
+{
+  "fields": {
+    "description": "4",
+    "image": "Grand Hotel Bari/87/c2.jpg",
+    "hotel": 25,
+    "number": 87,
+    "beds": 4,
+    "cost": 500.0
+  },
+  "model": "hotels.room",
+  "pk": 61
+},
+{
+  "fields": {
+    "description": "5",
+    "image": "Grand Hotel Bari/67/c3.jpg",
+    "hotel": 25,
+    "number": 67,
+    "beds": 5,
+    "cost": 600.0
+  },
+  "model": "hotels.room",
+  "pk": 62
+},
+{
+  "fields": {
+    "comment": "Hotel molto bello e pulito. \r\nBuono il cibo",
+    "firstname": "Gianluca",
+    "created": "2016-11-22T09:37:36Z",
+    "lastname": "Maugeri",
+    "hotel": 19,
+    "rate": 4,
+    "user": [
+      "customer1"
+    ],
+    "email": "gmaugeri@gmail.com"
+  },
+  "model": "review.review",
+  "pk": 16
+},
+{
+  "fields": {
+    "comment": "Hotel nella norma, dovrebbero garantire servizi come la Spa e la colazione in camera..",
+    "firstname": "Andrea",
+    "created": "2016-11-22T09:38:18Z",
+    "lastname": "venturi",
+    "hotel": 19,
+    "rate": 3,
+    "user": [
+      "customer1"
+    ],
+    "email": "aventuri@gmail.com"
+  },
+  "model": "review.review",
+  "pk": 17
+},
+{
+  "fields": {
+    "comment": "Deludente, i servizi in camera non valgono il prezzo pagato",
+    "firstname": "Carla",
+    "created": "2016-11-22T09:41:32Z",
+    "lastname": "Menozzi",
+    "hotel": 24,
+    "rate": 2,
+    "user": [
+      "customer2"
+    ],
+    "email": "carla@gmail.com"
+  },
+  "model": "review.review",
+  "pk": 18
+},
+{
+  "fields": {
+    "comment": "Hotel valido e ottima qualit\u00e0 prezzo!",
+    "firstname": "Gianluca",
+    "created": "2016-11-22T09:42:36Z",
+    "lastname": "Maugeri",
+    "hotel": 24,
+    "rate": 4,
+    "user": [
+      "customer1"
+    ],
+    "email": "gmaugeri@gmail.com"
+  },
+  "model": "review.review",
+  "pk": 19
+},
+{
+  "fields": {
+    "idate": "2017-01-01",
+    "city": "Fabbrico",
+    "updated": "2016-11-22T09:35:50Z",
+    "tel": "+393335661378",
+    "room": 46,
+    "firstname": "gianluca",
+    "created": "2016-11-22T09:35:50Z",
+    "lastname": "maugeri",
+    "fdate": "2017-01-25",
+    "is_active": true,
+    "user": [
+      "customer1"
+    ],
+    "address": "via don sturzo, 52",
+    "email": "gmaugeri@gmail.com"
+  },
+  "model": "reservation.reservation",
+  "pk": 8
+},
+{
+  "fields": {
+    "idate": "2016-11-23",
+    "city": "Correggio",
+    "updated": "2016-11-22T09:36:55Z",
+    "tel": "+390522413812",
+    "room": 37,
+    "firstname": "Andrea",
+    "created": "2016-11-22T09:36:55Z",
+    "lastname": "Venturi",
+    "fdate": "2016-11-30",
+    "is_active": true,
+    "user": [
+      "customer1"
+    ],
+    "address": "via l. moggi, 23",
+    "email": "aventuri@gmail.com"
+  },
+  "model": "reservation.reservation",
+  "pk": 9
+},
+{
+  "fields": {
+    "idate": "2016-12-18",
+    "city": "Milano",
+    "updated": "2016-11-25T11:02:16Z",
+    "tel": "+393335661379",
+    "room": 59,
+    "firstname": "Paola",
+    "created": "2016-11-22T09:40:03Z",
+    "lastname": "Genovese",
+    "fdate": "2016-12-20",
+    "is_active": false,
+    "user": [
+      "customer2"
+    ],
+    "address": "via prova, 45",
+    "email": "genny@gmail.com"
+  },
+  "model": "reservation.reservation",
+  "pk": 10
+},
+{
+  "fields": {
+    "idate": "2016-12-19",
+    "city": "Roma",
+    "updated": "2016-11-25T11:01:47Z",
+    "tel": "+393522341874",
+    "room": 59,
+    "firstname": "Carla",
+    "created": "2016-11-22T09:40:50Z",
+    "lastname": "Menozzi",
+    "fdate": "2016-12-24",
+    "is_active": true,
+    "user": [
+      "customer2"
+    ],
+    "address": "via carlino, 78",
+    "email": "carla@gmail.com"
+  },
+  "model": "reservation.reservation",
+  "pk": 11
+},
+{
+  "fields": {
+    "idate": "2016-12-21",
+    "city": "Correggio",
+    "updated": "2016-11-25T11:03:36Z",
+    "tel": "+393372323233",
+    "room": 59,
+    "firstname": "Carlo",
+    "created": "2016-11-25T11:03:36Z",
+    "lastname": "Pietruzzi",
+    "fdate": "2016-12-24",
+    "is_active": false,
+    "user": [
+      "customer2"
+    ],
+    "address": "Via Moggi 12",
+    "email": "ventur65@hotmail.it"
+  },
+  "model": "reservation.reservation",
+  "pk": 12
+},
+{
+  "fields": {
+    "action_flag": 1,
+    "action_time": "2016-10-13T07:03:59Z",
+    "object_repr": "Golf Hotel",
+    "object_id": "1",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "hotels",
+      "hotel"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 1
+},
+{
+  "fields": {
+    "action_flag": 1,
+    "action_time": "2016-10-13T07:05:04Z",
+    "object_repr": "Maruga Hotel",
+    "object_id": "2",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "hotels",
+      "hotel"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 2
+},
+{
+  "fields": {
+    "action_flag": 1,
+    "action_time": "2016-10-13T07:05:39Z",
+    "object_repr": "owners",
+    "object_id": "1",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 3
+},
+{
+  "fields": {
+    "action_flag": 1,
+    "action_time": "2016-10-13T07:08:06Z",
+    "object_repr": "customers",
+    "object_id": "2",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 4
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-10-13T07:08:18Z",
+    "object_repr": "gianluca",
+    "object_id": "1",
+    "change_message": "Changed groups.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 5
+},
+{
+  "fields": {
+    "action_flag": 1,
+    "action_time": "2016-10-13T07:08:34Z",
+    "object_repr": "beppe",
+    "object_id": "2",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 6
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-10-13T07:08:45Z",
+    "object_repr": "beppe",
+    "object_id": "2",
+    "change_message": "Changed groups.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 7
+},
+{
+  "fields": {
+    "action_flag": 1,
+    "action_time": "2016-10-20T07:41:43Z",
+    "object_repr": "Piscina",
+    "object_id": "1",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "hotels",
+      "service"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 8
+},
+{
+  "fields": {
+    "action_flag": 1,
+    "action_time": "2016-10-20T07:41:51Z",
+    "object_repr": "Wi-Fi",
+    "object_id": "2",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "hotels",
+      "service"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 9
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-10-21T10:11:30Z",
+    "object_repr": "owners",
+    "object_id": "1",
+    "change_message": "Changed permissions.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 10
+},
+{
+  "fields": {
+    "action_flag": 1,
+    "action_time": "2016-10-21T15:34:34Z",
+    "object_repr": "Bar",
+    "object_id": "3",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "hotels",
+      "service"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 11
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-10-24T10:04:48Z",
+    "object_repr": "beppe",
+    "object_id": "2",
+    "change_message": "No fields changed.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 12
+},
+{
+  "fields": {
+    "action_flag": 3,
+    "action_time": "2016-11-22T08:43:16Z",
+    "object_repr": "",
+    "object_id": "16",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "hotels",
+      "hotel"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 13
+},
+{
+  "fields": {
+    "action_flag": 3,
+    "action_time": "2016-11-22T08:43:16Z",
+    "object_repr": "Sange",
+    "object_id": "15",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "hotels",
+      "hotel"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 14
+},
+{
+  "fields": {
+    "action_flag": 3,
+    "action_time": "2016-11-22T08:43:16Z",
+    "object_repr": "Japan Hotel",
+    "object_id": "14",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "hotels",
+      "hotel"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 15
+},
+{
+  "fields": {
+    "action_flag": 3,
+    "action_time": "2016-11-22T08:43:16Z",
+    "object_repr": "Golf Hotel",
+    "object_id": "1",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "hotels",
+      "hotel"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 16
+},
+{
+  "fields": {
+    "action_flag": 3,
+    "action_time": "2016-11-22T08:43:44Z",
+    "object_repr": "beppe",
+    "object_id": "2",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 17
+},
+{
+  "fields": {
+    "action_flag": 3,
+    "action_time": "2016-11-22T08:43:44Z",
+    "object_repr": "Daniela",
+    "object_id": "4",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 18
+},
+{
+  "fields": {
+    "action_flag": 3,
+    "action_time": "2016-11-22T08:43:44Z",
+    "object_repr": "giovanni",
+    "object_id": "3",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 19
+},
+{
+  "fields": {
+    "action_flag": 3,
+    "action_time": "2016-11-22T08:43:44Z",
+    "object_repr": "prova",
+    "object_id": "5",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 20
+},
+{
+  "fields": {
+    "action_flag": 3,
+    "action_time": "2016-11-22T08:43:44Z",
+    "object_repr": "prova1",
+    "object_id": "7",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 21
+},
+{
+  "fields": {
+    "action_flag": 1,
+    "action_time": "2016-11-22T08:43:57Z",
+    "object_repr": "owner1",
+    "object_id": "8",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 22
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-11-22T08:44:13Z",
+    "object_repr": "owner1",
+    "object_id": "8",
+    "change_message": "Changed groups.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 23
+},
+{
+  "fields": {
+    "action_flag": 1,
+    "action_time": "2016-11-22T09:03:12Z",
+    "object_repr": "Sky",
+    "object_id": "4",
+    "change_message": "",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "hotels",
+      "service"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 24
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-11-23T15:55:23Z",
+    "object_repr": "owners",
+    "object_id": "1",
+    "change_message": "Changed permissions.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 25
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-11-23T15:55:25Z",
+    "object_repr": "owners",
+    "object_id": "1",
+    "change_message": "No fields changed.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "group"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 26
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-11-23T15:57:50Z",
+    "object_repr": "owner2",
+    "object_id": "9",
+    "change_message": "Changed user_permissions.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 27
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-11-23T15:58:12Z",
+    "object_repr": "owner1",
+    "object_id": "8",
+    "change_message": "Changed user_permissions.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 28
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-11-23T15:58:29Z",
+    "object_repr": "owner3",
+    "object_id": "10",
+    "change_message": "Changed user_permissions.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 29
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-11-24T16:44:13Z",
+    "object_repr": "San Genesio Hotel",
+    "object_id": "23",
+    "change_message": "Changed city.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "hotels",
+      "hotel"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 30
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-11-24T16:44:29Z",
+    "object_repr": "Excelsior",
+    "object_id": "22",
+    "change_message": "Changed city.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "hotels",
+      "hotel"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 31
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-11-24T18:04:14Z",
+    "object_repr": "Review object",
+    "object_id": "19",
+    "change_message": "Changed comment.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "review",
+      "review"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 32
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-11-24T18:04:39Z",
+    "object_repr": "Review object",
+    "object_id": "19",
+    "change_message": "Changed comment.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "review",
+      "review"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 33
+},
+{
+  "fields": {
+    "action_flag": 2,
+    "action_time": "2016-11-25T10:54:02Z",
+    "object_repr": "gianluca",
+    "object_id": "1",
+    "change_message": "Changed groups and user_permissions.",
+    "user": [
+      "gianluca"
+    ],
+    "content_type": [
+      "auth",
+      "user"
+    ]
+  },
+  "model": "admin.logentry",
+  "pk": 34
+}
+]
