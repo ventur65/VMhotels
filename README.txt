@@ -30,11 +30,14 @@ Una volta seguiti i passi precedenti, quindi, si proceda con:
 	python manage.py loaddata db.json
 Caricando i dati il superuser che abbiamo creato per accedere all'interfaccia 
 admin http://127.0.0.1:8000/admin/ ha come username 'gianluca' e password 'gianluca'.
+
 Per eseguire i test:
 	python manage.py test
 	
-Per far partire il server:
-	python manage.py runserver
+JAVASCRIPT:
+Come da requisiti abbiamo usato script Javascript per la visualizzazione dell'orologio
+nella barra di navigazione (file static/js/orologio.js) e per il conteggio visite nella 
+pagina principale (file static/js/contatore_view.js).
 	
 EMAIL:
 Di default le email vengono stampate su stdout. Per inviarle effettivamente
@@ -65,7 +68,7 @@ bottone 'Add Review') e fare Reservation (da pagine dettaglio camera con 'Add Re
 Se si logga con customer2, nella pagina personale si dovrebbero trovare 3 reservation
 effettuate per la stessa stanza, di cui una sola non in coda 
 (non ha la scritta --in queue--).
-Cliccando sul link nella reservation attiva, si accede alla pagina di dettaglio.
+Cliccando sul link della reservation attiva, si accede alla pagina di dettaglio.
 Se si prova ad eliminare tale prenotazione, si potrà notare che le 2 prenotazioni 
 rimaste non sono più in coda e, sul terminale, si noteranno le 2 email che sarebbero
 state spedite.
