@@ -18,4 +18,4 @@ class Review(models.Model):
 	created = models.DateTimeField(auto_now_add = True)
 	
 	def __unicode__(self):
-		return self.firstname + " " + str(self.rate)
+		return self.firstname + " Hotel: " + str(self.hotel)+ " Rate: " + str(self.rate)
